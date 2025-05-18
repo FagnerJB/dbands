@@ -12,9 +12,9 @@ class Register
       add_action('edit_category', [$this, 'save_fields']);
    }
 
-   public function add_fields()
+   public function add_fields(): void
    {
-      echo <<<FIELD
+      echo <<<'FIELD'
       <div class="form-field">
          <label for="singular">Nome singular</label>
          <input id="singular" name="singular" type="text" value size="40">
@@ -22,21 +22,21 @@ class Register
       FIELD;
    }
 
-   public function edit_fields($term)
+   public function edit_fields($term): void
    {
       $value = get_term_meta($term->term_id, 'singular_name', true);
-?>
+      ?>
       <tr class="form-field">
          <th scope="row"><label for="singular">Nome singular</label></th>
          <td>
-            <input id="singular" name="singular" value="<?php echo $value ?>" type="text">
+            <input id="singular" name="singular" value="<?php echo $value; ?>" type="text">
          </td>
       </tr>
 <?php
 
    }
 
-   public function save_fields($term_ID)
+   public function save_fields($term_ID): void
    {
       if (!empty($_POST['singular'])) {
          $value = sanitize_text_field($_POST['singular']);

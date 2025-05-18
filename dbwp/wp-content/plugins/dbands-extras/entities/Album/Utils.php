@@ -4,12 +4,13 @@ namespace dbp\Album;
 
 class Utils
 {
-   public  static function get_albums()
+   public static function get_albums()
    {
       global $wpdb;
 
       return $wpdb->get_results(
-         "SELECT
+         <<<EOD
+         SELECT
             t.term_id,
             t.name,
             ma.meta_value AS artist,
@@ -33,8 +34,8 @@ class Utils
          JOIN {$wpdb->term_taxonomy} AS x
             ON x.term_id = t.term_id
          WHERE x.taxonomy = 'albuns'
-         ORDER BY ma.meta_value ASC, my.meta_value DESC
-         ;"
+         ORDER BY ma.meta_value ASC, my.meta_value DESC;
+         EOD
       );
    }
 }

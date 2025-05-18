@@ -15,7 +15,7 @@ class Ad
    {
       $positions = [
          'footer' => '1974786989',
-         'aside'  => '1017762680'
+         'aside'  => '1017762680',
       ];
 
       return <<<AD
@@ -32,13 +32,13 @@ class Ad
    {
       $positions = [
          'footer' => '728x90',
-         'aside'  => '300x250'
+         'aside'  => '300x250',
       ];
 
       return "<img src=\"https://placehold.co/{$positions[$this->position]}/png\" />";
    }
 
-   public function echo()
+   public function echo(): void
    {
       if ('production' === wp_get_environment_type()) {
          echo $this->ad();

@@ -1,6 +1,6 @@
 <?php
 
-$config = new PhpCsFixer\Config();
+$config = (new PhpCsFixer\Config())->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect());
 return $config->setRiskyAllowed(true)->setIndent('   ')
    ->setRules([
       '@PhpCsFixer'                              => true,
@@ -19,11 +19,10 @@ return $config->setRiskyAllowed(true)->setIndent('   ')
       'long_to_shorthand_operator'               => true,
       'modernize_strpos'                         => true,
       'modernize_types_casting'                  => true,
-      'multiline_promoted_properties'            => true,
+      // 'multiline_promoted_properties'            => true,
       'multiline_string_to_heredoc'              => true,
-      'new_expression_parentheses'               => true,
+      // 'new_expression_parentheses'               => true,
       'no_php4_constructor'                      => true,
-      'no_unneeded_curly_braces'                 => true,
       'no_unset_cast'                            => false,
       'no_useless_sprintf'                       => true,
       'octal_notation'                           => true,
@@ -49,9 +48,8 @@ return $config->setRiskyAllowed(true)->setIndent('   ')
       'fopen_flags'                            => ['b_mode' => false],
       'global_namespace_import'                => ['import_classes' => true],
       'increment_style'                        => ['style' => 'post'],
-      'no_alias_functions'                     => ['sets' => '@all'],
+      'no_alias_functions'                     => ['sets' => ['@all']],
       'class_definition'                       => ['single_item_single_line' => true],
-
       'heredoc_indentation'                    => ['indentation' => 'same_as_start'],
       'list_syntax'                            => ['syntax' => 'long'],
       'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line'],
@@ -60,11 +58,14 @@ return $config->setRiskyAllowed(true)->setIndent('   ')
       'ordered_imports'                        => ['imports_order' => ['const', 'function', 'class']],
       'phpdoc_line_span'                       => ['const' => 'single', 'property' => 'single'],
 
+      'binary_operator_spaces' => [
+         'default'   => 'align',
+      ],
       'blank_line_before_statement' => [
-         'statements' => ['break', 'case', 'continue', 'declare', 'default', 'do', 'for', 'foreach', 'goto', 'if', 'phpdoc', 'return', 'switch', 'throw', 'try', 'while', 'yield', 'yield_from']
+         'statements' => ['case', 'declare', 'default', 'do', 'for', 'foreach', 'goto', 'if', 'phpdoc', 'return', 'switch', 'throw', 'try', 'while', 'yield', 'yield_from']
       ],
       'class_attributes_separation' => [
-         'elements' => ['const' => 'only_if_meta', 'property' => 'only_if_meta']
+         'elements' => ['const' => 'only_if_meta', 'property' => 'only_if_meta', 'trait_import' => 'one']
       ],
       'function_declaration' => [
          'closure_function_spacing' => 'none',
@@ -77,7 +78,7 @@ return $config->setRiskyAllowed(true)->setIndent('   ')
          'elements' => ['arrays', 'array_destructuring', 'arguments', 'parameters', 'match']
       ],
       'no_extra_blank_lines' => [
-         'tokens' => ['attribute', 'break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'switch', 'throw', 'use', 'use_trait']
+         'tokens' => ['attribute', 'break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'switch', 'throw', 'use']
       ],
       'yoda_style' => [
          'less_and_greater' => null,

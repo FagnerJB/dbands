@@ -20,6 +20,7 @@ class Register
       }
 
       $output = '';
+
       if (isset($_GET['code'])) {
          $spotify = new Spotify();
          $spotify->save_token($_GET['code']);
@@ -28,10 +29,10 @@ class Register
          $output .= 'Entrou cookie.';
       } else {
          $spotify = new Spotify();
-         $link = $spotify->get_auth_link();
+         $link    = $spotify->get_auth_link();
          $output .= <<<LINK
-         <a class="btn btn-secondary spotify-auth-btn" href="$link"><i class="fab fa-spotify"></i> Entrar com Spotify</a>
-LINK;
+                  <a class="btn btn-secondary spotify-auth-btn" href="{$link}"><i class="fab fa-spotify"></i> Entrar com Spotify</a>
+         LINK;
       }
 
       return $output;

@@ -9,7 +9,7 @@ get_component('header');
 
       get_page_component('search', 'content');
 
-      ?>
+?>
    </div>
 </main>
 <?php

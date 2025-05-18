@@ -8,15 +8,14 @@
       $users = get_users([
          'orderby'             => 'post_count',
          'order'               => 'DESC',
-         'has_published_posts' => ['post']
+         'has_published_posts' => ['post'],
       ]);
 
       foreach ($users as $author) {
-
-      ?>
+         ?>
          <li>
-            <a class="btn-alt" href="<?php echo get_author_posts_url($author->ID) ?>" title="<?php printf(esc_html__('Publicações de %s', 'dbands'), $author->display_name) ?>">
-               <?php echo $author->display_name ?>
+            <a class="btn-alt" href="<?php echo get_author_posts_url($author->ID); ?>" title="<?php printf(esc_html__('Publicações de %s', 'dbands'), $author->display_name); ?>">
+               <?php echo $author->display_name; ?>
             </a>
          </li>
       <?php

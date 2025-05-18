@@ -4,7 +4,7 @@ namespace dbp\Band;
 
 class Register
 {
-   public  function __construct()
+   public function __construct()
    {
       add_action('init', [$this, 'rename_labels']);
       add_action('post_tag_term_edit_form_tag', [$this, 'add_form_enctype']);
@@ -18,29 +18,29 @@ class Register
       add_filter('manage_post_tag_custom_column', [$this, 'columns_content'], 10, 3);
    }
 
-   public function rename_labels()
+   public function rename_labels(): void
    {
       global $wp_taxonomies;
 
       $new_labels = [
-         'name'                      => 'Bandas',
-         'singular_name'             => 'Banda',
-         'menu_name'                 => 'Bandas',
-         'all_items'                 => 'Todas as bandas',
-         'edit_item'                 => 'Editar banda',
-         'view_item'                 => 'Ver banda',
-         'update_item'               => 'Atualizar banda',
-         'add_new_item'              => 'Adicionar banda',
-         'new_item_name'             => 'Nova banda',
-         'search_items'              => 'Buscar banda',
-         'popular_items'             => 'Bandas populares',
-         'add_or_remove_items'       => 'Adicionar ou remover bandas',
-         'choose_from_most_used'     => 'Escolher das mais usadas bandas',
-         'not_found'                 => 'Nenhum banda encontrada',
-         'back_to_items'             => 'Voltar para bandas',
-         'no_terms'                  => 'Sem bandas',
-         'items_list_navigation'     => 'Bandas',
-         'items_list'                => 'Bandas',
+         'name'                  => 'Bandas',
+         'singular_name'         => 'Banda',
+         'menu_name'             => 'Bandas',
+         'all_items'             => 'Todas as bandas',
+         'edit_item'             => 'Editar banda',
+         'view_item'             => 'Ver banda',
+         'update_item'           => 'Atualizar banda',
+         'add_new_item'          => 'Adicionar banda',
+         'new_item_name'         => 'Nova banda',
+         'search_items'          => 'Buscar banda',
+         'popular_items'         => 'Bandas populares',
+         'add_or_remove_items'   => 'Adicionar ou remover bandas',
+         'choose_from_most_used' => 'Escolher das mais usadas bandas',
+         'not_found'             => 'Nenhum banda encontrada',
+         'back_to_items'         => 'Voltar para bandas',
+         'no_terms'              => 'Sem bandas',
+         'items_list_navigation' => 'Bandas',
+         'items_list'            => 'Bandas',
       ];
 
       $wp_taxonomies['post_tag']->labels = (object) array_merge((array) $wp_taxonomies['post_tag']->labels, $new_labels);
@@ -48,37 +48,37 @@ class Register
       $wp_taxonomies['post_tag']->label = 'Bandas';
    }
 
-   public function add_form_enctype()
+   public function add_form_enctype(): void
    {
       echo ' enctype="multipart/form-data"';
    }
 
-   public function add_fields()
+   public function add_fields(): void
    {
       foreach (Utils::get_metas() as $key => $details) {
-         $required = isset($details['required']) ? 'form-required' : '';
-         $type = isset($details['type']) ? $details['type'] : 'text';
+         $required      = isset($details['required']) ? 'form-required' : '';
+         $type          = $details['type'] ?? 'text';
          $required_attr = isset($details['required']) ? 'required="true"' : '';
 
          echo <<<FIELD
-         <div class="form-field $required">
-            <label for="$key">{$details['name']}</label>
-            <input id="$key" name="$key" type="$type" value size="40" aria-required="true" $required_attr>
+         <div class="form-field {$required}">
+            <label for="{$key}">{$details['name']}</label>
+            <input id="{$key}" name="{$key}" type="{$type}" value size="40" aria-required="true" {$required_attr}>
             <p>{$details['description']}.</p>
          </div>
          FIELD;
       }
    }
 
-   public function edit_fields($term)
+   public function edit_fields($term): void
    {
       $Band = new Band($term);
 
-?>
+      ?>
       <tr class="form-field">
          <th scope="row">Prévia</th>
          <td>
-            <a class="button" href="<?php $Band->link() ?>" target="_blank">Visualizar página deste artista</a>
+            <a class="button" href="<?php $Band->link(); ?>" target="_blank">Visualizar página deste artista</a>
          </td>
       </tr>
       <tr class="form-field">
@@ -86,19 +86,18 @@ class Register
          <td>
             <?php
 
-            if ($Band->has_file('cover')) {
-
-            ?>
+                  if ($Band->has_file('cover')) {
+                     ?>
                <div class="row-cover">
-                  <img src="<?php echo $Band->get_cover() ?>" width="100%" loading="lazy">
+                  <img src="<?php echo $Band->get_cover(); ?>" width="100%" loading="lazy">
                </div>
             <?php
 
-            }
+                  }
 
-            ?>
+      ?>
             <input id="cover" name="cover" type="file" accept="image/png,image/x-png,image/x-citrix-png,image/bmp,image/jpeg,image/x-citrix-jpeg,image/tiff">
-            <p class="description">Atualizar ou adicionar imagem de cabeçalho. <a class="button edit-attachment" href="https://www.photopea.com/" target="_blank"><?php esc_html_e('Preparar imagem', 'dbands') ?></a>. Se a imagem não for exatamente <strong>960 x 300</strong>, será redimensionada e cortada para tal e convertida para JPEG.</p>
+            <p class="description">Atualizar ou adicionar imagem de cabeçalho. <a class="button edit-attachment" href="https://www.photopea.com/" target="_blank"><?php esc_html_e('Preparar imagem', 'dbands'); ?></a>. Se a imagem não for exatamente <strong>960 x 300</strong>, será redimensionada e cortada para tal e convertida para JPEG.</p>
          </td>
       </tr>
       <tr class="form-field">
@@ -106,19 +105,18 @@ class Register
          <td>
             <?php
 
-            if ($Band->has_file('logo')) {
-
-            ?>
+      if ($Band->has_file('logo')) {
+         ?>
                <div class="row-logo">
-                  <?php echo $Band->get_logo() ?>
+                  <?php echo $Band->get_logo(); ?>
                </div>
             <?php
 
-            }
+      }
 
-            ?>
+      ?>
             <input id="logo" name="logo" type="file" accept="image/png,image/x-png,image/x-citrix-png,image/bmp,image/jpeg,image/x-citrix-jpeg,image/tiff">
-            <p class="description">Atualizar ou adicionar logotipo. <a class="button" href="https://www.photopea.com/" target="_blank"><?php esc_html_e('Preparar a imagem', 'dbands') ?></a> salvando em PNG 8, escala de cinza, com 64 cores. Se a <strong>largura</strong> do logotipo não for <strong>160</strong> com altura variável, será redimensionada para tal e convertida para PNG.</p>
+            <p class="description">Atualizar ou adicionar logotipo. <a class="button" href="https://www.photopea.com/" target="_blank"><?php esc_html_e('Preparar a imagem', 'dbands'); ?></a> salvando em PNG 8, escala de cinza, com 64 cores. Se a <strong>largura</strong> do logotipo não for <strong>160</strong> com altura variável, será redimensionada para tal e convertida para PNG.</p>
          </td>
       </tr>
       <?php
@@ -132,26 +130,27 @@ class Register
             $required = 'required="true" aria-required="true"';
          }
 
-         if (!in_array($key, array('band_genre', 'band_city', 'band_photo_credits'))) {
+         if (!in_array($key, ['band_genre', 'band_city', 'band_photo_credits'])) {
             $autocomplete = ' autocomplete="off"';
          }
 
-      ?>
-         <tr class="form-field <?php if (isset($details['required'])) echo 'form-required'; ?>">
+         ?>
+         <tr class="form-field <?php if (isset($details['required'])) {
+            echo 'form-required';
+         } ?>">
             <th scope="row"><label for="<?php echo $key; ?>"><?php echo $details['name']; ?></label></th>
             <td>
-               <input id="<?php echo $key; ?>" name="<?php echo $key; ?>" type="<?php echo (isset($details['type'])) ? $details['type'] : 'text'; ?>" value="<?php echo $value ?>" size="40" <?php echo $required . $autocomplete ?>>
+               <input id="<?php echo $key; ?>" name="<?php echo $key; ?>" type="<?php echo (isset($details['type'])) ? $details['type'] : 'text'; ?>" value="<?php echo $value; ?>" size="40" <?php echo $required . $autocomplete; ?>>
                <?php
 
-               if (!empty($value) && isset($details['type']) && 'url' == $details['type']) {
-
-               ?>
-                  <a class="button" href="<?php echo $value ?>" target="_blank">Verificar página</a>
+               if (!empty($value) && isset($details['type']) && 'url' === $details['type']) {
+                  ?>
+                  <a class="button" href="<?php echo $value; ?>" target="_blank">Verificar página</a>
                <?php
 
                }
 
-               ?>
+         ?>
                <p class="description"><?php echo $details['description']; ?>.</p>
             </td>
          </tr>
@@ -160,7 +159,7 @@ class Register
       }
    }
 
-   public function save_fields($term_id)
+   public function save_fields($term_id): void
    {
       add_filter('upload_dir', ['Utils', 'change_upload_folder'], 9);
 
@@ -187,8 +186,8 @@ class Register
 
                   $current_image->set_quality(80);
                   $current_image->save($filename_target, 'image/jpeg');
-               } elseif ('logo' == $type) {
-                  if (160 != $size['width']) {
+               } elseif ('logo' === $type) {
+                  if (160 !== $size['width']) {
                      $current_image->resize(160, null, false);
                   }
 
@@ -213,11 +212,11 @@ class Register
 
    public function add_columns($columns)
    {
-      $columns_new   = array(
+      $columns_new = [
          'images' => esc_html__('Imagens', 'dbands'),
          'social' => esc_html__('Links', 'dbands'),
          'info'   => esc_html__('Informações', 'dbands'),
-      );
+      ];
       $columns_start = array_splice($columns, 0, 2);
       $columns       = array_merge($columns_start, $columns_new, $columns);
 
@@ -233,6 +232,7 @@ class Register
       switch ($column) {
          case 'images':
             $content = '<div style="display:flex;flex-direction:column;gap:2px;font-size:16px">';
+
             if (!empty($Band->has_file('cover'))) {
                $content .= '<span>✅ Capa</span>';
             }
@@ -242,15 +242,17 @@ class Register
             }
 
             $content .= '</div>';
+
             break;
 
          case 'social':
             $content = '<div style="display:flex;flex-flow:\'row wrap\';gap:5px;font-size:18px">';
 
-            foreach (array('site', 'spotify', 'itunes', 'deezer', 'youtube', 'facebook', 'instagram', 'twitter', 'lastfm', 'musixmatch') as $meta) {
+            foreach (['site', 'spotify', 'itunes', 'deezer', 'youtube', 'facebook', 'instagram', 'twitter', 'lastfm', 'musixmatch'] as $meta) {
                $content .= $Band->get_meta_link($meta, false);
             }
             $content .= '</div>';
+
             break;
 
          case 'info':
@@ -263,6 +265,7 @@ class Register
 
             $content .= '</div>';
 
+            // continuous
          default:
             break;
       }
@@ -270,7 +273,7 @@ class Register
       return $content;
    }
 
-   public function delete($_term_ID, $_tax_ID, $type, $term)
+   public function delete($_term_ID, $_tax_ID, $type, $term): void
    {
       if ('post_tag' !== $type) {
          return;
@@ -280,12 +283,12 @@ class Register
 
       $upload_path = wp_upload_dir()['path'];
 
-      if (file_exists("$upload_path/covers/{$term->slug}.jpg")) {
-         unlink("$upload_path/covers/{$term->slug}.jpg");
+      if (file_exists("{$upload_path}/covers/{$term->slug}.jpg")) {
+         unlink("{$upload_path}/covers/{$term->slug}.jpg");
       }
 
-      if (file_exists("$upload_path/logos/{$term->slug}.png")) {
-         unlink("$upload_path/logos/{$term->slug}.png");
+      if (file_exists("{$upload_path}/logos/{$term->slug}.png")) {
+         unlink("{$upload_path}/logos/{$term->slug}.png");
       }
 
       remove_filter('upload_dir', ['Utils', 'change_upload_folder']);

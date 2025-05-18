@@ -2,8 +2,6 @@
 
 namespace dbp\Common;
 
-use dbp\Common\Utils;
-
 class Register_Search
 {
    public function __construct()
@@ -15,7 +13,7 @@ class Register_Search
       add_filter('search_link', [$this, 'change_search_link'], 10, 2);
    }
 
-   public function add_redirect()
+   public function add_redirect(): void
    {
       if (wp_is_serving_rest_request() || wp_doing_ajax()) {
          return;
@@ -28,11 +26,11 @@ class Register_Search
       }
 
       $search_type = $_GET['search_type'] ?? 'site';
-      $page = $_GET['paged'] ?? 0;
-      $url = Utils::get_search_link($s, $search_type, $page);
+      $page        = $_GET['paged']       ?? 0;
+      $url         = Utils::get_search_link($s, $search_type, $page);
 
       if (wp_safe_redirect($url)) {
-         exit();
+         exit;
       }
    }
 
@@ -43,11 +41,11 @@ class Register_Search
       return Utils::get_search_link($search_query, $search_type);
    }
 
-   public function add_rewrite()
+   public function add_rewrite(): void
    {
       // TV
-      add_rewrite_tag('%video%',       '([a-zA-Z0-9-_]{11})');
-      add_rewrite_tag('%playlist%',    '([a-zA-Z0-9-_]{18,34})');
+      add_rewrite_tag('%video%', '([a-zA-Z0-9-_]{11})');
+      add_rewrite_tag('%playlist%', '([a-zA-Z0-9-_]{18,34})');
       add_rewrite_rule('^tv/([^/]*)/([^/]*)?', 'index.php?page_id=8261&video=$matches[1]&playlist=$matches[2]', 'top');
       add_rewrite_rule('^tv/([^/]*)/?', 'index.php?page_id=8261&video=$matches[1]', 'top');
 
@@ -78,7 +76,7 @@ class Register_Search
       $text = trim($text);
       $text = substr($text, 0, 66);
       $text = remove_accents($text);
-      $text = strtolower($text);
-      return $text;
+
+      return strtolower($text);
    }
 }

@@ -14,7 +14,8 @@ class Utils
    public static function get_page()
    {
       $page = get_query_var('paged');
-      if ($page === 0) {
+
+      if (0 === $page) {
          $page = 1;
       }
 
@@ -23,10 +24,9 @@ class Utils
 
    public static function remove_tags($text)
    {
-      $text = preg_replace('@<(a)[^>]*?>.*?</\\1>\.?@si', '', $text);
-      $text = wp_strip_all_tags($text);
+      $text = preg_replace('@<(a)[^>]*?>.*?</\1>\.?@si', '', $text);
 
-      return $text;
+      return wp_strip_all_tags($text);
    }
 
    public static function is_response_error($thing)
@@ -34,12 +34,12 @@ class Utils
       return is_array($thing) && isset($thing['code'], $thing['message'], $thing['data']) && $thing['data']['status'] >= 400;
    }
 
-   public  static function get_social_links($name, $username = '')
+   public static function get_social_links($name, $username = '')
    {
       return [
          'share' => [
             'icon'  => 'fa-solid fa-share',
-            'label' => "Compartilhar no $name",
+            'label' => "Compartilhar no {$name}",
          ],
          'repost' => [
             'icon'  => 'fa-solid fa-retweet',
@@ -47,20 +47,20 @@ class Utils
          ],
          'like' => [
             'icon'  => 'fa-solid fa-heart',
-            'label' => 'Curtir'
+            'label' => 'Curtir',
          ],
          'reply' => [
-            'icon' => 'fa-solid fa-comment',
-            'label' => 'Responder'
+            'icon'  => 'fa-solid fa-comment',
+            'label' => 'Responder',
          ],
          'link' => [
-            'icon' => 'fa-solid fa-link',
-            'label' => "Esta publicação no $name",
+            'icon'  => 'fa-solid fa-link',
+            'label' => "Esta publicação no {$name}",
          ],
          'profile' => [
             'icon'  => 'fa-solid fa-user-plus',
-            'label' => "Seguir @$username",
-         ]
+            'label' => "Seguir @{$username}",
+         ],
       ];
    }
 
@@ -125,7 +125,7 @@ class Utils
             'subtitle'    => esc_html__('Artistas mais ouvidos do semestre', 'dbands'),
             'search_page' => esc_html__('Artistas mais ouvidos do último semestre de usuário no Last.fm', 'dbands'),
             'service'     => 'fab fa-lastfm',
-         ]
+         ],
       ];
 
       if (false === $only_keys) {
@@ -139,9 +139,6 @@ class Utils
       }
 
       return null;
-      /**
-       * spotify = search => ID => related-artists
-       *
-       */
+      // spotify = search => ID => related-artists
    }
 }

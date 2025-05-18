@@ -3,6 +3,9 @@
 namespace dbp\Common;
 
 use dbp\Services\Youtube;
+use WP_Query;
+use WP_REST_Response;
+use WP_REST_Server;
 
 class Register_Endpoints
 {
@@ -20,17 +23,17 @@ class Register_Endpoints
       return 'api';
    }
 
-   public function set_search_per_page($query)
+   public function set_search_per_page($query): void
    {
       if ($query->is_main_query() && is_search()) {
          $query->set('posts_per_page', 15);
       }
    }
 
-   public function create_endpoints()
+   public function create_endpoints(): void
    {
       register_rest_route('db/v1', '/ajax', [
-         'methods'             => \WP_REST_Server::READABLE,
+         'methods'             => WP_REST_Server::READABLE,
          'callback'            => [$this, 'get_ajax_content'],
          'permission_callback' => '__return_true',
          'args'                => [
@@ -47,13 +50,13 @@ class Register_Endpoints
                'type'    => 'integer',
                'default' => 0,
             ],
-         ]
+         ],
       ]);
 
       $search_options = Utils::get_search_options(true);
 
       register_rest_route('db/v1', '/search', [
-         'methods'             => \WP_REST_Server::READABLE,
+         'methods'             => WP_REST_Server::READABLE,
          'callback'            => [$this, 'get_search_content'],
          'permission_callback' => '__return_true',
          'args'                => [
@@ -70,11 +73,11 @@ class Register_Endpoints
                'type'    => 'integer',
                'default' => 0,
             ],
-         ]
+         ],
       ]);
 
       register_rest_route('db/v1', '/next-video', [
-         'methods'             => \WP_REST_Server::READABLE,
+         'methods'             => WP_REST_Server::READABLE,
          'callback'            => [$this, 'get_next_video'],
          'permission_callback' => '__return_true',
          'args'                => [
@@ -82,7 +85,7 @@ class Register_Endpoints
                'type'     => 'string',
                'required' => true,
             ],
-         ]
+         ],
       ]);
    }
 
@@ -101,8 +104,8 @@ class Register_Endpoints
       ];
 
       if ('date' === $key) {
-         $dates = explode('/', $value);
-         $query['year'] = $dates[0];
+         $dates             = explode('/', $value);
+         $query['year']     = $dates[0];
          $query['monthnum'] = $dates[1];
       } elseif (in_array($key, array_keys($queries_keys))) {
          $query[$queries_keys[$key]] = $value;
@@ -124,7 +127,7 @@ class Register_Endpoints
       }
 
       global $wp_query;
-      $wp_query = new \WP_Query($query);
+      $wp_query = new WP_Query($query);
 
       // CONTENT
       ob_start();
@@ -133,15 +136,15 @@ class Register_Endpoints
 
       if ($page > 1) {
          $actions[] = [
-            'action'   => 'append',
-            'target'   => '#content',
-            'content'  => $content,
+            'action'  => 'append',
+            'target'  => '#content',
+            'content' => $content,
          ];
       } else {
          $actions[] = [
-            'action'   => 'html',
-            'target'   => '#content',
-            'content'  => $content,
+            'action'  => 'html',
+            'target'  => '#content',
+            'content' => $content,
          ];
 
          // COVER + SCROLL
@@ -151,53 +154,53 @@ class Register_Endpoints
             $cover = ob_get_clean();
 
             $actions[] = [
-               'action'   => 'html',
-               'target'   => '#cover',
-               'content'  => $cover,
+               'action'  => 'html',
+               'target'  => '#cover',
+               'content' => $cover,
             ];
 
             $actions[] = [
-               'action'   => 'scroll',
-               'target'   => '#top',
+               'action' => 'scroll',
+               'target' => '#top',
             ];
          } else {
             $actions[] = [
-               'action'   => 'scroll',
-               'target'   => '#main',
+               'action' => 'scroll',
+               'target' => '#main',
             ];
          }
 
          // CLASS
-         $classes = implode(' ', get_body_class());
+         $classes   = implode(' ', get_body_class());
          $actions[] = [
-            'action'   => 'setAttr',
-            'target'   => 'body',
-            'content'  => "class=$classes"
+            'action'  => 'setAttr',
+            'target'  => 'body',
+            'content' => "class={$classes}",
          ];
 
          $title = html_entity_decode(wp_get_document_title());
 
          $actions[] = [
             'action'  => 'title',
-            'content' => $title
+            'content' => $title,
          ];
 
          $actions[] = [
             'action'  => 'setAttr',
             'target'  => 'body',
-            'content' => "data-title=$title",
+            'content' => "data-title={$title}",
          ];
 
          $actions[] = [
-            'action' => 'ignore',
-            'target' => 'pagination.maxPage',
+            'action'  => 'ignore',
+            'target'  => 'pagination.maxPage',
             'content' => $wp_query->max_num_pages,
          ];
       }
 
       wp_reset_query();
 
-      return new \WP_REST_Response($actions);
+      return new WP_REST_Response($actions);
    }
 
    public function get_search_content($request)
@@ -207,7 +210,7 @@ class Register_Endpoints
       $page = $request->get_param('page');
 
       global $wp_query;
-      $wp_query = new \WP_Query([
+      $wp_query = new WP_Query([
          's'              => $s,
          'posts_per_page' => 15,
          'paged'          => $page,
@@ -220,16 +223,16 @@ class Register_Endpoints
 
       if ($page > 1) {
          $actions[] = [
-            'action'   => 'append',
-            'target'   => '#content',
-            'content'  => $content,
+            'action'  => 'append',
+            'target'  => '#content',
+            'content' => $content,
          ];
       } else {
-         $classes = implode(' ', get_body_class());
-         $actions[] =  [
+         $classes   = implode(' ', get_body_class());
+         $actions[] = [
             'action'  => 'setAttr',
             'target'  => 'body',
-            'content' => "class=$classes"
+            'content' => "class={$classes}",
          ];
 
          $actions[] = [
@@ -253,13 +256,13 @@ class Register_Endpoints
          $actions[] = [
             'action'  => 'setAttr',
             'target'  => 'body',
-            'content' => "data-title=$title",
+            'content' => "data-title={$title}",
          ];
       }
 
       wp_reset_query();
 
-      return new \WP_REST_Response($actions);
+      return new WP_REST_Response($actions);
    }
 
    public function get_next_video($request)
@@ -273,11 +276,12 @@ class Register_Endpoints
    public function parse_error($response)
    {
       $data = $response->get_data();
+
       if (!Utils::is_response_error($data)) {
          return $response;
       }
 
-      return new \WP_REST_Response([
+      return new WP_REST_Response([
          [
             'action'  => 'addClass',
             'target'  => '#loading-bar',
@@ -289,8 +293,8 @@ class Register_Endpoints
             'content' => $data['message'],
          ],
          [
-            'action'   => 'delay',
-            'content'  => [
+            'action'  => 'delay',
+            'content' => [
                [
                   'action'  => 'removeClass',
                   'target'  => '#loading-bar',
@@ -300,9 +304,9 @@ class Register_Endpoints
                   'action'  => 'text',
                   'target'  => '#loading-bar',
                   'content' => '',
-               ]
+               ],
             ],
-         ]
+         ],
       ], 400);
    }
 }

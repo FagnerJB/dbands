@@ -10,14 +10,14 @@ class Register
       add_action('wpe_head_scripts', [$this, 'add_footer'], 99);
    }
 
-   public function add_scripts()
+   public function add_scripts(): void
    {
       wp_enqueue_script('adsbygoogle', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7971845527728300', [], null, [
-         'strategy' => 'async'
+         'strategy' => 'async',
       ]);
    }
 
-   public function add_footer()
+   public function add_footer(): void
    {
       echo '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
    }

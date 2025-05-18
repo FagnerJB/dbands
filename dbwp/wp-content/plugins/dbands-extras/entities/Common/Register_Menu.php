@@ -16,16 +16,15 @@ class Register_Menu
       add_filter('wp_nav_menu_items', [$this, 'add_menu_button'], 10, 2);
    }
 
-   public function register_menus()
+   public function register_menus(): void
    {
-      register_nav_menus(array(
-         'about_pages'    => esc_html__('Páginas - Sobre', 'dbands'),
-         'social_links'   => esc_html__('Links - Redes sociais', 'dbands'),
+      register_nav_menus([
+         'about_pages'  => esc_html__('Páginas - Sobre', 'dbands'),
+         'social_links' => esc_html__('Links - Redes sociais', 'dbands'),
          // 'partners_links' => esc_html__('Links - Parceiros', 'dbands'),
-         'api_links'      => esc_html__('Links - API', 'dbands')
-      ));
+         'api_links' => esc_html__('Links - API', 'dbands'),
+      ]);
    }
-
 
    public function add_menu_class($atts)
    {
@@ -34,44 +33,40 @@ class Register_Menu
       return $atts;
    }
 
-   public function add_menu_custom_field($item_id)
+   public function add_menu_custom_field($item_id): void
    {
       $icon = get_post_meta($item_id, 'menu_icon', true);
-      $icon = $icon ? $icon : "";
+      $icon = $icon ?: '';
 
       $new_tab = get_post_meta($item_id, 'menu_newtab', true);
-      $new_tab = $new_tab ? "checked" : "";
+      $new_tab = $new_tab ? 'checked' : '';
 
       echo <<<OPTIONS
-      <p class="description description-wide">
-         <label for="edit-menu-item-icon-$item_id">
-            Classe do ícone<br>
-            <input type="text" id="edit-menu-item-icon-$item_id" class="widefat edit-menu-item-icon" name="menu-item-icon[$item_id]" value="$icon">
-         </label>
-      </p>
-      <p class="description description-wide">
-         <label for="edit-menu-item-newtab-$item_id">
-            Abrir em nova janela<br>
-            <input type="checkbox" id="edit-menu-item-newtab-$item_id" class="widefat edit-menu-item-newtab" name="menu-item-newtab[$item_id]" value="true" $new_tab>
-         </label>
-      </p>
-OPTIONS;
+            <p class="description description-wide">
+               <label for="edit-menu-item-icon-{$item_id}">
+                  Classe do ícone<br>
+                  <input type="text" id="edit-menu-item-icon-{$item_id}" class="widefat edit-menu-item-icon" name="menu-item-icon[{$item_id}]" value="{$icon}">
+               </label>
+            </p>
+            <p class="description description-wide">
+               <label for="edit-menu-item-newtab-{$item_id}">
+                  Abrir em nova janela<br>
+                  <input type="checkbox" id="edit-menu-item-newtab-{$item_id}" class="widefat edit-menu-item-newtab" name="menu-item-newtab[{$item_id}]" value="true" {$new_tab}>
+               </label>
+            </p>
+      OPTIONS;
    }
 
    public function add_menu_button($items, $args)
    {
-      if (false !== strpos($args->menu_class, 'menu-btns')) {
+      if (str_contains($args->menu_class, 'menu-btns')) {
          $items = str_replace('<a', '<a class="btn-alt !gap-2"', $items);
       }
 
       return $items;
    }
 
-
-
-
-
-   public function save_nav_menu()
+   public function save_nav_menu(): void
    {
       if (!isset($_POST['menu-item-icon']) || !isset($_POST['menu-item-newtab'])) {
          return;
@@ -99,10 +94,10 @@ OPTIONS;
       $icon_class = get_post_meta($item->ID, 'menu_icon', true);
 
       if ($icon_class) {
-         return "<i class='$icon_class'></i> <span class='menu-item-text'>$title</span>";
-      } else {
-         return $title;
+         return "<i class='{$icon_class}'></i> <span class='menu-item-text'>{$title}</span>";
       }
+
+      return $title;
    }
 
    public function add_menu_target($atts, $item)

@@ -13,16 +13,15 @@ $Lyric = new Lyric();
       'text' => esc_html__('Editar esta letra', 'dbands'),
    ]);
 
-   ?>
+?>
    <div class="flex flex-col col-2">
       <h2 class="font-semibold text-xl">
-         <?php echo $Lyric->get('title') ?>
+         <?php echo $Lyric->get('title'); ?>
       </h2>
       <ul class="flex flex-col gap-1">
          <?php
 
-         if ($single_name = $Lyric->get('single')) {
-
+      if ($single_name = $Lyric->get('single')) {
          ?>
             <li>
                <?php
@@ -31,84 +30,81 @@ $Lyric = new Lyric();
                   esc_html__('%sSingle:%s %s', 'dbands'),
                   '<span class="font-medium">',
                   '</span>',
-                  $single_name
+                  $single_name,
                );
 
-               ?>
+         ?>
             </li>
          <?php
 
-         }
+      }
 
-         $album = $Lyric->get('terms', taxonomy: 'albuns');
+$album = $Lyric->get('terms', taxonomy: 'albuns');
 
-         if (!empty($album)) {
-
-         ?>
+if (!empty($album)) {
+   ?>
             <li>
                <?php
 
-               printf(
-                  esc_html__('%sÁlbum:%s %s', 'dbands'),
-                  '<span class="font-medium">',
-                  '</span>',
-                  $album[0]->name
-               );
+         printf(
+            esc_html__('%sÁlbum:%s %s', 'dbands'),
+            '<span class="font-medium">',
+            '</span>',
+            $album[0]->name,
+         );
 
-               ?>
+   ?>
             </li>
          <?php
 
-         }
+}
 
-         if ($composer = $Lyric->get('compositor')) {
-
-         ?>
+if ($composer = $Lyric->get('compositor')) {
+   ?>
             <li>
                <?php
 
-               printf(
-                  esc_html__('%sComposição:%s %s', 'dbands'),
-                  '<span class="font-medium">',
-                  '</span>',
-                  $composer
-               );
+         printf(
+            esc_html__('%sComposição:%s %s', 'dbands'),
+            '<span class="font-medium">',
+            '</span>',
+            $composer,
+         );
 
-               ?>
+   ?>
             </li>
          <?php
 
-         }
+}
 
-         ?>
+?>
       </ul>
    </div>
    <div class="flex flex-col col-2">
       <?php
 
       if ($translator = $Lyric->get('tradutor')) {
-
-      ?>
+         ?>
          <div class="font-semibold text-xl">
             <?php
 
-            printf(esc_html__('Traduzido por %s', 'dbands'), $translator)
+               printf(esc_html__('Traduzido por %s', 'dbands'), $translator);
 
-            ?>
+         ?>
          </div>
       <?php
 
       }
 
-      get_component('aside-postdate');
+get_component('aside-postdate');
 
-      ?>
+?>
    </div>
    <?php
 
    get_component('aside-bands');
 
-   get_component('aside-ad');
+get_component('aside-ad');
 
-   ?>
+?>
 </div>

@@ -7,7 +7,7 @@ $Lyric = new Lyric();
 ?>
 <div class="container-content">
    <section>
-      <article id="lyric-<?php echo $Lyric->ID ?>" <?php post_class() ?>>
+      <article id="lyric-<?php echo $Lyric->ID; ?>" <?php post_class(); ?>>
          <header class="mb-7">
             <h1>
                <?php echo $Lyric->get('title'); ?>
@@ -21,6 +21,6 @@ $Lyric = new Lyric();
 
       get_page_component('single-lyric', 'aside');
 
-      ?>
+?>
    </aside>
 </div>

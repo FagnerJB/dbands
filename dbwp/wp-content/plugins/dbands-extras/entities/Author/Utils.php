@@ -10,7 +10,7 @@ class Utils
          'user_fav_bands' => [
             'name'        => 'Bandas recomendadas',
             'placeholder' => 'Rammstein, Scorpions, Alphaville',
-            'description' => 'Nome das bandas favoritas ou recomendadas do site. Separe com <strong>, (vírgula) </strong> para vários'
+            'description' => 'Nome das bandas favoritas ou recomendadas do site. Separe com <strong>, (vírgula) </strong> para vários',
          ],
          'user_spotify' => [
             'name'        => 'Spotify',
@@ -19,7 +19,7 @@ class Utils
             'link'        => 'https://open.spotify.com/user/%s',
             'text'        => 'Spotify',
             'title'       => 'Perfil no Spotify',
-            'icon'        => 'fab fa-spotify'
+            'icon'        => 'fab fa-spotify',
          ],
          'user_lastfm' => [
             'name'        => 'Last.fm',
@@ -28,7 +28,7 @@ class Utils
             'link'        => 'https://www.last.fm/user/%s',
             'text'        => 'Last.fm',
             'title'       => 'Perfil no Last.fm',
-            'icon'        => 'fab fa-lastfm'
+            'icon'        => 'fab fa-lastfm',
          ],
          'user_instagram' => [
             'name'        => 'Instagram',
@@ -37,7 +37,7 @@ class Utils
             'link'        => 'https://www.instagram.com/%s',
             'text'        => '@%s',
             'title'       => 'Perfil no Instagram',
-            'icon'        => 'fab fa-instagram'
+            'icon'        => 'fab fa-instagram',
          ],
          'user_youtube' => [
             'name'        => 'Playlist de recomendações no YouTube',
@@ -46,7 +46,7 @@ class Utils
             'link'        => 'https://www.youtube.com/playlist?list=%s',
             'text'        => 'Playlist no YouTube',
             'title'       => 'Playlist no YouTube',
-            'icon'        => 'fab fa-youtube'
+            'icon'        => 'fab fa-youtube',
          ],
          'user_twitter' => [
             'name'        => 'X',
@@ -55,7 +55,7 @@ class Utils
             'link'        => 'https://x.com/%s',
             'text'        => '@%s',
             'title'       => 'Perfil no Twitter',
-            'icon'        => 'fab fa-x-twitter'
+            'icon'        => 'fab fa-x-twitter',
          ],
          'user_facebook' => [
             'name'        => 'Facebook',
@@ -64,7 +64,7 @@ class Utils
             'link'        => 'https://fb.com/%s',
             'text'        => 'Facebook',
             'title'       => 'Perfil no Facebook',
-            'icon'        => 'fab fa-facebook'
+            'icon'        => 'fab fa-facebook',
          ],
       ];
    }

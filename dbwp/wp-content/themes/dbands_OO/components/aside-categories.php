@@ -8,7 +8,7 @@ if (is_home()) {
 
 ?>
 <section class="flex flex-col gap-2">
-   <h2 class="<?php echo $title_class ?>">
+   <h2 class="<?php echo $title_class; ?>">
       <?php esc_html_e('Todas as categorias', 'dbands'); ?>
    </h2>
    <?php
@@ -17,9 +17,9 @@ if (is_home()) {
       'with_links' => true,
       'categories' => get_categories([
          'orderby' => 'count',
-         'order'   => 'DESC'
-      ])
+         'order'   => 'DESC',
+      ]),
    ]);
 
-   ?>
+?>
 </section>

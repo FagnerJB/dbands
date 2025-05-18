@@ -2,7 +2,7 @@
 
 if (isset($_GET)) {
    // VIDEO + PLAYLIST =======================================================
-   if (isset($_GET['list']) and isset($_GET['v'])) {
+   if (isset($_GET['list'], $_GET['v'])) {
       $url = 'https://dbands.com.br/tv/' . $_GET['v'] . '/' . $_GET['list'];
    }
 

@@ -11,26 +11,26 @@ do_action('get_header');
 
    wp_head();
 
-   ?>
+?>
 </head>
 
-<body id="top" x-data="dbands" data-title="<?php echo wp_get_document_title() ?>" <?php body_class('no-js') ?> x-bind:class="{'overflow-hidden': tv.status === 'full'||gallery.open}">
+<body id="top" x-data="dbands" data-title="<?php echo wp_get_document_title(); ?>" <?php body_class('no-js'); ?> x-bind:class="{'overflow-hidden': tv.status === 'full'||gallery.open}">
    <?php
 
-   wp_body_open();
+wp_body_open();
 
-   ?>
+?>
    <noscript>
       <div class="p-4 mb-3 bg-red-800 text-zinc-200 text-center">
          <?php
 
-         printf(
-            esc_html__('%s ou %s para que este site funcione corretamente.', 'dbands'),
-            '<a class="btn-alt" href="https://browser-update.org/pt/update-browser.html" target="_blank" rel="external">' . esc_html__('Atualize seu navegador', 'dbands') . '</a>',
-            '<a class="btn-alt" href="https://www.enable-javascript.com/pt/" target="_blank" rel="external">' . esc_html__('ative o JavaScript', 'dbands') . '</a>'
-         );
+      printf(
+         esc_html__('%s ou %s para que este site funcione corretamente.', 'dbands'),
+         '<a class="btn-alt" href="https://browser-update.org/pt/update-browser.html" target="_blank" rel="external">' . esc_html__('Atualize seu navegador', 'dbands') . '</a>',
+         '<a class="btn-alt" href="https://www.enable-javascript.com/pt/" target="_blank" rel="external">' . esc_html__('ative o JavaScript', 'dbands') . '</a>',
+      );
 
-         ?>
+?>
       </div>
    </noscript>
 
@@ -48,9 +48,9 @@ do_action('get_header');
          <span class="grow uppercase">
             <?php
 
-            esc_html_e('Contém cookies. Pode conter anúncios personalizados.', 'dbands');
+   esc_html_e('Contém cookies. Pode conter anúncios personalizados.', 'dbands');
 
-            ?>
+?>
          </span>
          <div class="flex flex-col sm:flex-row gap-1 sm:gap-3">
             <a class="btn-alt uppercase" href="https://dbands.com.br/politica-de-privacidade" rel="privacy-policy">Detalhes</a>
@@ -64,16 +64,16 @@ do_action('get_header');
          <div id="cover" class="relative">
             <?php
 
-            get_component(['header', 'cover']);
+get_component(['header', 'cover']);
 
-            ?>
+?>
          </div>
          <div class="absolute bottom-1 left-2 w-5/12 md:w-4/12 text-shadow-cover text-white">
             <?php
 
-            the_custom_logo();
+the_custom_logo();
 
-            ?>
+?>
          </div>
       </div>
    </header>
@@ -81,4 +81,4 @@ do_action('get_header');
 
    get_component(['header', 'search']);
 
-   ?>
+?>

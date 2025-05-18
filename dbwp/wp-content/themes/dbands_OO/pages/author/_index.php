@@ -9,7 +9,7 @@ get_component('header');
 
       get_page_component('author', 'content');
 
-      ?>
+?>
    </div>
 </main>
 <?php

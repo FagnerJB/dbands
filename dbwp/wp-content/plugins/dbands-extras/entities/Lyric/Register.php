@@ -23,19 +23,17 @@ class Register
 
       $Lyric = new Lyric();
 
-      unset($metas['og:article:published_time']);
-      unset($metas['og:article:modified_time']);
-      unset($metas['author']);
-      unset($metas['og:article:tag']);
+      unset($metas['og:article:published_time'], $metas['og:article:modified_time'], $metas['author'], $metas['og:article:tag']);
 
       $metas['og:type'] = 'music.song';
 
       $metas['og:music:musician'] = $Lyric->get_artists();
-      $metas['og:title'] = $Lyric->get_fullname() . ' (tradução)';
+      $metas['og:title']          = $Lyric->get_fullname() . ' (tradução)';
 
       $metas['og:music:album:track'] = $Lyric->get('order');
 
       $albums = $Lyric->get('terms', taxonomy: 'albuns');
+
       if (!empty($albums)) {
          $metas['og:music:album'] = $albums[0]->name;
       }
@@ -44,13 +42,13 @@ class Register
          esc_attr__('%s, letra de %s traduzida por %s', 'dbands'),
          $Lyric->get('title'),
          $Lyric->get_artists(),
-         $Lyric->get('tradutor')
+         $Lyric->get('tradutor'),
       );
 
       return $metas;
    }
 
-   public function register()
+   public function register(): void
    {
       register_post_type('lyric', [
          'labels' => [
@@ -61,43 +59,43 @@ class Register
          'menu_icon'     => 'dashicons-playlist-audio',
          'supports'      => ['title', 'editor', 'page-attributes', 'custom-fields', 'post-formats', 'author', 'excerpt'],
          'rewrite'       => [
-            'slug' => 'letra'
+            'slug' => 'letra',
          ],
          'taxonomies' => [
             'post_tag',
-            'albums'
-         ]
+            'albums',
+         ],
       ]);
    }
 
    public function add_columns($columns)
    {
-      $columns_new   = array(
+      $columns_new = [
          'album'      => esc_html__('Álbum', 'dbands'),
          'translator' => esc_html__('Tradutor', 'dbands'),
-      );
+      ];
       $columns_start = array_splice($columns, 0, 3);
-      $columns       = array_merge($columns_start, $columns_new, $columns);
 
-      return $columns;
+      return array_merge($columns_start, $columns_new, $columns);
    }
 
-   public function columns_content($column_name, $post_ID)
+   public function columns_content($column_name, $post_ID): void
    {
       switch ($column_name) {
          case 'album':
-            $albums = array_map(function ($album) {
-               return $album->name;
-            }, get_the_terms($post_ID, 'albuns'));
+            $albums = array_map(fn($album) => $album->name, get_the_terms($post_ID, 'albuns'));
 
             echo implode(', ', $albums);
+
             break;
 
          case 'translator':
             $translator = get_post_meta($post_ID, 'tradutor', true);
+
             if ($translator) {
                echo $translator;
             }
+
             break;
 
          default:
@@ -105,16 +103,16 @@ class Register
       }
    }
 
-   public function add_meta_fields($post_type)
+   public function add_meta_fields($post_type): void
    {
-      if ($post_type !== 'lyric') {
+      if ('lyric' !== $post_type) {
          return;
       }
 
       add_meta_box('dbands_lyrics_meta_box', 'Informações', [$this, 'meta_content'], 'lyric', 'normal', 'high');
    }
 
-   public function meta_content($post)
+   public function meta_content($post): void
    {
       $composer   = get_post_meta($post->ID, 'compositor', true);
       $translator = get_post_meta($post->ID, 'tradutor', true);
@@ -127,22 +125,22 @@ class Register
       <table width="100%">
          <tr><td>
             <p><label for="tradutor"><strong>Tradução</strong></label><br>
-            <input id="tradutor" type="text" name="tradutor" value="$translator" class="widefat"><br>
+            <input id="tradutor" type="text" name="tradutor" value="{$translator}" class="widefat"><br>
             <small>Nome do(s) tradutor(es).</small></p>
          </td></tr>
          <tr><td>
             <p><label for="compositor"><strong>Composição</strong></label><br>
-            <input id="compositor" type="text" name="compositor" value="$composer" class="widefat"><br>
+            <input id="compositor" type="text" name="compositor" value="{$composer}" class="widefat"><br>
             <small>Nome do(s) compositor(es).</small></p>
          </td></tr>
          <tr><td>
             <p><label for="single"><strong>Single</strong></label><br>
-            <input id="single" type="text" name="single" value="$single" class="widefat"><br>
+            <input id="single" type="text" name="single" value="{$single}" class="widefat"><br>
             <small>Se não em álbum principal, nome do single.</small></p>
          </td></tr>
          <tr><td>
             <p><label for="spotify_track"><strong>Faixa no Spotify</strong></label><br>
-            <input id="spotify_track" type="text" name="spotify_track" value="$spotify" class="widefat"><br>
+            <input id="spotify_track" type="text" name="spotify_track" value="{$spotify}" class="widefat"><br>
             <small>ID da faixa no Spotify.</small></p>
          </td></tr>
       </table>
@@ -172,6 +170,7 @@ class Register
 
          if (empty($value) && !is_numeric($value)) {
             delete_post_meta($post_ID, $key);
+
             continue;
          }
 
@@ -189,7 +188,7 @@ class Register
       }
 
       $searchable = implode(' ', $terms);
-      $insert     = "<!-- $searchable -->";
+      $insert     = "<!-- {$searchable} -->";
 
       $check = substr($post->post_content, -strlen($insert), strlen($insert));
 

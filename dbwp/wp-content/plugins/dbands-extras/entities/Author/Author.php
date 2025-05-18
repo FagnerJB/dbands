@@ -30,8 +30,9 @@ class Author extends User
       $meta_keys = Utils::get_metas();
 
       $socials = [];
+
       foreach ($meta_keys as $key => $meta_info) {
-         if ($key === 'user_fav_bands') {
+         if ('user_fav_bands' === $key) {
             continue;
          }
 

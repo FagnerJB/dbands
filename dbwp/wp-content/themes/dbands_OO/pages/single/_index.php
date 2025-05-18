@@ -11,7 +11,7 @@ get_component('header');
          get_page_component('single', 'content');
       }
 
-      ?>
+?>
    </div>
 </main>
 <?php

@@ -19,8 +19,8 @@ class Utils
       $directory = opendir($path);
 
       while ($file = readdir($directory)) {
-         if ($file !== "." && $file !== ".." && strlen($file) > 4) {
-            $all_files[] = str_replace(array('.jpg', '.png'), '', $file);
+         if ('.' !== $file && '..' !== $file && strlen($file) > 4) {
+            $all_files[] = str_replace(['.jpg', '.png'], '', $file);
          }
       }
 

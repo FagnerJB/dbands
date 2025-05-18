@@ -14,9 +14,9 @@ class group_bands
       extract(shortcode_atts(['by' => ''], $atts));
 
       $bands_all = get_terms([
-         'taxonomy' => 'post_tag',
-         'order' => 'ASC',
-         'hide_empty' => false
+         'taxonomy'   => 'post_tag',
+         'order'      => 'ASC',
+         'hide_empty' => false,
       ]);
 
       if (empty($bands_all)) {
@@ -31,7 +31,7 @@ class group_bands
 
             if (array_key_exists($genre, $categories)) {
                $categories[$genre]['items'][] = $band;
-               $categories[$genre]['count'] = $categories[$genre]['count'] + 1;
+               $categories[$genre]['count']++;
             } else {
                $categories[$genre]['items'] = [$band];
                $categories[$genre]['count'] = 0;
@@ -46,12 +46,12 @@ class group_bands
             $letter = strtoupper(remove_accents($band->name[0]));
 
             if (!in_array($letter, $alphabet)) {
-               $letter = "#";
+               $letter = '#';
             }
 
             if (array_key_exists($letter, $categories)) {
                $categories[$letter]['items'][] = $band;
-               $categories[$letter]['count'] = $categories[$letter]['count'] + 1;
+               $categories[$letter]['count']++;
             } else {
                $categories[$letter]['items'] = [$band];
                $categories[$letter]['count'] = 0;
@@ -61,13 +61,13 @@ class group_bands
 
       $bands_total = count($bands_all);
       $column_size = floor($bands_total / 3);
-      $in_column = 0;
-      $in_total = 0;
+      $in_column   = 0;
+      $in_total    = 0;
 
       $html_return = '<div class="grid auto-rows-auto grid-cols-1 sm:grid-cols-3 gap-3 text-left">';
 
       foreach ($categories as $title => $category) {
-         if ($in_column === 0) {
+         if (0 === $in_column) {
             $html_return .= '<div>';
          }
 
@@ -75,8 +75,8 @@ class group_bands
          $html_return .= '<ul class="flex flex-col gap-1">';
 
          foreach ($category['items'] as $band) {
-            $name = apply_filters('the_title', $band->name);
-            $link = esc_url(get_tag_link($band->term_id));
+            $name  = apply_filters('the_title', $band->name);
+            $link  = esc_url(get_tag_link($band->term_id));
             $title = sprintf(_n('Com %s publicação', 'Com %s publicações', $band->count, 'dbands'), $band->count);
             $html_return .= '<li><a href="' . $link . '" title="' . $title . '">' . $name . '</a></li>';
             $in_column++;
@@ -87,6 +87,7 @@ class group_bands
 
          if ($in_total === $bands_total) {
             $html_return .= '</div>';
+
             break;
          }
 

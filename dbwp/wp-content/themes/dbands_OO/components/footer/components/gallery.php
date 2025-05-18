@@ -7,7 +7,7 @@
          x-show="gallery.images.length>1">
          <i class="fa-solid fa-chevron-left"></i>
       </button>
-      <button class="btn-alt aspect-square text-xl" title="<?php esc_html_e('Fechar', 'dbands') ?>" x-on:click="gallery.open = false" x-on:keyup.escape.window="gallery.open = false">
+      <button class="btn-alt aspect-square text-xl" title="<?php esc_html_e('Fechar', 'dbands'); ?>" x-on:click="gallery.open = false" x-on:keyup.escape.window="gallery.open = false">
          <i class="fas fa-times"></i>
       </button>
       <button class="btn-alt aspect-square" x-on:click="navGallery()"

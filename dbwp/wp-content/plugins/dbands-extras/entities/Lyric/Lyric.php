@@ -29,7 +29,7 @@ class Lyric extends Post
       return $bands . ' - ' . $title;
    }
 
-   public function  get_content()
+   public function get_content()
    {
       $priority = has_filter('the_content', 'wpautop');
       remove_filter('the_content', 'wpautop', $priority);

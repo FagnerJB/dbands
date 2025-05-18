@@ -31,7 +31,7 @@ class Lastfm
       ]), [
          'cache_key'      => 'lastfm-artist-' . $this->lang . '-' . $artist,
          'cache_duration' => '1 week',
-         'cache_type'     => 'disk'
+         'cache_type'     => 'disk',
       ]);
 
       if (\is_wp_error($artist_fetched)) {
@@ -54,82 +54,14 @@ class Lastfm
          foreach ($artist_content['artist']['tags']['tag'] as $tag) {
             $artist_return['tags'][] = [
                'name' => $tag['name'],
-               'url'  => $tag['url']
+               'url'  => $tag['url'],
             ];
-         };
+         }
       }
 
       $artist_return['items'] = $this->get_artist_similar($artist);
 
       return $artist_return;
-   }
-
-   private function get_artist_similar($artist)
-   {
-      $similares_fetched = \wp_remote_get($this->baseurl . '?' . http_build_query([
-         ...$this->args,
-         'method'      => 'artist.getsimilar',
-         'artist'      => $artist,
-         'autocorrect' => 1,
-         'limit'       => 48,
-      ]), [
-         'cache_key'      => 'lastfm-artistSimilar-' . $artist,
-         'cache_duration' => '1 week',
-         'cache_type'     => 'disk'
-      ]);
-
-      if (\is_wp_error($similares_fetched)) {
-         return false;
-      }
-
-      $similares_content = json_decode(\wp_remote_retrieve_body($similares_fetched), true);
-
-      if (empty($similares_content['similarartists']['artist'])) {
-         return false;
-      }
-
-      foreach ($similares_content['similarartists']['artist'] as $artist) {
-         $similares_return[] = [
-            'name'  => (string) $artist['name'],
-            'url'   => (string) $artist['url'],
-            'match' => number_format(((float) $artist['match']) * 100, 1),
-         ];
-      }
-
-      return $similares_return;
-   }
-
-   private function get_tag_artists($tag)
-   {
-      $tag_fetched = \wp_remote_get($this->baseurl . '?' . http_build_query([
-         ...$this->args,
-         'method' => 'tag.gettopartists',
-         'tag'    => $tag,
-         'limit'  => 48
-      ]), [
-         'cache_key'      => 'lastfm-tagArtists-' . $tag,
-         'cache_duration' => '1 week',
-         'cache_type'     => 'disk',
-      ]);
-
-      if (\is_wp_error($tag_fetched)) {
-         return false;
-      }
-
-      $tag_content = \json_decode(\wp_remote_retrieve_body($tag_fetched), true);
-
-      if (empty($tag_content['topartists']['artist'])) {
-         return false;
-      }
-
-      foreach ($tag_content['topartists']['artist'] as $artist) {
-         $tag_return[] = [
-            'name' => (string) $artist['name'],
-            'url'  => (string) $artist['url']
-         ];
-      }
-
-      return $tag_return;
    }
 
    public function get_tag($tag)
@@ -142,7 +74,7 @@ class Lastfm
       ]), [
          'cache_key'      => 'lastfm-tag-' . $this->lang . '-' . $tag,
          'cache_duration' => '1 week',
-         'cache_type'     => 'disk'
+         'cache_type'     => 'disk',
       ]);
 
       if (\is_wp_error($tag_fetched)) {
@@ -163,38 +95,6 @@ class Lastfm
       $tag_return['items'] = $this->get_tag_artists($tag);
 
       return $tag_return;
-   }
-
-   private function get_tag_similares($tag)
-   {
-      $tag_fetched = \wp_remote_get($this->baseurl . '?' . http_build_query([
-         ...$this->args,
-         'method' => 'tag.getsimilar',
-         'tag'    => $tag,
-      ]), [
-         'cache_key'      => 'lastfm-tagSimilar-' . $tag,
-         'cache_duration' => '1 week',
-         'cache_type'     => 'disk'
-      ]);
-
-      if (\is_wp_error($tag_fetched)) {
-         return false;
-      }
-
-      $tag_content = json_decode(\wp_remote_retrieve_body($tag_fetched), true);
-
-      if (empty($tag_content['similartags']['tag'])) {
-         return false;
-      }
-
-      foreach ($tag_content['similartags']['tag'] as $tag) {
-         $similar_return[] = [
-            'name' => (string) $tag['name'],
-            'url'  => (string) $tag['url']
-         ];
-      }
-
-      return $similar_return;
    }
 
    public function get_user($username)
@@ -229,9 +129,109 @@ class Lastfm
       return $user_return;
    }
 
+   private function get_artist_similar($artist)
+   {
+      $similares_fetched = \wp_remote_get($this->baseurl . '?' . http_build_query([
+         ...$this->args,
+         'method'      => 'artist.getsimilar',
+         'artist'      => $artist,
+         'autocorrect' => 1,
+         'limit'       => 48,
+      ]), [
+         'cache_key'      => 'lastfm-artistSimilar-' . $artist,
+         'cache_duration' => '1 week',
+         'cache_type'     => 'disk',
+      ]);
+
+      if (\is_wp_error($similares_fetched)) {
+         return false;
+      }
+
+      $similares_content = json_decode(\wp_remote_retrieve_body($similares_fetched), true);
+
+      if (empty($similares_content['similarartists']['artist'])) {
+         return false;
+      }
+
+      foreach ($similares_content['similarartists']['artist'] as $artist) {
+         $similares_return[] = [
+            'name'  => (string) $artist['name'],
+            'url'   => (string) $artist['url'],
+            'match' => number_format(((float) $artist['match']) * 100, 1),
+         ];
+      }
+
+      return $similares_return;
+   }
+
+   private function get_tag_artists($tag)
+   {
+      $tag_fetched = \wp_remote_get($this->baseurl . '?' . http_build_query([
+         ...$this->args,
+         'method' => 'tag.gettopartists',
+         'tag'    => $tag,
+         'limit'  => 48,
+      ]), [
+         'cache_key'      => 'lastfm-tagArtists-' . $tag,
+         'cache_duration' => '1 week',
+         'cache_type'     => 'disk',
+      ]);
+
+      if (\is_wp_error($tag_fetched)) {
+         return false;
+      }
+
+      $tag_content = \json_decode(\wp_remote_retrieve_body($tag_fetched), true);
+
+      if (empty($tag_content['topartists']['artist'])) {
+         return false;
+      }
+
+      foreach ($tag_content['topartists']['artist'] as $artist) {
+         $tag_return[] = [
+            'name' => (string) $artist['name'],
+            'url'  => (string) $artist['url'],
+         ];
+      }
+
+      return $tag_return;
+   }
+
+   private function get_tag_similares($tag)
+   {
+      $tag_fetched = \wp_remote_get($this->baseurl . '?' . http_build_query([
+         ...$this->args,
+         'method' => 'tag.getsimilar',
+         'tag'    => $tag,
+      ]), [
+         'cache_key'      => 'lastfm-tagSimilar-' . $tag,
+         'cache_duration' => '1 week',
+         'cache_type'     => 'disk',
+      ]);
+
+      if (\is_wp_error($tag_fetched)) {
+         return false;
+      }
+
+      $tag_content = json_decode(\wp_remote_retrieve_body($tag_fetched), true);
+
+      if (empty($tag_content['similartags']['tag'])) {
+         return false;
+      }
+
+      foreach ($tag_content['similartags']['tag'] as $tag) {
+         $similar_return[] = [
+            'name' => (string) $tag['name'],
+            'url'  => (string) $tag['url'],
+         ];
+      }
+
+      return $similar_return;
+   }
+
    private function get_user_artists($username, $period = '6month')
    {
-      //overall | 7day | 1month | 3month | 6month | 12month
+      // overall | 7day | 1month | 3month | 6month | 12month
 
       $artists_fetched = \wp_remote_get($this->baseurl . '?' . http_build_query([
          ...$this->args,
@@ -249,7 +249,6 @@ class Lastfm
          return false;
       }
 
-
       $artists_content = json_decode(\wp_remote_retrieve_body($artists_fetched), true);
 
       if (empty($artists_content['topartists']['artist'])) {
@@ -257,11 +256,11 @@ class Lastfm
       }
 
       foreach ($artists_content['topartists']['artist'] as $artist) {
-         $artists_return[] = array(
+         $artists_return[] = [
             'name' => $artist['name'],
             'url'  => $artist['url'],
             'rank' => $artist['playcount'],
-         );
+         ];
       }
 
       return $artists_return;

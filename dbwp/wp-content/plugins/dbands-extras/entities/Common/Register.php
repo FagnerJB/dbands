@@ -2,9 +2,6 @@
 
 namespace dbp\Common;
 
-use dbp\Common\Utils;
-use dbp\Lyric\Lyric;
-
 class Register
 {
    public function __construct()
@@ -20,7 +17,7 @@ class Register
       add_filter('upload_mimes', [$this, 'remove_upload_types'], 10, 2);
    }
 
-   public function enqueue_styles()
+   public function enqueue_styles(): void
    {
       wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v6.7.2/css/all.css');
    }
@@ -32,20 +29,20 @@ class Register
       return $custom_logo_attrs;
    }
 
-   public function prints_head_tags()
+   public function prints_head_tags(): void
    {
       echo '<link rel="search" type="application/opensearchdescription+xml" title="Busca no Deutsche Bands" href="/opensearch.xml">';
       echo '<link rel="alternate" type="application/rss+xml" title="Últimas notícias" href="' . get_post_meta(11649, '_menu_item_url', true) . '"/>';
    }
 
-   public function add_theme_supports()
+   public function add_theme_supports(): void
    {
       add_theme_support('custom-background');
       add_theme_support('custom-logo');
       add_theme_support('dark-editor-style');
    }
 
-   public function remove_wp_assets()
+   public function remove_wp_assets(): void
    {
       wp_deregister_style('admin-bar');
       wp_deregister_style('wp-block-library');
@@ -70,18 +67,12 @@ class Register
          return $types;
       }
 
-      $types = array_filter($types, function ($type) {
-         return !(preg_match('/(text|video|application)\//', $type));
-      });
+      $types = array_filter($types, fn($type) => !preg_match('/(text|video|application)\//', $type));
 
       if (user_can($user, 'edit_posts')) {
          return $types;
       }
 
-      $types = array_filter($types, function ($type) {
-         return !(preg_match('/(audio)\//', $type));
-      });
-
-      return $types;
+      return array_filter($types, fn($type) => !preg_match('/(audio)\//', $type));
    }
 }

@@ -35,7 +35,7 @@ class Youtube
       $results_fetched = \wp_remote_get("{$this->baseurl}/search/?" . http_build_query(wp_parse_args($args, $defaults)), [
          'cache_key'      => 'yt-search-' . $key,
          'cache_duration' => '3 days',
-         'cache_type'     => 'disk'
+         'cache_type'     => 'disk',
       ]);
 
       if (is_wp_error($results_fetched)) {
@@ -58,10 +58,10 @@ class Youtube
          $video_ID = $video['id']['videoId'];
 
          $videos_return[$video_ID] = [
-            'id'        => $video_ID,
-            'date'      => date_i18n('Y-m-d H:i:s', strtotime((string) $video['snippet']['publishedAt'])),
-            'title'     => (string) $video['snippet']['title'],
-            'author'    => (string) $video['snippet']['channelTitle'],
+            'id'     => $video_ID,
+            'date'   => date_i18n('Y-m-d H:i:s', strtotime((string) $video['snippet']['publishedAt'])),
+            'title'  => (string) $video['snippet']['title'],
+            'author' => (string) $video['snippet']['channelTitle'],
          ];
       }
 
@@ -79,11 +79,11 @@ class Youtube
          'maxResults' => 50,
          'key'        => $this->apikey,
          'playlistId' => $playlist_ID,
-         'pageToken'  => $page
+         'pageToken'  => $page,
       ]), [
          'cache_key'      => 'yt-playlistItems-' . $playlist_ID . '-' . $page,
          'cache_duration' => '1 day',
-         'cache_type'     => 'disk'
+         'cache_type'     => 'disk',
       ]);
 
       if (false === $playlist_videos_fetched) {
@@ -110,10 +110,10 @@ class Youtube
          $video_ID = (string) $video['snippet']['resourceId']['videoId'];
 
          $videos_playlist_return['videos'][$video_ID] = [
-            'id'        => $video_ID,
-            'date'      => date_i18n('Y-m-d H:i:s', strtotime((string) $video['snippet']['publishedAt'])),
-            'title'     => (string) $video['snippet']['title'],
-            'author'    => (string) $video['snippet']['channelTitle'],
+            'id'     => $video_ID,
+            'date'   => date_i18n('Y-m-d H:i:s', strtotime((string) $video['snippet']['publishedAt'])),
+            'title'  => (string) $video['snippet']['title'],
+            'author' => (string) $video['snippet']['channelTitle'],
          ];
       }
 
@@ -127,11 +127,11 @@ class Youtube
          'maxResults' => 50,
          'key'        => $this->apikey,
          'channelId'  => $channel,
-         'pageToken'  => $pageToken
+         'pageToken'  => $pageToken,
       ]), [
          'cache_key'      => 'yt-subs-' . $channel . '-' . $pageToken,
          'cache_duration' => '1 month',
-         'cache_type'     => 'disk'
+         'cache_type'     => 'disk',
       ]);
 
       if (false === $subscriptions_fetched) {
@@ -145,38 +145,6 @@ class Youtube
       }
 
       return $subscriptions_content['items'];
-   }
-
-   private function get_feed_videos($channel_ID)
-   {
-      $playlist_ID = 'UULF' . ltrim($channel_ID, 'UC');
-      $only_videos = $this->get_playlist_videos($playlist_ID);
-
-      if (empty($only_videos['videos'])) {
-         return [];
-      }
-
-      $only_upcoming = $this->search([
-         'order'     => 'date',
-         'channelId' => $channel_ID,
-         'eventType' => 'upcoming',
-      ]);
-
-      $only_broadcasts = array_merge(
-         array_keys($only_upcoming)
-      );
-
-      $videos_filtered = [];
-
-      foreach ($only_videos['videos'] as $video_ID => $video) {
-         if (in_array($video_ID, $only_broadcasts)) {
-            continue;
-         }
-
-         $videos_filtered[$video_ID] = $video;
-      }
-
-      return $videos_filtered;
    }
 
    public function get_feed($page = 1, $video_ID = '')
@@ -220,9 +188,11 @@ class Youtube
 
       if (!empty($video_ID)) {
          $found = [];
+
          foreach ($videos_next as $key => $video) {
             if ($key === $video_ID) {
                $found = $video;
+
                break;
             }
          }
@@ -234,5 +204,37 @@ class Youtube
       $length = 1 === $page ? $this->first_page : $this->per_page;
 
       return array_slice($videos_next, $offset, $length);
+   }
+
+   private function get_feed_videos($channel_ID)
+   {
+      $playlist_ID = 'UULF' . ltrim($channel_ID, 'UC');
+      $only_videos = $this->get_playlist_videos($playlist_ID);
+
+      if (empty($only_videos['videos'])) {
+         return [];
+      }
+
+      $only_upcoming = $this->search([
+         'order'     => 'date',
+         'channelId' => $channel_ID,
+         'eventType' => 'upcoming',
+      ]);
+
+      $only_broadcasts = array_merge(
+         array_keys($only_upcoming),
+      );
+
+      $videos_filtered = [];
+
+      foreach ($only_videos['videos'] as $video_ID => $video) {
+         if (in_array($video_ID, $only_broadcasts)) {
+            continue;
+         }
+
+         $videos_filtered[$video_ID] = $video;
+      }
+
+      return $videos_filtered;
    }
 }

@@ -22,7 +22,7 @@ class Register
       add_filter('embed_oembed_html', [$this, 'edit_oembed'], 10, 2);
    }
 
-   public function add_metas()
+   public function add_metas(): void
    {
       if ('site' !== get_query_var('search_type', 'site')) {
          echo '<meta name="robots" content="noindex, nofollow">';
@@ -33,7 +33,7 @@ class Register
    {
       if ('dns-prefetch' === $type) {
          $urls[] = [
-            'href' => 'https://adservice.google.com'
+            'href' => 'https://adservice.google.com',
          ];
       }
 
@@ -47,22 +47,22 @@ class Register
       return $urls;
    }
 
-   public function enqueue_styles()
+   public function enqueue_styles(): void
    {
       wp_enqueue_style('main', get_theme_file_uri('assets/style.css'));
 
       $bg = WP_CONTENT_URL . '/uploads/trianglify.png';
-      wp_add_inline_style('main', ":root{--bg-image: url('$bg');}");
+      wp_add_inline_style('main', ":root{--bg-image: url('{$bg}');}");
 
       wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v6.7.2/css/all.css');
    }
 
-   public function enqueue_scripts()
+   public function enqueue_scripts(): void
    {
       global $wp_query;
 
       wp_enqueue_script('main', get_theme_file_uri('assets/script.js'), ['youtube'], null, [
-         'strategy' => 'defer'
+         'strategy' => 'defer',
       ]);
 
       wp_localize_script('main', 'dbands', [
@@ -70,7 +70,7 @@ class Register
          'catBase'  => get_option('category_base'),
          'tagBase'  => get_option('tag_base'),
          'maxPages' => $wp_query->max_num_pages,
-         'debug'    => current_user_can('manage_options')
+         'debug'    => current_user_can('manage_options'),
       ]);
 
       wp_localize_script('main', 'wpe', [
@@ -79,13 +79,13 @@ class Register
       ]);
 
       wp_enqueue_script('youtube', 'https://www.youtube.com/iframe_api', [], null, [
-         'strategy' => 'defer'
+         'strategy' => 'defer',
       ]);
    }
 
-   public function add_inline_scripts()
+   public function add_inline_scripts(): void
    {
-?>
+      ?>
       <script>
          window.addEventListener('DOMContentLoaded', function() {
             document.getElementsByTagName('body')[0].classList.remove('no-js')
@@ -103,7 +103,7 @@ class Register
             $spotify       = new Spotify();
             $artist        = get_the_terms($post_ID, 'post_tag')[0]->name;
             $track         = get_the_title($post_ID);
-            $spotify_track = $spotify->search("$artist $track", "track");
+            $spotify_track = $spotify->search("{$artist} {$track}", 'track');
 
             if (!$spotify_track) {
                add_post_meta($post_ID, 'spotify_track', $spotify_track);
@@ -111,7 +111,7 @@ class Register
          }
 
          if (!empty($spotify_track) && 'notrack' !== $spotify_track) {
-            $embed = '<div class="text-center"><iframe src="https://open.spotify.com/embed/track/' . $spotify_track . '" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" title="Esta faixa no Spotify"></iframe></div>';
+            $embed   = '<div class="text-center"><iframe src="https://open.spotify.com/embed/track/' . $spotify_track . '" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" title="Esta faixa no Spotify"></iframe></div>';
             $content = $embed . $content;
          }
       }
@@ -121,7 +121,7 @@ class Register
 
    public function edit_oembed($oembed, $url)
    {
-      if (strpos($url, 'youtube.com') === false) {
+      if (!str_contains($url, 'youtube.com')) {
          return '<div class="aspect-video *:size-full">' . $oembed . '</div>';
       }
 
@@ -129,6 +129,7 @@ class Register
       get_component('embed-video', [
          'oembed' => $oembed,
       ]);
+
       return ob_get_clean();
    }
 
@@ -136,6 +137,7 @@ class Register
    {
       ob_start();
       get_component('img-placeholder');
+
       return ob_get_clean();
    }
 }

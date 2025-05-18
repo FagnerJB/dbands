@@ -35,55 +35,54 @@ if ('artista' === $search_type) {
 }
 
 ?>
-<div id="page-<?php echo $page ?>" class="container-content">
+<div id="page-<?php echo $page; ?>" class="container-content">
    <section>
       <?php
 
-      if ($page === 1 || !wp_is_serving_rest_request()) {
-
-      ?>
+      if (1 === $page || !wp_is_serving_rest_request()) {
+         ?>
          <header class="mb-7">
             <h1>
                <?php
 
-               if (empty($search_term)) {
-                  esc_html_e('Faça uma busca', 'dbands');
-               } else {
-                  printf(esc_html__('Resultados para %s', 'dbands'), $search_term);
-               }
+                  if (empty($search_term)) {
+                     esc_html_e('Faça uma busca', 'dbands');
+                  } else {
+                     printf(esc_html__('Resultados para %s', 'dbands'), $search_term);
+                  }
 
-               ?>
+         ?>
             </h1>
             <div>
                <?php
 
-               echo $search_options[$search_type]['search_page'];
+         echo $search_options[$search_type]['search_page'];
 
-               ?>
+         ?>
             </div>
          </header>
       <?php
 
       }
 
-      if (!have_posts() || empty($search_term) || isset($items) && empty($items)) {
-         get_component('loop-empty');
-      } else {
-         if ('site' === $search_type) {
-            get_component('loop-posts');
-         } elseif (in_array($search_type, ['artista', 'tag', 'usuario'])) {
-            get_component('loop-lastfm', [
-               'search_type' => $search_type,
-               'card'        => $lastfm,
-            ]);
-         } elseif ('videos' === $search_type) {
-            get_component('loop-videos', [
-               'videos'     => $items,
-            ]);
-         }
-      }
+if (!have_posts() || empty($search_term) || isset($items) && empty($items)) {
+   get_component('loop-empty');
+} else {
+   if ('site' === $search_type) {
+      get_component('loop-posts');
+   } elseif (in_array($search_type, ['artista', 'tag', 'usuario'])) {
+      get_component('loop-lastfm', [
+         'search_type' => $search_type,
+         'card'        => $lastfm,
+      ]);
+   } elseif ('videos' === $search_type) {
+      get_component('loop-videos', [
+         'videos' => $items,
+      ]);
+   }
+}
 
-      ?>
+?>
    </section>
 </div>
 <?php

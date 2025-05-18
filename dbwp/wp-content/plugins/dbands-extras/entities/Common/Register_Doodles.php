@@ -5,7 +5,7 @@ namespace dbp\Common;
 class Register_Doodles
 {
    private $current = false;
-   private $dates = [
+   private $dates   = [
       // October 31th
       'halloween' => [
          'start' => 'October 25th',
@@ -40,6 +40,21 @@ class Register_Doodles
       }
    }
 
+   public function change_logo($logo_ID)
+   {
+      $new_logo = get_posts([
+         'name'      => $this->current,
+         'fields'    => 'ids',
+         'post_type' => 'attachment',
+      ]);
+
+      if (empty($new_logo)) {
+         return $logo_ID;
+      }
+
+      return $new_logo[0];
+   }
+
    private function is_between()
    {
       $today = time();
@@ -56,26 +71,13 @@ class Register_Doodles
 
          if ($start <= $today && $today < $end) {
             $this->current = $day;
+
             return $day;
+
             break;
          }
       }
 
       return false;
-   }
-
-   public function change_logo($logo_ID)
-   {
-      $new_logo = get_posts([
-         'name'      => $this->current,
-         'fields'    => 'ids',
-         'post_type' => 'attachment',
-      ]);
-
-      if (empty($new_logo)) {
-         return $logo_ID;
-      }
-
-      return $new_logo[0];
    }
 }
