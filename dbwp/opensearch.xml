@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSearchDescription
+   xmlns="http://a9.com/-/spec/opensearch/1.1/"
+   xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+   <ShortName>dbands</ShortName>
+   <LongName>Deutsche Bands</LongName>
+   <Description>Busca do site Deutsche Bands</Description>
+   <Tags>musik music música bands german bandas alemãs Alemanha</Tags>
+   <Url type="text/html" template="https://dbands.com.br/busca/{searchTerms}"></Url>
+   <Contact>contato@dbands.com.br</Contact>
+   <Image height="16" width="16" type="image/x-icon">httpss://dbands.com.br/favicon.ico</Image>
+   <Language>pt-br</Language>
+   <OutputEncoding>UTF-8</OutputEncoding>
+   <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription>
