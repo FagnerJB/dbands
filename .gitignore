@@ -1,5 +1,6 @@
 node_modules/
-env-*
+vendor/
 **/cache/
 uploads/
-vendor/
+env-*
+**/themes/**/assets/

@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+@import './common';
+@import './content';
+@import './toast';
+
+@source "../../../dbands_OO";
+
+@theme {
+   --font-sans: 'Georama', ui-sans-serif, system-ui, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji';
+
+   --text-*: initial;
+   --text-xxs: 0.75rem;
+   --text-xs: 0.875rem;
+   --text-sm: 1rem;
+   --text-base: 1.125rem;
+   --text-lg: 1.25rem;
+   --text-xl: 1.5rem;
+   --text-2xl: 1.875rem;
+   --text-3xl: 2.25rem;
+
+   --aspect-feed: 4 / 5;
+   --aspect-row: 7 / 3;
+
+   --text-shadow-cover: 1px 1px 2px rgba(0, 0, 0, 0.9),
+      -1px -1px 3px rgba(0, 0, 0, 0.5);
+
+   --breakpoint-*: initial;
+   --breakpoint-sm: 37rem;
+   --breakpoint-md: 48rem;
+   --breakpoint-lg: 64rem;
+   --breakpoint-xl: 80rem;
+}
+
+html::before {
+   @apply fixed bottom-0 right-0 z-9999 py-1 px-2 bg-red-600/90 text-white text-xxs font-bold font-mono sm:content-['sm:'] md:content-['md:'] lg:content-['lg:'] xl:content-['xl:']
+   /* 2xl:content-['2xl:']; */;
+}
+
+@utility container {
+   margin-inline: auto;
+   padding-inline: calc(var(--spacing) * 3);
+   min-width: 360px;
+}
+
+@utility btn {
+   @apply inline-flex items-center py-1.5 px-3 hover:bg-neutral-700 focus:bg-neutral-700 text-zinc-100 gap-px bg-neutral-900;
+}
+
+@utility btn-alt {
+   @apply btn gap-2 bg-neutral-800;
+}
+
+@font-face {
+   font-family: 'Georama';
+   font-style: italic;
+   font-weight: 100 900;
+   font-stretch: 62.5% 150%;
+   font-display: swap;
+   src: url(https://fonts.gstatic.com/s/georama/v13/MCoRzAn438bIEyxFVaIo3bv9.woff2)
+      format('woff2');
+   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+      U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+   font-family: 'Georama';
+   font-style: normal;
+   font-weight: 100 900;
+   font-stretch: 62.5% 150%;
+   font-display: swap;
+   src: url(https://fonts.gstatic.com/s/georama/v13/MCoTzAn438bIEyxFVacY3w.woff2)
+      format('woff2');
+   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+      U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

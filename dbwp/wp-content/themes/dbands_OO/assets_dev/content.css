@@ -1,0 +1,90 @@
+h1 {
+   @apply text-xl md:text-3xl font-semibold;
+}
+
+.container-content {
+   @apply container flex flex-col lg:flex-row gap-8 py-5 bg-zinc-200 text-zinc-800;
+
+   section {
+      @apply w-full;
+   }
+
+   aside {
+      @apply w-full lg:max-w-md;
+   }
+}
+
+body.search #search {
+   @apply sticky top-0 z-10;
+}
+
+.content {
+   h2 {
+      @apply text-xl font-medium mt-5 mb-2;
+   }
+
+   h3 {
+      @apply text-lg font-medium mt-3 mb-1;
+   }
+
+   h4 {
+      @apply text-lg font-medium mt-3 mb-1;
+   }
+
+   h5 {
+      @apply text-lg font-medium mt-5 mb-1;
+   }
+
+   h6 {
+      @apply font-medium mt-2;
+   }
+
+   p + p {
+      @apply mt-2;
+   }
+
+   img {
+      @apply align-middle;
+   }
+
+   img {
+      @apply mx-auto;
+   }
+
+   .alignright {
+      @apply md:float-right md:ml-3 mb-3 clear-both;
+   }
+
+   .wp-caption-text {
+      @apply bg-zinc-300 py-1 px-2;
+   }
+
+   strong {
+      @apply font-semibold;
+   }
+
+   *::selection {
+      @apply bg-amber-400;
+   }
+}
+
+.content a,
+.with-links a {
+   @apply border-b border-transparent border-dashed hover:border-zinc-400 focus:border-zinc-400;
+}
+
+.lyric table {
+   tr {
+      @apply flex flex-col sm:flex-row gap-7 md:gap-1;
+   }
+   td {
+      @apply align-top whitespace-pre-wrap;
+   }
+   td {
+      @apply first:order-2 sm:first:order-1;
+   }
+}
+
+body.search .search-options {
+   @apply flex;
+}

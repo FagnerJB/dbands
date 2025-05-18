@@ -1,0 +1,78 @@
+body {
+   @apply bg-zinc-800 bg-cover bg-fixed bg-no-repeat font-sans antialiased text-base;
+   background-image: var(--bg-image);
+   font-optical-sizing: auto;
+}
+
+button {
+   @apply cursor-pointer;
+}
+
+body.no-js .wjs,
+.nojs {
+   display: none;
+}
+
+body.no-js .nojs {
+   display: block;
+}
+
+summary {
+   @apply cursor-pointer;
+}
+
+[x-cloak] {
+   @apply hidden;
+}
+
+@keyframes barprogress {
+   0% {
+      background-position: 0% 0;
+   }
+   to {
+      background-position: 125% 0;
+   }
+}
+
+.wpe-body-loading #loading-bar {
+   @apply h-3.5;
+   background: linear-gradient(to right, #f00, #fc0, #f00);
+   background-size: 500%;
+   animation: 2s linear infinite barprogress;
+}
+
+#loading-bar.error {
+   @apply h-5;
+}
+
+.btn-item {
+   @apply bg-neutral-800 hover:bg-neutral-700;
+}
+
+.menu-only-icons .menu-item-text {
+   @apply hidden;
+}
+
+summary.custom-marker {
+   @apply flex justify-between items-center;
+   --fa: '\f078';
+}
+
+[open] > summary.custom-marker {
+   --fa: '\f068';
+}
+
+summary.custom-marker::after {
+   font-family: 'Font Awesome 6 Free';
+   content: var(--fa);
+   font-weight: 900;
+}
+
+.share-hidden {
+   opacity: 0;
+   padding: 0;
+   margin: 0;
+   overflow: hidden;
+   height: 0px;
+   transform: scaleY(0);
+}

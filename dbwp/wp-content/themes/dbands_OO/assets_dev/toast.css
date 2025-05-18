@@ -1,0 +1,11 @@
+#toast-list {
+   @apply fixed right-1 bottom-[calc(100vw*9/16)] sm:bottom-73 z-79 flex flex-col-reverse gap-1 w-full sm:max-w-lg;
+}
+
+.toast {
+   @apply bg-zinc-900 py-2.5 px-3 text-zinc-200 transition ease-linear;
+}
+
+.toast-hidden {
+   @apply opacity-0 translate-y-full;
+}
