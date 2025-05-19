@@ -26,14 +26,7 @@ jobs:
       - name: Setup Rclone
         uses: AnimMouse/setup-rclone@v1
         with:
-          rclone_config: |
-            [remote]
-            type = sftp
-            host = ${{ secrets.FTP_HOST }}
-            user = ${{ vars.SERVER_USER }}
-            key_file = ${{ secrets.SSH_PRIVATE_KEY }}
-          disable_base64: true
-
+          rclone_config: ${{ secrets.RCLONE_CONFIG }}
       - run: rclone copyto dbwp/ remote:${PATH_DIR}/
 
       - name: Send Email
