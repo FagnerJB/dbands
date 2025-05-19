@@ -32,11 +32,10 @@ jobs:
           cp rclone ~/.local/bin/
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Run copy
-        run: |
-          echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/key/private
-          chmod 600 ~/key/private
-          rclone config create remote sftp host=${{ secrets.FTP_HOST }} user=${{ vars.SERVER_USER }} key_file=~/key/private -vv
-          rclone copyto dbwp/ remote:${{ vars.SERVER_FOLDER }} -vv
+        run: echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/key/private
+      - run: chmod 600 ~/key/private
+      - run: rclone config create remote sftp host=${{ secrets.FTP_HOST }} user=${{ vars.SERVER_USER }} key_file=~/key/private -vv
+      - run: rclone copyto dbwp/ remote:${{ vars.SERVER_FOLDER }} -vv
 
       - name: Send Email
         uses: hilarion5/send-mail@v1
