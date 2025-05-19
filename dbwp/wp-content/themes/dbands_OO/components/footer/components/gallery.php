@@ -21,7 +21,7 @@
          <template x-for="(image, idx) in gallery.images">
             <li class="galleryImage border-2 border-transparent shrink-0" x-bind:class="{'border-zinc-200':idx===gallery.current}">
                <button x-on:click="gallery.current = idx">
-                  <img class="size-20 object-cover" x-bind:src="image" alt="" />
+                  <img class="inline size-20 object-cover" x-bind:src="image" alt="" />
                </button>
             </li>
          </template>

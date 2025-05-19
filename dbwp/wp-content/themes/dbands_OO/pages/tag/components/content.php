@@ -46,8 +46,9 @@ if (1 === $page || !wp_is_serving_rest_request()) {
 </div>
 <?php
 
-get_component('pagination', [
-   'link' => $Band->get('link'),
+latte_component('pagination', [
+   'link'      => $Band->get('link'),
+   'max_pages' => $wp_query->max_num_pages,
 ]);
 
 ?>

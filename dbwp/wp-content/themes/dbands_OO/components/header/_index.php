@@ -21,7 +21,7 @@ wp_body_open();
 
 ?>
    <noscript>
-      <div class="p-4 mb-3 bg-red-800 text-zinc-200 text-center">
+      <div class="p-4 mb-3 bg-red-800 text-zinc-200 text-center text-xs sm:text-base">
          <?php
 
       printf(

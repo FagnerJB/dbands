@@ -2,7 +2,7 @@ const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
-   entry: './dbwp/wp-content/themes/dbands_OO/assets/dev/index.ts',
+   entry: './dbwp/wp-content/themes/dbands_OO/assets_dev/index.ts',
    module: {
       rules: [
          {

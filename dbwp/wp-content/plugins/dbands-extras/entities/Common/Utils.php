@@ -13,13 +13,7 @@ class Utils
 
    public static function get_page()
    {
-      $page = get_query_var('paged');
-
-      if (0 === $page) {
-         $page = 1;
-      }
-
-      return $page;
+      return max(get_query_var('paged'), 1);
    }
 
    public static function remove_tags($text)
@@ -99,7 +93,7 @@ class Utils
             'placeholder' => esc_html__('Pesquise por vídeos musicais no YouTube', 'dbands'),
             'title'       => esc_html__('Clipes', 'dbands'),
             'subtitle'    => esc_html__('Vídeos de música', 'dbands'),
-            'search_page' => esc_html__('Vídeos de música mais populares do YouTube', 'dbands'),
+            'search_page' => esc_html__('Vídeos de música do YouTube', 'dbands'),
             'service'     => 'fab fa-youtube',
          ],
          'artista' => [

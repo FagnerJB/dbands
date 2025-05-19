@@ -73,7 +73,6 @@ class Register_Doodles
             $this->current = $day;
 
             return $day;
-
             break;
          }
       }

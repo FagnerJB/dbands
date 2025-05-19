@@ -17,7 +17,6 @@ $title = sprintf(esc_html__('Publicações de %s', 'dbands'), $User->get('name')
    ]);
 
 ?>
-
    <div>
       <div class="flex gap-2 items-start">
          <a class="shrink-0" href="<?php echo $User->get('link'); ?>" title="<?php echo $title; ?>" rel="author">
@@ -42,12 +41,12 @@ $title = sprintf(esc_html__('Publicações de %s', 'dbands'), $User->get('name')
 
 ?>
    </div>
-   <?php
+<?php
 
-   get_component('tags', [
-      'post'       => $News,
-      'with_links' => true,
-   ]);
+get_component('tags', [
+   'post'       => $News,
+   'with_links' => true,
+]);
 
 get_component('aside-bands');
 

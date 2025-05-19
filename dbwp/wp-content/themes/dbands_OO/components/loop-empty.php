@@ -6,7 +6,7 @@ use dbp\Common\Utils;
 <p class="font-medium">
    <?php esc_html_e('Não há publicações aqui. Tente fazer nova uma busca.', 'dbands'); ?>
 </p>
-<div class="my-2">
+<div class="my-2 wjs">
    <?php
 
    $search_options = Utils::get_search_options();

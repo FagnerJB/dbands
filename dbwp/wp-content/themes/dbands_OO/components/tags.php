@@ -17,7 +17,7 @@ if (!is_single() && $News) {
 
 $tags = array_merge($bands ?? [], $categories ?? []);
 
-if (is_tag() || is_category()) {
+if (is_tag() || is_category() && !$with_links) {
    $current = get_queried_object();
 
    $found = array_find_key($tags, fn($term) => $term->term_id === $current->term_id);
@@ -70,7 +70,7 @@ if (!empty($tags)) {
 
                echo '<a class="' . $item_classes . ' py-1.5 px-3" href="' . get_term_link($tag) . '" ' . $rel . '>';
             } else {
-               echo '<div class="' . $item_classes . ' py-0.75 px-1.5">';
+               echo '<div class="' . $item_classes . ' py-0.75 px-2">';
             }
 
             $prefix = 'category' === $tag->taxonomy ? '<i class="fas fa-hashtag"></i>' : '';

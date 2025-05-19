@@ -274,7 +274,6 @@ class Band extends Term
 
          default:
             return '';
-
             break;
       }
 

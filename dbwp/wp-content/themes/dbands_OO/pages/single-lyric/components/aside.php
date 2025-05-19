@@ -100,9 +100,11 @@ get_component('aside-postdate');
 
 ?>
    </div>
-   <?php
+<?php
 
-   get_component('aside-bands');
+get_component('aside-bands');
+
+get_component('aside-share');
 
 get_component('aside-ad');
 

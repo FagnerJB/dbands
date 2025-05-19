@@ -2,6 +2,7 @@
 
 use dbp\Author\Author;
 use dbp\Common\Utils;
+use wpe\Utils as WpeUtils;
 
 $Author = new Author();
 $page   = Utils::get_page();
@@ -31,19 +32,20 @@ if (have_posts()) {
 ?>
    </section>
    <aside>
-      <?php
+   <?php
 
-if (1 === $page || !wp_is_serving_rest_request()) {
-   get_page_component('author', 'aside');
-}
+   if (1 === $page || !wp_is_serving_rest_request()) {
+      get_page_component('author', 'aside');
+   }
 
-?>
+   ?>
    </aside>
 </div>
 <?php
 
-get_component('pagination', [
-   'link' => $Author->get('link'),
+latte_component('pagination', [
+   'link'      => $Author->get('link'),
+   'max_pages' => $wp_query->max_num_pages,
 ]);
 
 ?>

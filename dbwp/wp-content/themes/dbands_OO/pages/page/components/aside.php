@@ -14,14 +14,14 @@ $first  = key($videos);
          Deutsche Bands TV
       </h2>
       <div class="flex gap-2">
-         <a class="flex flex-col" href="<?php echo home_url('tv/' . $first); ?>">
+         <a class="flex flex-col" <?php Utils::video_attrs($first); ?>>
             <img class="w-full aspect-video" src="<?php echo Utils::get_video_thumb($first); ?>" width="320" height="180">
             <div class="btn-alt !py-2 !px-4">
                <i class="fas fa-play"></i> Recentes
             </div>
          </a>
 
-         <a class="flex flex-col" href="<?php echo home_url('tv/PLTg2AhCnKU-L4-2j5yEEEyNWDsdnzqVB1'); ?>">
+         <a class="flex flex-col" <?php Utils::video_attrs('PLTg2AhCnKU-L4-2j5yEEEyNWDsdnzqVB1'); ?>>
             <img class="w-full aspect-video" src="<?php echo Utils::get_video_thumb('bBqrlBFsf0s'); ?>" width="320" height="180">
             <div class="btn-alt !py-2 !px-4">
                <i class="fas fa-play"></i> Recomendações

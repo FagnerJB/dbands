@@ -9,12 +9,8 @@ button {
 }
 
 body.no-js .wjs,
-.nojs {
-   display: none;
-}
-
-body.no-js .nojs {
-   display: block;
+body:not(.no-js) .nojs {
+   display: none !important;
 }
 
 summary {
@@ -68,7 +64,7 @@ summary.custom-marker::after {
    font-weight: 900;
 }
 
-.share-hidden {
+body:not(.no-js) .share-hidden {
    opacity: 0;
    padding: 0;
    margin: 0;

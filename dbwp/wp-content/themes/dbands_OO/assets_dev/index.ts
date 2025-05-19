@@ -34,6 +34,8 @@ document.addEventListener('alpine:init', () => {
          tv: new dbtv(this),
 
          init() {
+            this.$action('remClass', 'body', 'no-js')
+
             this.pagination.archiveUrl =
                this.$refs.archiveLink?.dataset.archiveLink ?? dbands.mainUrl
 

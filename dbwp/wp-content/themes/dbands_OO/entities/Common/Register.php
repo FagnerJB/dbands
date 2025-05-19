@@ -9,9 +9,6 @@ class Register
    public function __construct()
    {
       add_action('wpe_head_metas', [$this, 'add_metas']);
-
-      add_action('wpe_head_scripts', [$this, 'add_inline_scripts']);
-
       add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
       add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 
@@ -81,17 +78,6 @@ class Register
       wp_enqueue_script('youtube', 'https://www.youtube.com/iframe_api', [], null, [
          'strategy' => 'defer',
       ]);
-   }
-
-   public function add_inline_scripts(): void
-   {
-      ?>
-      <script>
-         window.addEventListener('DOMContentLoaded', function() {
-            document.getElementsByTagName('body')[0].classList.remove('no-js')
-         })
-      </script>
-<?php
    }
 
    public function add_embed_content($content)

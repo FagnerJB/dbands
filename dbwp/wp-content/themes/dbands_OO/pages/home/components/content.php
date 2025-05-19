@@ -90,8 +90,9 @@ if ($page <= 1) {
    </div>
    <?php
 
-   get_component('pagination', [
-      'link' => home_url(),
+   latte_component('pagination', [
+      'link'      => home_url(),
+      'max_pages' => $wp_query->max_num_pages,
    ]);
 
 ?>

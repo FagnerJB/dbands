@@ -87,8 +87,9 @@ if (!have_posts() || empty($search_term) || isset($items) && empty($items)) {
 </div>
 <?php
 
-get_component('pagination', [
-   'link' => get_search_link(get_search_query()),
+latte_component('pagination', [
+   'link'      => get_search_link(get_search_query()),
+   'max_pages' => $wp_query->max_num_pages,
 ]);
 
 ?>

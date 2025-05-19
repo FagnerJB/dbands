@@ -77,7 +77,7 @@ $social_posts['td'] = [
    'icon'   => 'fa-brands fa-threads text-xl',
    'bg'     => 'bg-black',
    'share'  => "https://www.threads.com/intent/post?text={$title}&url={$link}",
-   // https://www.threads.net/intent/follow?username=threads
+   // "profile" => https://www.threads.net/intent/follow?username=dbands_com_br
 ];
 
 $social_posts['rd'] = [
@@ -117,7 +117,9 @@ $social_posts['show'] = [
 
 ?>
 <section id="share" class="share-list flex flex-col gap-2">
-   <h2 class="text-xl font-medium"><?php esc_html_e('Nas redes sociais', 'dbands'); ?></h2>
+   <h2 class="text-xl font-medium">
+      <?php esc_html_e('Nas redes sociais', 'dbands'); ?>
+   </h2>
    <ul class="flex flex-col">
       <?php
 
@@ -126,11 +128,11 @@ $social_posts['show'] = [
 
          $container_class = "share-{$key}";
          $container_class .= isset($social['mini']) ? ' items-center' : ' items-start';
-         $container_class .= isset($social['hidden']) ? ' share-hidden' : '';
+         $container_class .= isset($social['hidden']) ? ' share-hidden' : ' wjs';
 
          ?>
-         <li class="<?php echo $social['bg']; ?> transition-all text-white flex my-2 py-1.5 px-2 font-medium text-lg <?php echo $container_class; ?>">
-            <?php
+      <li class="<?php echo $social['bg']; ?> transition-all text-white flex my-2 py-1.5 px-2 font-medium text-lg <?php echo $container_class; ?>">
+         <?php
 
                if (isset($social['mini'])) {
                   foreach ($social_links as $key => $social_link) {
@@ -161,8 +163,8 @@ $social_posts['show'] = [
          }
 
          ?>
-            <div class="grow flex flex-col text-base">
-               <?php
+         <div class="grow flex flex-col text-base">
+            <?php
 
             foreach ($social_links as $key => $social_link) {
                if (!isset($social[$key])) {
@@ -170,30 +172,40 @@ $social_posts['show'] = [
                }
 
                ?>
-                  <a class="py-1.5 px-2" href="<?php echo esc_url($social[$key]); ?>" target="_blank" rel="external">
-                     <i class="<?php echo $social_link['icon']; ?> w-6"></i>
-                     <?php echo $social_link['label']; ?>
-                  </a>
-               <?php
+            <a class="py-1.5 px-2"
+               href="<?php echo esc_url($social[$key]); ?>"
+               target="_blank" rel="external">
+               <i
+                  class="<?php echo $social_link['icon']; ?> w-6"></i>
+               <?php echo $social_link['label']; ?>
+            </a>
+            <?php
 
             }
 
          if (isset($social['action'])) {
             ?>
-                  <button class="py-1.5 px-2 text-left" <?php echo $social['action']; ?>>
-                     <?php echo $social['name']; ?>
-                  </button>
-               <?php
+            <button class="py-1.5 px-2 text-left"
+               <?php echo $social['action']; ?>>
+               <?php echo $social['name']; ?>
+            </button>
+            <?php
 
          }
 
          ?>
-            </div>
-         </li>
-      <?php
+         </div>
+      </li>
+      <li>
+         <?php
 
       }
 
 ?>
+      <li>
+         <div class="py-1.5 px-2 bg-zinc-700 truncate text-zinc-200 w-full select-all nojs">
+            <?php echo $title_raw; ?> - <?php echo $link_raw; ?>
+         </div>
+      </li>
    </ul>
 </section>

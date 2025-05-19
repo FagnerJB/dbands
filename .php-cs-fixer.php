@@ -1,26 +1,31 @@
 <?php
 
-$config = (new PhpCsFixer\Config())->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect());
+use PhpCsFixer\Config;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
+
+$config = (new Config())
+   ->setParallelConfig(ParallelConfigFactory::detect());
+
 return $config->setRiskyAllowed(true)->setIndent('   ')
    ->setRules([
-      '@PhpCsFixer'                              => true,
-      'array_push'                               => true,
-      'blank_line_between_import_groups'         => false,
-      'combine_nested_dirname'                   => true,
-      'comment_to_phpdoc'                        => true,
-      'date_time_immutable'                      => true,
-      'dir_constant'                             => true,
-      'ereg_to_preg'                             => true,
-      'fopen_flag_order'                         => true,
-      'function_to_constant'                     => true,
-      'get_class_to_class_keyword'               => true,
-      'implode_call'                             => true,
-      'logical_operators'                        => true,
-      'long_to_shorthand_operator'               => true,
-      'modernize_strpos'                         => true,
-      'modernize_types_casting'                  => true,
+      '@PhpCsFixer'                      => true,
+      'array_push'                       => true,
+      'blank_line_between_import_groups' => false,
+      'combine_nested_dirname'           => true,
+      'comment_to_phpdoc'                => true,
+      'date_time_immutable'              => true,
+      'dir_constant'                     => true,
+      'ereg_to_preg'                     => true,
+      'fopen_flag_order'                 => true,
+      'function_to_constant'             => true,
+      'get_class_to_class_keyword'       => true,
+      'implode_call'                     => true,
+      'logical_operators'                => true,
+      'long_to_shorthand_operator'       => true,
+      'modernize_strpos'                 => true,
+      'modernize_types_casting'          => true,
       // 'multiline_promoted_properties'            => true,
-      'multiline_string_to_heredoc'              => true,
+      'multiline_string_to_heredoc' => true,
       // 'new_expression_parentheses'               => true,
       'no_php4_constructor'                      => true,
       'no_unset_cast'                            => false,
@@ -59,29 +64,29 @@ return $config->setRiskyAllowed(true)->setIndent('   ')
       'phpdoc_line_span'                       => ['const' => 'single', 'property' => 'single'],
 
       'binary_operator_spaces' => [
-         'default'   => 'align',
+         'default' => 'align_single_space_minimal',
       ],
       'blank_line_before_statement' => [
-         'statements' => ['case', 'declare', 'default', 'do', 'for', 'foreach', 'goto', 'if', 'phpdoc', 'return', 'switch', 'throw', 'try', 'while', 'yield', 'yield_from']
+         'statements' => ['case', 'declare', 'default', 'do', 'for', 'foreach', 'goto', 'if', 'phpdoc', 'return', 'switch', 'throw', 'try', 'while', 'yield', 'yield_from'],
       ],
       'class_attributes_separation' => [
-         'elements' => ['const' => 'only_if_meta', 'property' => 'only_if_meta', 'trait_import' => 'one']
+         'elements' => ['const' => 'only_if_meta', 'property' => 'only_if_meta', 'trait_import' => 'one'],
       ],
       'function_declaration' => [
          'closure_function_spacing' => 'none',
-         'closure_fn_spacing' => 'none'
+         'closure_fn_spacing'       => 'none',
       ],
       'phpdoc_order_by_value' => [
-         'annotations' => ['author', 'covers', 'coversNothing', 'dataProvider', 'depends', 'group', 'internal', 'method', 'mixin', 'property', 'property-read', 'property-write', 'requires', 'throws', 'uses']
+         'annotations' => ['author', 'covers', 'coversNothing', 'dataProvider', 'depends', 'group', 'internal', 'method', 'mixin', 'property', 'property-read', 'property-write', 'requires', 'throws', 'uses'],
       ],
       'trailing_comma_in_multiline' => [
-         'elements' => ['arrays', 'array_destructuring', 'arguments', 'parameters', 'match']
+         'elements' => ['arrays', 'array_destructuring', 'arguments', 'parameters', 'match'],
       ],
       'no_extra_blank_lines' => [
-         'tokens' => ['attribute', 'break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'switch', 'throw', 'use']
+         'tokens' => ['attribute', 'break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'switch', 'throw', 'use'],
       ],
       'yoda_style' => [
-         'less_and_greater' => null,
-         'always_move_variable' => true
+         'less_and_greater'     => null,
+         'always_move_variable' => true,
       ],
    ]);

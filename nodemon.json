@@ -1,6 +1,6 @@
 {
    "verbose": false,
-   "watch": ["/dbwp/wp-content/themes/dbands_OO/assets/dev/"],
+   "watch": ["/dbwp/wp-content/themes/dbands_OO/assets_dev/"],
    "exec": "npm run js",
    "ext": "*.ts"
 }
