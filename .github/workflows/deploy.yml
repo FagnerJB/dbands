@@ -25,9 +25,9 @@ jobs:
 
       - name: Rclone
         run: |
-          apt-get update -qqy && apt-get upgrade -qqy
-          apt-get install -qqy curl unzip
-          curl https://rclone.org/install.sh | bash
+          sudo apt-get update -qqy && apt-get upgrade -qqy
+          sudo apt-get install -qqy curl unzip
+          curl https://rclone.org/install.sh | sudo bash
           rclone config create remote sftp host=${{ secrets.FTP_HOST }} user=${{ vars.SERVER_USER }} key_file=${{ secrets.SSH_PRIVATE_KEY }}
           rclone copyto dbwp/ remote:${PATH_DIR}/
 
