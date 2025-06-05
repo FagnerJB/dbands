@@ -6,7 +6,7 @@
    "scripts": {
       "build": "npm run css -- --minify && npm run js",
       "dev": "nodemon & npm run css -- --watch",
-      "css": "npx @tailwindcss/cli -i ./dbwp/wp-content/themes/dbands_OO/assets_dev/index.css -o ./dbwp/wp-content/themes/dbands_OO/assets/style.css",
+      "css": "npx @tailwindcss/cli -i ./dbwp/wp-content/themes/dbands/assets_dev/index.css -o ./dbwp/wp-content/themes/dbands/assets/style.css",
       "js": "webpack",
       "test": ""
    },

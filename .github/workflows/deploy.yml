@@ -21,7 +21,7 @@ jobs:
       - name: Generate Web version
         run: |
           npm i && npm run build
-          rm -rf dbwp/wp-content/themes/dbands_OO/assets_dev
+          rm -rf dbwp/wp-content/themes/dbands/assets_dev
 
       - name: Setup Rclone
         run: |
