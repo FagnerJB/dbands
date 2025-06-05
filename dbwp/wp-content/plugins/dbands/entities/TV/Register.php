@@ -25,7 +25,7 @@ final class Register
 
    public function do_redirect(): void
    {
-      $cav_template = get_query_var('cavwp', false);
+      $cav_template = get_query_var('cav', false);
 
       if ('youtube' !== $cav_template) {
          return;
