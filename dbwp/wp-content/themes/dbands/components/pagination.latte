@@ -1,0 +1,71 @@
+{var $page = dbp\Common\Utils::get_page()}
+{var $next = $page + 1}
+{var $prev = $page - 1}
+{var $pages = 2}
+<nav class="container py-3 bg-zinc-900 text-zinc-200 text-xs md:text-base">
+   <ul class="flex gap-px sm:gap-2 nojs">
+      <li class="flex">
+         <a class="btn-alt" href="#top" title="Ir para o topo da página">
+            <i class="fas fa-arrow-alt-circle-up"></i>
+            <span class="hidden sm:inline">Topo</span>
+         </a>
+      </li>
+      <li class="grow">
+         <ul class="flex justify-center gap-px sm:gap-2 *:flex">
+         {var $nav_items = cavWP\Utils::paginate_links(['mid_size' => 3,'next_text' => '<span class="hidden sm:inline">Próxima</span><span class="hidden lg:inline">página</span> <i class="fas fa-arrow-right"></i>','prev_text' => '<i class="fas fa-arrow-left"></i> <span class="hidden lg:inline">Página</span><span class="hidden sm:inline lg:lowercase">Anterior</span>'], ['page-numbers current' => 'btn-alt !px-2.5 !bg-zinc-600','page-numbers' => 'btn-alt !px-2.5'])}
+         {foreach $nav_items as $nav_item}
+            <li>
+               {$nav_item|noescape}
+            </li>
+         {/foreach}
+         </ul>
+      </li>
+   </ul>
+   <ul class="flex justify-between items-center wjs" x-ref="archiveLink"
+      data-archive-link="{$link}">
+      <li class="w-1/3 flex gap-px sm:gap-2">
+         <button class="btn-alt" type="button" title="Ir para o topo da página" x-on:click="$do('scroll', '#page-1')">
+            <i class="fas fa-arrow-alt-circle-up"></i> Topo
+         </button>
+      {if $max_pages > 1}
+         {if $page > 1}
+            {var $min_prev = $page - $pages < 2 ? 2 : $page - $pages}
+            {for $p=$min_prev; $p < $page; $p++}
+               <button class="btn-alt" type="button" title="Ir para página {$p}" x-show="pagination.currentPage >= {$p}" x-on:click="$do('scroll','#page-{$p}')" x-cloak>
+                  {$p}
+               </button>
+            {/for}
+         {/if}
+      {/if}
+      </li>
+      {if $max_pages > 1}
+         <li class="w-1/3 uppercase text-center font-medium">
+            <span x-show="pagination.currentPage >= 2" x-cloak>
+               <span class="hidden sm:inline">Página</span>
+               {$page}
+               <span class="inline sm:hidden">/</span>
+               <span class="hidden sm:inline"> de </span>
+               {$max_pages}
+            </span>
+         </li>
+         <li class="w-1/3 flex justify-end gap-px sm:gap-2">
+            {var $min_next = $next <= 1 ? 2 : $next}
+            {for $p = $min_next; $p <= $page + $pages; $p++}
+               <button class="btn-alt" type="button" title="Ir para página {$p}" x-show="pagination.currentPage >= {$p}" x-on:click="$do('scroll','#page-{$p}')" x-cloak>
+                  {$p}
+               </button>
+            {/for}
+            <button class="btn-alt" type="button" title="Carregar mais páginas" x-show="!pagination.infinite"
+               x-on:click="onInfinite()" x-cloak>
+               <i class="fas fa-plus-circle"></i>
+               Mais
+            </button>
+            <button class="btn-alt" type="button" title="Parar carregamento automático" x-show="pagination.infinite"
+               x-on:click="pagination.infinite=false" x-cloak>
+               <i class="fas fa-stop-circle"></i>
+               Parar
+            </button>
+         </li>
+      {/if}
+   </ul>
+</nav>
