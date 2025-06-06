@@ -2,10 +2,10 @@ import Alpine from 'alpinejs'
 import persist from '@alpinejs/persist'
 import cav from '@ctrlaltvers/alpine'
 
+import dbtv from './tv'
+
 Alpine.plugin(persist)
 Alpine.plugin(cav)
-
-import dbtv from './tv'
 
 document.addEventListener('alpine:init', () => {
    Alpine.data('dbands', function () {

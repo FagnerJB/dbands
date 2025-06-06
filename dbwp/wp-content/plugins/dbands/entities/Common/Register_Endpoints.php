@@ -84,9 +84,9 @@ class Register_Endpoints
 
    public function get_ajax_content($request)
    {
-      $key   = sanitize_text_field($request->get_param('key'));
-      $value = sanitize_text_field($request->get_param('value'));
-      $page  = sanitize_text_field($request->get_param('page'));
+      $key   = $request->get_param('key');
+      $value = $request->get_param('value');
+      $page  = $request->get_param('page');
 
       $queries_keys = [
          'author'   => 'author_name',

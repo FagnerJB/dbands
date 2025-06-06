@@ -1,4 +1,4 @@
-#toast-list {
+#toasts {
    @apply fixed right-1 bottom-[calc(100vw*9/16)] sm:bottom-73 z-79 flex flex-col-reverse gap-1 w-full sm:max-w-lg;
 }
 
