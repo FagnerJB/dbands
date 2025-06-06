@@ -2,6 +2,6 @@
 
 namespace dbp\Page;
 
-use cavWP\Post;
+use cavWP\Models\Post;
 
 class Page extends Post {}

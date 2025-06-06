@@ -2,7 +2,7 @@
 
 namespace dbp\Band;
 
-use cavWP\Term;
+use cavWP\Models\Term;
 use dbp\Author\Author;
 use dbp\Common\Utils as CommonUtils;
 use dbp\Services\Spotify\Spotify;

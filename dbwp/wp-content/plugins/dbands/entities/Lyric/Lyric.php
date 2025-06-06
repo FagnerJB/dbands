@@ -2,7 +2,7 @@
 
 namespace dbp\Lyric;
 
-use cavWP\Post;
+use cavWP\Models\Post;
 
 class Lyric extends Post
 {

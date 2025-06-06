@@ -2,6 +2,6 @@
 
 namespace dbp\Category;
 
-use cavWP\Term;
+use cavWP\Models\Term;
 
 class Category extends Term {}

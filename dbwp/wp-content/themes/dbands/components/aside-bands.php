@@ -1,6 +1,6 @@
 <?php
 
-use cavWP\Post;
+use cavWP\Models\Post;
 use dbp\Band\Band;
 use dbp\Band\Utils;
 use dbp\Common\Utils as CommonUtils;

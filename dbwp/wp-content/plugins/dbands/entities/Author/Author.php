@@ -2,7 +2,7 @@
 
 namespace dbp\Author;
 
-use cavWP\User;
+use cavWP\Models\User;
 
 class Author extends User
 {

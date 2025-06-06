@@ -2,7 +2,7 @@
 
 namespace dbp\News;
 
-use cavWP\Post;
+use cavWP\Models\Post;
 
 class News extends Post
 {

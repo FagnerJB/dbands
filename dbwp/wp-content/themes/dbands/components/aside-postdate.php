@@ -1,6 +1,6 @@
 <?php
 
-use cavWP\Post;
+use cavWP\Models\Post;
 
 $Post = new Post();
 
