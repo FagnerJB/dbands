@@ -10,12 +10,24 @@ class Register
    {
       add_action('cav_head_metas', [$this, 'add_metas']);
       add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
+      // add_action('wp_enqueue_scripts', [$this, 'add_breakpoints_mark']);
       add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
       add_action('wp_resource_hints', [$this, 'add_resources'], 10, 2);
 
       add_filter('cav_post_thumbnail_placeholder_img', [$this, 'sets_thumbnail_placeholder']);
       add_filter('the_content', [$this, 'add_embed_content']);
       add_filter('embed_oembed_html', [$this, 'edit_oembed'], 10, 2);
+   }
+
+   public function add_breakpoints_mark(): void
+   {
+      $data = <<<'STYLE'
+      html::before {
+         @apply fixed bottom-0 right-0 z-9999 py-1 px-2 bg-red-600/90 text-white text-xxs font-bold font-mono sm:content-['sm:'] md:content-['md:'] lg:content-['lg:'] xl:content-['xl:'];
+      }
+      STYLE;
+
+      wp_add_inline_style('main', $data);
    }
 
    public function add_embed_content($content)

@@ -7,7 +7,7 @@ class Register
    public function __construct()
    {
       add_action('admin_init', [$this, 'registers_settings']);
-      add_action('wp_enqueue_scripts', [$this, 'adds_scripts'], 99);
+      add_action('wp_body_open', [$this, 'adds_scripts'], 99);
       add_action('cav_head_scripts', [$this, 'adds_footer'], 99);
    }
 
@@ -18,9 +18,7 @@ class Register
 
    public function adds_scripts(): void
    {
-      wp_enqueue_script('adsbygoogle', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7971845527728300', [], null, [
-         'strategy' => 'async',
-      ]);
+      echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7971845527728300" crossorigin="anonymous"></script>';
    }
 
    public function echo_field($args): void

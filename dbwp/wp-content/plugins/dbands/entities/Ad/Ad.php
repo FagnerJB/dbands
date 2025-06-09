@@ -30,7 +30,7 @@ class Ad
          <img src="{$image_url}" alt="" />
       </a>
       <ins class="adsbygoogle"
-         style="display:block"
+         style="display:block;width:100%;margin:auto;max-width:728px;"
          data-ad-client="ca-pub-7971845527728300"
          data-ad-slot="{$positions[$this->position]}"
          data-ad-format="auto"
