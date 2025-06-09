@@ -4,17 +4,8 @@ namespace dbp\Common;
 
 class Utils
 {
-   public static function clean_domain($url)
-   {
-      $domain = preg_replace('|https?://|', '', $url);
 
-      return untrailingslashit($domain);
-   }
 
-   public static function get_page()
-   {
-      return max(get_query_var('paged'), 1);
-   }
 
    public static function remove_tags($text)
    {

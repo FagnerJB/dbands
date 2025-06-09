@@ -25,7 +25,7 @@ class Register
 
    public function enqueue_styles(): void
    {
-      wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v6.7.2/css/all.css');
+      wp_enqueue_style('fontawesome');
    }
 
    public function prints_head_tags(): void

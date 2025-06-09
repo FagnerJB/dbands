@@ -6,14 +6,12 @@ use dbp\Album\Utils as AlbumUtils;
 
 ?>
 <div class="container-content">
-   <section class="content">
-      <header class="mb-7">
-         <h1>
-            <?php echo $post_type->labels->archives; ?>
-         </h1>
-      </header>
+   <main class="content">
+      <h1 class="mb-7">
+         <?php echo $post_type->labels->archives; ?>
+      </h1>
       <div>
-         <?php
+      <?php
 
       $all_albums = AlbumUtils::get_albums();
 
@@ -108,12 +106,8 @@ if (!empty($all_albums)) {
 
 ?>
       </div>
-   </section>
+   </main>
    <aside>
-      <?php
-
-get_page_component('archive-lyric', 'aside');
-
-?>
+      <?php get_page_component('archive-lyric', 'aside'); ?>
    </aside>
 </div>

@@ -5,7 +5,8 @@ h1 {
 .container-content {
    @apply container flex flex-col lg:flex-row gap-8 py-5 bg-zinc-200 text-zinc-800;
 
-   section {
+   section,
+   main {
       @apply w-full;
    }
 

@@ -4,6 +4,14 @@ namespace dbp\Band;
 
 class Utils
 {
+   public static function capitalize_genre($genre){
+      if('ebm'===strtolower($genre)){
+         return strtoupper($genre);
+      }
+
+      return ucwords($genre);
+   }
+
    public static function select_random($select_by = 'cover')
    {
       if (!in_array($select_by, ['cover', 'logo'])) {

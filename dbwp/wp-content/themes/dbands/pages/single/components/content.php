@@ -6,16 +6,14 @@ $News = new News();
 
 ?>
 <div class="container-content">
-   <section>
+   <main>
       <article id="single-<?php echo $News->ID; ?>" <?php post_class('content'); ?>>
-         <header class="mb-7">
-            <h1><?php echo $News->get('title'); ?></h1>
-         </header>
+         <h1 class="mb-7"><?php echo $News->get('title'); ?></h1>
          <div class="text-justify">
             <?php echo $News->get('content'); ?>
          </div>
       </article>
-   </section>
+   </main>
    <aside>
       <?php
 

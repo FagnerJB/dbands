@@ -105,12 +105,7 @@ class Register
 
    public function enqueue_styles(): void
    {
-      wp_enqueue_style('main', get_theme_file_uri('assets/style.css'));
-
-      $bg = WP_CONTENT_URL . '/uploads/trianglify.png';
-      wp_add_inline_style('main', ":root{--bg-image: url('{$bg}');}");
-
-      wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v6.7.2/css/all.css');
+      wp_enqueue_style('main', get_theme_file_uri('assets/style.css'), ['fontawesome']);
    }
 
    public function sets_thumbnail_placeholder()

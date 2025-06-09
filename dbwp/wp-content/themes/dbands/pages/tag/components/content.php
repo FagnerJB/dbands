@@ -1,14 +1,14 @@
 <?php
 
 use dbp\Band\Band;
-use dbp\Common\Utils;
+use cavWP\Utils;
 
 $page = Utils::get_page();
 $Band = new Band();
 
 ?>
 <div id="page-<?php echo $page; ?>" class="container-content">
-   <section>
+   <main>
       <?php
 
       if (1 === $page || !wp_is_serving_rest_request()) {
@@ -33,7 +33,7 @@ if (have_posts()) {
 }
 
 ?>
-   </section>
+   </main>
    <aside>
       <?php
 

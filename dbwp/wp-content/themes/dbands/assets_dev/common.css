@@ -1,6 +1,5 @@
 body {
-   @apply bg-zinc-800 bg-cover bg-fixed bg-no-repeat font-sans antialiased text-base;
-   background-image: var(--bg-image);
+   @apply bg-zinc-800 font-sans antialiased text-base;
    font-optical-sizing: auto;
 }
 

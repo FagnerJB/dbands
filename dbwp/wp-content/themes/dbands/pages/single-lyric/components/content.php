@@ -6,7 +6,7 @@ $Lyric = new Lyric();
 
 ?>
 <div class="container-content">
-   <section>
+   <main>
       <article id="lyric-<?php echo $Lyric->ID; ?>" <?php post_class(); ?>>
          <header class="mb-7">
             <h1>
@@ -15,7 +15,7 @@ $Lyric = new Lyric();
          </header>
          <div class="text-left whitespace-break-spaces"><?php echo $Lyric->get_content(); ?></div>
       </article>
-   </section>
+   </main>
    <aside>
       <?php
 

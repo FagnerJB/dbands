@@ -2,6 +2,8 @@
 
 namespace dbt\Shortcodes;
 
+use dbp\Band\Utils;
+
 class group_bands
 {
    public function __construct()
@@ -71,14 +73,14 @@ class group_bands
             $html_return .= '<div>';
          }
 
-         $html_return .= '<h3 id="' . sanitize_title($title) . '" class="capitalize">' . $title . '</h3>';
+         $html_return .= '<h3 id="' . sanitize_title($title) . '">' . Utils::capitalize_genre($title) . '</h3>';
          $html_return .= '<ul class="flex flex-col gap-1">';
 
          foreach ($category['items'] as $band) {
             $name  = apply_filters('the_title', $band->name);
             $link  = esc_url(get_tag_link($band->term_id));
-            $title = sprintf(_n('Com %s publicação', 'Com %s publicações', $band->count, 'dbands'), $band->count);
-            $html_return .= '<li><a href="' . $link . '" title="' . $title . '">' . $name . '</a></li>';
+            $band_title = sprintf(_n('Com %s publicação', 'Com %s publicações', $band->count, 'dbands'), $band->count);
+            $html_return .= '<li><a href="' . $link . '" title="' . $band_title . '">' . $name . '</a></li>';
             $in_column++;
             $in_total++;
          }

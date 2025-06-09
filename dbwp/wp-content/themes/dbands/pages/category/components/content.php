@@ -1,24 +1,22 @@
 <?php
 
 use dbp\Category\Category;
-use dbp\Common\Utils;
+use cavWP\Utils;
 
 $Category = new Category();
 $page     = Utils::get_page();
 
 ?>
 <div id="page-<?php echo $page; ?>" class="container-content">
-   <section>
+   <main>
       <?php
 
       if (1 === $page || !wp_is_serving_rest_request()) {
          ?>
-         <header class="mb-7">
-            <h1>
-               <i class="fas fa-hashtag"></i>
-               <?php echo $Category->get('name'); ?>
-            </h1>
-         </header>
+      <h1 class="mb-7">
+         <i class="fas fa-hashtag"></i>
+         <?php echo $Category->get('name'); ?>
+      </h1>
       <?php
 
       }
@@ -30,7 +28,7 @@ if (have_posts()) {
 }
 
 ?>
-   </section>
+   </main>
    <aside>
       <?php
 
@@ -44,7 +42,7 @@ if (1 === $page || !wp_is_serving_rest_request()) {
 <?php
 
 latte_component('pagination', [
-   'link' => $Category->get('link'),
+   'link'      => $Category->get('link'),
    'max_pages' => $wp_query->max_num_pages,
 ]);
 

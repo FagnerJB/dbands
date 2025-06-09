@@ -1,9 +1,9 @@
 <?php
 
-use dbp\Common\Utils as CommonUtils;
+use cavWP\Utils as CavUtils;
 use dbp\Lyric\Utils;
 
-$page   = CommonUtils::get_page();
+$page   = CavUtils::get_page();
 $lyrics = Utils::get_lyrics($page);
 
 if (!empty($lyrics)) {

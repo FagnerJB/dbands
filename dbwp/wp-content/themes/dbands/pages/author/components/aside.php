@@ -1,7 +1,7 @@
 <?php
 
 use dbp\Author\Author;
-use dbp\Common\Utils as CommonUtils;
+use cavWP\Utils as CavUtils;
 
 $Author = new Author();
 
@@ -27,7 +27,7 @@ $Author = new Author();
 if ($user_url = $Author->get('user_url')) {
    ?>
             <a class="self-start text-sm" href="<?php echo esc_url($user_url); ?>" target="_blank">
-               <?php echo CommonUtils::clean_domain($user_url); ?>
+               <?php echo CavUtils::clean_domain($user_url); ?>
             </a>
          <?php
 

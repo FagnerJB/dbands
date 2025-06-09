@@ -1,23 +1,21 @@
 <?php
 
 use dbp\Author\Author;
-use dbp\Common\Utils;
+use cavWP\Utils;
 
 $Author = new Author();
 $page   = Utils::get_page();
 
 ?>
 <div id="page-<?php echo $page; ?>" class="container-content">
-   <section>
+   <main>
       <?php
 
       if (1 === $page || !wp_is_serving_rest_request()) {
          ?>
-      <header class="mb-7">
-         <h1>
+         <h1 class="mb-7">
             <?php printf(esc_html__('Publicações de %s', 'dbands'), $Author->get('display_name')); ?>
          </h1>
-      </header>
       <?php
 
       }
@@ -29,7 +27,7 @@ if (have_posts()) {
 }
 
 ?>
-   </section>
+   </main>
    <aside>
       <?php
 
@@ -43,8 +41,8 @@ if (have_posts()) {
 <?php
 
 latte_component('pagination', [
-'link'      => $Author->get('link'),
-'max_pages' => $wp_query->max_num_pages,
+   'link'      => $Author->get('link'),
+   'max_pages' => $wp_query->max_num_pages,
 ]);
 
 ?>

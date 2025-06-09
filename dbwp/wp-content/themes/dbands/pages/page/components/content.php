@@ -6,18 +6,16 @@ $Page = new Page();
 
 ?>
 <div class="container-content">
-   <section>
+   <main>
       <article id="page-<?php echo $Page->ID; ?>" <?php post_class('content'); ?>>
-         <header class="mb-7">
-            <h1>
-               <?php echo $Page->get('title'); ?>
-            </h1>
-         </header>
+         <h1 class="mb-7">
+            <?php echo $Page->get('title'); ?>
+         </h1>
          <div class="text-justify">
             <?php echo $Page->get('content'); ?>
          </div>
       </article>
-   </section>
+   </main>
    <aside>
       <?php get_page_component('page', 'aside'); ?>
    </aside>

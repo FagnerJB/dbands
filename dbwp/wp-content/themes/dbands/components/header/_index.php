@@ -7,11 +7,7 @@ do_action('get_header');
 <html <?php language_attributes(); ?>>
 
 <head>
-   <?php
-
-   wp_head();
-
-?>
+   <?php wp_head(); ?>
 </head>
 
 <body id="top" x-data="dbands" data-title="<?php echo wp_get_document_title(); ?>" <?php body_class('no-js'); ?> x-bind:class="{'overflow-hidden': tv.status === 'full'||gallery.open}">
@@ -62,18 +58,10 @@ wp_body_open();
    <header class="container bg-zinc-900 text-zinc-200 !px-0 md:mt-3" data-nosnippet>
       <div class="relative">
          <div id="cover" class="relative">
-            <?php
-
-get_component(['header', 'cover']);
-
-?>
+            <?php get_component(['header', 'cover']); ?>
          </div>
          <div class="absolute bottom-1 left-2 w-5/12 md:w-4/12 text-shadow-cover text-white">
-            <?php
-
-the_custom_logo();
-
-?>
+            <?php the_custom_logo(); ?>
          </div>
       </div>
    </header>

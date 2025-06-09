@@ -26,15 +26,15 @@ class Ad
       $image_url = wp_get_attachment_url($sizes[$this->position]);
 
       echo <<<AD
+      <a href="{$link}" target="_blank" x-show="\$is.adblock" x-cloak>
+         <img src="{$image_url}" alt="" />
+      </a>
       <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-7971845527728300"
          data-ad-slot="{$positions[$this->position]}"
          data-ad-format="auto"
          data-full-width-responsive="true">
-         <a href="{$link}" target="_blank">
-            <img src="{$image_url}" alt="" />
-         </a>
       </ins>
       AD;
    }

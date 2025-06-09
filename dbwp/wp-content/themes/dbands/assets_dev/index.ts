@@ -125,7 +125,7 @@ document.addEventListener('alpine:init', () => {
                }
 
                const path = url.pathname.slice(1)
-               const matches = path.match(new RegExp(`${pattern}`))
+               const matches = path.match(new RegExp(pattern))
 
                if (matches) {
                   found = key

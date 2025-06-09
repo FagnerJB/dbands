@@ -1,6 +1,6 @@
 <div class="container-content">
-   <section>
-      <article id="page-404" <?php post_class('content'); ?>>
+   <main>
+      <section id="page-404" <?php post_class('content'); ?>>
          <header class="mb-7">
             <h1>
                <?php esc_html_e('Página não encontrada', 'dbands'); ?>
@@ -9,6 +9,6 @@
          <div class="text-justify">
             <?php get_component('loop-empty'); ?>
          </div>
-      </article>
-   </section>
+      </section>
+   </main>
 </div>

@@ -4,7 +4,7 @@ namespace dbp\Band;
 
 use cavWP\Models\Term;
 use dbp\Author\Author;
-use dbp\Common\Utils as CommonUtils;
+use cavWP\Utils as CavUtils;
 use dbp\Services\Spotify\Spotify;
 
 class Band extends Term
@@ -53,6 +53,10 @@ class Band extends Term
          parent::__construct($term, 'post_tag');
       }
 
+      if(empty($this->data)){
+         return;
+      }
+
       foreach (array_keys(Utils::get_metas()) as $key) {
          $array_metas[str_replace('band_', '', $key)] = $this->get_meta($key);
       }
@@ -77,7 +81,7 @@ class Band extends Term
 
    public function get_genre()
    {
-      return $this->meta->genre;
+      return Utils::capitalize_genre($this->meta->genre);
    }
 
    public function get_logo()
@@ -107,7 +111,7 @@ class Band extends Term
             }
             $link  = $this->meta->site;
             $icon  = 'fas fa-globe-europe';
-            $text  = CommonUtils::clean_domain($this->meta->site);
+            $text  = CavUtils::clean_domain($this->meta->site);
             $title = sprintf(esc_html__('Site oficial de %s', 'dbands'), $this->data->name);
 
             break;

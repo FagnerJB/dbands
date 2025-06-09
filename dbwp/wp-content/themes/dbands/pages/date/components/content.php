@@ -3,7 +3,7 @@
 global $wp_locale;
 
 use cavWP\Utils as CavUtils;
-use dbp\Common\Utils;
+use cavWP\Utils;
 
 $page  = Utils::get_page();
 $year  = get_query_var('year');
@@ -11,16 +11,14 @@ $month = get_query_var('monthnum');
 
 ?>
 <div id="page-<?php echo $page; ?>" class="container-content">
-   <section>
+   <main>
       <?php
 
       if (1 === $page || !wp_is_serving_rest_request()) {
          ?>
-      <header class="mb-7">
-         <h1>
+         <h1 class="mb-7">
             <?php printf('Em %s de %d', $wp_locale->get_month($month), $year); ?>
          </h1>
-      </header>
       <?php
 
       }
@@ -32,7 +30,7 @@ if (have_posts()) {
 }
 
 ?>
-   </section>
+   </main>
    <aside>
       <?php
 

@@ -1,6 +1,6 @@
 <?php
 
-use dbp\Common\Utils;
+use cavWP\Utils;
 use dbp\Services\Youtube;
 
 $page = Utils::get_page();

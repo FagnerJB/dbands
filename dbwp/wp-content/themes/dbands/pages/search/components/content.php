@@ -1,10 +1,11 @@
 <?php
 
+use cavWP\Utils as CavUtils;
 use dbp\Common\Utils;
 use dbp\Services\Lastfm;
 use dbp\Services\Youtube;
 
-$page        = Utils::get_page();
+$page        = CavUtils::get_page();
 $search_term = get_search_query();
 $search_type = get_query_var('search_type', 'site');
 

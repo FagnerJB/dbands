@@ -20,7 +20,7 @@ $suggests = Utils::get_suggests();
                      <div class="font-semibold text-xs md:text-xl">
                         <?php echo $suggested->term->get('name'); ?>
                      </div>
-                     <div class="text-xxs md:text-sm capitalize">
+                     <div class="text-xxs md:text-sm">
                         <?php echo $suggested->term->get_genre(); ?>
                      </div>
                   </div>

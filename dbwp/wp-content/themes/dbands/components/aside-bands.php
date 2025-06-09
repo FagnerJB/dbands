@@ -36,8 +36,8 @@ if (!empty($bands) && !is_wp_error($bands)) {
                   }
 
       ?>
-      <div class="font-medium capitalize">
-         <?php echo $Band->get_meta('band_genre'); ?>
+      <div class="font-medium">
+         <?php echo $Band->get_genre(); ?>
       </div>
    </a>
    <div>

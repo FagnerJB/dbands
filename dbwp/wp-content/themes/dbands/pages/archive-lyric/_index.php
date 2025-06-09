@@ -3,15 +3,11 @@
 get_component('header');
 
 ?>
-<main id="main">
+<div id="main">
    <div id="content">
-<?php
-
-get_page_component('archive-lyric', 'content');
-
-?>
+      <?php get_page_component('archive-lyric', 'content'); ?>
    </div>
-</main>
+</div>
 <?php
 
 get_component('footer');

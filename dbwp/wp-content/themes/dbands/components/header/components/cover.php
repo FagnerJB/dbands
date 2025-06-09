@@ -40,10 +40,10 @@ if (!empty($cover->meta->photo_credits)) {
 
       if (!empty($cover->meta->genre)) {
          ?>
-         <div class="text-xs md:text-lg capitalize font-semibold">
-            <a href="<?php echo get_permalink(217) . '#' . sanitize_title($cover->meta->genre); ?>"
-               title="<?php printf(esc_attr__('Mais bandas de %s', 'dbands'), $cover->meta->genre); ?>" tabindex="-1">
-               <?php echo $cover->meta->genre; ?>
+         <div class="text-xs md:text-lg font-semibold">
+            <a href="<?php echo get_permalink(217) . '#' . sanitize_title($cover->get_genre()); ?>"
+               title="<?php printf(esc_attr__('Mais bandas de %s', 'dbands'), $cover->get_genre()); ?>" tabindex="-1">
+               <?php echo $cover->get_genre(); ?>
             </a>
          </div>
       <?php
