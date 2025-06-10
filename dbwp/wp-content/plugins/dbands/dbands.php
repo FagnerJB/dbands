@@ -31,7 +31,6 @@ function start_autoloader(): void
    new Category\Register();
    new TV\Register();
    new Album\Register();
-   new News\Register();
    new Author\Register();
    new Ad\Register();
    new Services\Spotify\Register();
