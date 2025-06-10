@@ -96,7 +96,11 @@ class Register_Endpoints
          'lyric'    => 'name',
       ];
 
-      if ('date' === $key) {
+      if ('traducoes' === $value) {
+         $key = 'archive-lyric';
+
+         $query['post_type'] = 'lyric';
+      } elseif ('date' === $key) {
          $dates             = explode('/', $value);
          $query['year']     = $dates[0];
          $query['monthnum'] = $dates[1];
@@ -107,16 +111,14 @@ class Register_Endpoints
       }
 
       if ('lyric' === $key) {
-         $query['post_type'] = $key;
+         $key = 'single-lyric';
+
+         $query['post_type'] = 'lyric';
       }
 
       // ARCHIVES
       if (in_array($key, ['author', 'category', 'date', 'home', 'tag'])) {
          $query['paged'] = $page;
-      }
-
-      if ('lyric' === $key) {
-         $key = 'single-lyric';
       }
 
       global $wp_query;
