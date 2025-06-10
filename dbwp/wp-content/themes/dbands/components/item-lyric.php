@@ -11,7 +11,7 @@ $title = sprintf(esc_attr__('Tradução de %s de %s', 'dbands'), $Lyric->get('ti
    <article class="size-full">
       <a class="flex flex-col justify-end md:justify-between py-2 px-3 size-full bg-amber-400 hover:bg-yellow-300 focus-visible:bg-yellow-300" href="<?php echo $Lyric->get('link'); ?>" title="<?php echo $title; ?>" rel="bookmark">
          <div class="grow italic line-clamp-2 sm:line-clamp-2 md:line-clamp-4 text-xxs md:text-base">
-            <?php $Lyric->get('excerpt'); ?>
+            <?php echo $Lyric->get('excerpt'); ?>
          </div>
          <div>
             <h3>
