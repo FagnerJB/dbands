@@ -1,4 +1,4 @@
-<div class="bg-black/90 fixed inset-0 flex flex-col gap-3 p-3 select-none" x-show="gallery.open" x-on:wheel.prevent="navGallery" x-on:touchmove.prevent="navGallery" x-transition x-cloak>
+<div class="bg-black/90 fixed inset-0 flex flex-col gap-3 p-3 select-none" x-show="gallery.open" x-on:wheel.prevent="navGallery" x-on:touchmove.prevent.passive="navGallery" x-transition x-cloak>
    <div class="grow flex items-center justify-center">
       <img class="max-h-[calc(100dvh-9rem)] w-auto" x-bind:src="gallery.images[gallery.current]" alt="" />
    </div>

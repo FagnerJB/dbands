@@ -15,7 +15,7 @@ $title = sprintf(esc_attr__('Publicações sobre %s', 'dbands'), $cover->get('na
 
 ?>
 <a class="block" href="<?php echo $cover->get('link'); ?>" title="<?php echo $title; ?>" tabindex="-1">
-   <img class="w-full" src="<?php echo $cover->get_cover(); ?>" width="960" height="300" alt="" loading="lazy">
+   <img class="w-full" src="<?php echo $cover->get_cover(); ?>" width="960" height="300" alt="">
 </a>
 <?php
 

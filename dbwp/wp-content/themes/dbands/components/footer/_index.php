@@ -8,7 +8,7 @@ get_component(['footer', 'gallery']);
 get_component(['footer', 'tv']);
 
 ?>
-<div x-on:scroll.window.debounce="handleScroll"></div>
+<div x-on:scroll.window.debounce.passive="handleScroll"></div>
 <div x-on:popstate.window.debounce="handlePopState"></div>
 <footer id="footer">
    <div class="container py-3 bg-zinc-800 text-zinc-200">
