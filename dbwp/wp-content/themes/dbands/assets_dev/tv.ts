@@ -30,7 +30,8 @@ export default class dbtv {
          return
       }
 
-      if (this.state === YT.PlayerState.ENDED) {
+      // YT.PlayerState.ENDED
+      if (this.state === 0) {
          this.current = id
          return
       }
@@ -68,48 +69,44 @@ export default class dbtv {
       this.showNext = !!this.queue.length
    }
 
-   playWhenAvailable(videoID: string) {
-      if (0 === videoID.length) {
-         return
-      }
-
-      let checkYt = setInterval(() => {
-         if ('function' === typeof YT.Player) {
-            clearInterval(checkYt)
-            this.play(videoID, 'full')
-            return
-         }
-      }, 111)
-   }
-
    initPlayer(id: string) {
-      let options = {} as YT.PlayerOptions
-      let playerVars = {} as YT.PlayerVars
-      if (this.isPlaylist(id)) {
-         playerVars.list = id
-         playerVars.listType = 'playlist'
-         this.showNext = true
-      } else {
-         options.videoId = id
-      }
+      this.alpine
+         .$do('script', 'youtube', 'https://www.youtube.com/iframe_api')
+         .then((status: boolean) => {
+            if (status === false) {
+               console.error("YouTube SDK didn't load.")
+               return
+            }
 
-      this.player = new YT.Player('player-container', {
-         ...options,
-         width: '640',
-         height: '390',
-         events: {
-            onReady: () => this.onPlayerReady(),
-            onStateChange: (e) => (this.state = e.data),
-         },
-         playerVars: {
-            ...playerVars,
-            modestbranding: 1,
-            enablejsapi: 1,
-            cc_load_policy: 0,
-            rel: 0,
-            fs: 0,
-         },
-      })
+            let options = {} as YT.PlayerOptions
+            let playerVars = {} as YT.PlayerVars
+
+            if (this.isPlaylist(id)) {
+               playerVars.list = id
+               playerVars.listType = 'playlist'
+               this.showNext = true
+            } else {
+               options.videoId = id
+            }
+
+            this.player = new YT.Player('player-container', {
+               ...options,
+               width: '640',
+               height: '390',
+               events: {
+                  onReady: () => this.onPlayerReady(),
+                  onStateChange: (e) => (this.state = e.data),
+               },
+               playerVars: {
+                  ...playerVars,
+                  modestbranding: 1,
+                  enablejsapi: 1,
+                  cc_load_policy: 0,
+                  rel: 0,
+                  fs: 0,
+               },
+            })
+         })
    }
 
    onStatusChange(newStatus: string) {
@@ -142,6 +139,7 @@ export default class dbtv {
       if (this.ready) {
          if (this.isPlaylist(current)) {
             this.player.destroy()
+            this.ready = false
          } else {
             this.player.loadVideoById(current)
             return

@@ -1,9 +1,12 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
+@import '@ctrlaltvers/tailwind/dist/fontawesome';
 @import './common';
 @import './content';
 @import './toast';
 
-@source "../../../dbands";
+@source inline("fa-square-rss");
+@source "../";
+@source "../../../plugins/dbands";
 
 @theme {
    --font-sans: 'Georama', ui-sans-serif, system-ui, sans-serif,

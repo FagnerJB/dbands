@@ -7,65 +7,71 @@ class Youtube
    private $apikey     = YOUTUBE_APIKEY;
    private $baseurl    = 'https://youtube.googleapis.com/youtube/v3';
    private $first_page = 10;
-   private $per_page   = 16;
    private $id;
+   private $per_page = 16;
 
    public function __construct($id = '')
    {
       $this->id = $id;
    }
 
-   public function search(array $args)
+   public function get_feed($page = 1, $video_ID = '')
    {
-      $defaults = [
-         'key'             => $this->apikey,
-         'maxResults'      => 50,
-         'order'           => 'relevance',
-         'part'            => 'snippet',
-         'safeSearch'      => 'strict',
-         'type'            => 'video',
-         'videoCategoryId' => 10,
-         'videoDefinition' => 'high',
-         'videoDimension'  => '2d',
-         'videoEmbeddable' => 'true',
-      ];
+      $videos_next = get_transient('dbtv-videos');
 
-      $key = sanitize_file_name(http_build_query($args));
+      if (!$videos_next) {
+         $channels = $this->get_subscriptions($this->id);
 
-      $results_fetched = \wp_remote_get("{$this->baseurl}/search/?" . http_build_query(wp_parse_args($args, $defaults)), [
-         'cache_key'      => 'yt-search-' . $key,
-         'cache_duration' => '3 days',
-         'cache_type'     => 'disk',
-      ]);
-
-      if (is_wp_error($results_fetched)) {
-         return [];
-      }
-
-      $results_content = json_decode(\wp_remote_retrieve_body($results_fetched), true);
-
-      if (empty($results_content['items'])) {
-         return [];
-      }
-
-      $videos_return = [];
-
-      foreach ($results_content['items'] as $video) {
-         if (empty($video['id']['videoId'])) {
-            continue;
+         if (empty($channels)) {
+            return [];
          }
 
-         $video_ID = $video['id']['videoId'];
+         $videos = [];
 
-         $videos_return[$video_ID] = [
-            'id'     => $video_ID,
-            'date'   => date_i18n('Y-m-d H:i:s', strtotime((string) $video['snippet']['publishedAt'])),
-            'title'  => (string) $video['snippet']['title'],
-            'author' => (string) $video['snippet']['channelTitle'],
-         ];
+         foreach ($channels as $channel) {
+            $channel_ID = $channel['snippet']['resourceId']['channelId'];
+
+            $channel_uploads = $this->get_feed_videos($channel_ID);
+
+            if (empty($channel_uploads)) {
+               continue;
+            }
+
+            $videos = array_merge($videos, $channel_uploads);
+         }
+
+         uasort($videos, fn($a, $b) => strcmp($b['date'], $a['date']));
+
+         $videos_next = [];
+
+         foreach ($videos as $key => $value) {
+            $videos_next[$key] = [
+               ...$value,
+               'next' => next($videos)['id'] ?? false,
+            ];
+         }
+
+         set_transient('dbtv-videos', $videos_next, is_environment('production') ? DAY_IN_SECONDS : 0);
       }
 
-      return $videos_return;
+      if (!empty($video_ID)) {
+         $found = [];
+
+         foreach ($videos_next as $key => $video) {
+            if ($key === $video_ID) {
+               $found = $video;
+
+               break;
+            }
+         }
+
+         return $found;
+      }
+
+      $offset = 1 === $page ? 0 : $this->first_page + (($page - 2) * $this->per_page);
+      $length = 1 === $page ? $this->first_page : $this->per_page;
+
+      return array_slice($videos_next, $offset, $length);
    }
 
    public function get_playlist_videos($playlist_ID = null, $page = '')
@@ -147,63 +153,57 @@ class Youtube
       return $subscriptions_content['items'];
    }
 
-   public function get_feed($page = 1, $video_ID = '')
+   public function search(array $args)
    {
-      $videos_next = get_transient('dbtv-videos');
+      $defaults = [
+         'key'             => $this->apikey,
+         'maxResults'      => 50,
+         'order'           => 'relevance',
+         'part'            => 'snippet',
+         'safeSearch'      => 'strict',
+         'type'            => 'video',
+         'videoCategoryId' => 10,
+         'videoDefinition' => 'high',
+         'videoDimension'  => '2d',
+         'videoEmbeddable' => 'true',
+      ];
 
-      if (!$videos_next) {
-         $channels = $this->get_subscriptions($this->id);
+      $key = sanitize_file_name(http_build_query($args));
 
-         if (empty($channels)) {
-            return [];
-         }
+      $results_fetched = \wp_remote_get("{$this->baseurl}/search/?" . http_build_query(wp_parse_args($args, $defaults)), [
+         'cache_key'      => 'yt-search-' . $key,
+         'cache_duration' => '3 days',
+         'cache_type'     => 'disk',
+      ]);
 
-         $videos = [];
-
-         foreach ($channels as $channel) {
-            $channel_ID = $channel['snippet']['resourceId']['channelId'];
-
-            $channel_uploads = $this->get_feed_videos($channel_ID);
-
-            if (empty($channel_uploads)) {
-               continue;
-            }
-
-            $videos = array_merge($videos, $channel_uploads);
-         }
-
-         uasort($videos, fn($a, $b) => strcmp($b['date'], $a['date']));
-
-         $videos_next = [];
-
-         foreach ($videos as $key => $value) {
-            $videos_next[$key] = [
-               ...$value,
-               'next' => next($videos)['id'] ?? false,
-            ];
-         }
-
-         set_transient('dbtv-videos', $videos_next, DAY_IN_SECONDS);
+      if (is_wp_error($results_fetched)) {
+         return [];
       }
 
-      if (!empty($video_ID)) {
-         $found = [];
+      $results_content = json_decode(\wp_remote_retrieve_body($results_fetched), true);
 
-         foreach ($videos_next as $key => $video) {
-            if ($key === $video_ID) {
-               $found = $video;
-
-               break;
-            }
-         }
-
-         return $found;
+      if (empty($results_content['items'])) {
+         return [];
       }
 
-      $offset = 1 === $page ? 0 : $this->first_page + (($page - 2) * $this->per_page);
-      $length = 1 === $page ? $this->first_page : $this->per_page;
+      $videos_return = [];
 
-      return array_slice($videos_next, $offset, $length);
+      foreach ($results_content['items'] as $video) {
+         if (empty($video['id']['videoId'])) {
+            continue;
+         }
+
+         $video_ID = $video['id']['videoId'];
+
+         $videos_return[$video_ID] = [
+            'id'     => $video_ID,
+            'date'   => date_i18n('Y-m-d H:i:s', strtotime((string) $video['snippet']['publishedAt'])),
+            'title'  => (string) $video['snippet']['title'],
+            'author' => (string) $video['snippet']['channelTitle'],
+         ];
+      }
+
+      return $videos_return;
    }
 
    private function get_feed_videos($channel_ID)

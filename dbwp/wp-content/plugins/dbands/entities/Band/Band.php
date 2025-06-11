@@ -3,8 +3,8 @@
 namespace dbp\Band;
 
 use cavWP\Models\Term;
-use dbp\Author\Author;
 use cavWP\Utils as CavUtils;
+use dbp\Author\Author;
 use dbp\Services\Spotify\Spotify;
 
 class Band extends Term
@@ -53,7 +53,7 @@ class Band extends Term
          parent::__construct($term, 'post_tag');
       }
 
-      if(empty($this->data)){
+      if (empty($this->data)) {
          return;
       }
 
@@ -169,7 +169,7 @@ class Band extends Term
                break;
             }
             $link = 'https://music.apple.com/br/artist/' . $this->meta->itunes . '?mt=1&app=music&at=10lSby';
-            $icon = 'fab fa-itunes';
+            $icon = 'fa-brands fa-itunes-note';
             $text = esc_html__('Ouça no Apple Music', 'dbands');
 
             break;
@@ -306,7 +306,7 @@ class Band extends Term
       }
 
       if (!empty($icon)) {
-         $html .= '<i class="' . $icon . ' text-center w-6"></i> ';
+         $html .= '<i class="' . $icon . ' text-center fa-fw"></i> ';
       }
 
       if ($withText && !empty($text)) {

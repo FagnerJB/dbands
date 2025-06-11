@@ -9,7 +9,6 @@ class Register
       add_post_type_support('page', 'excerpt');
 
       add_action('wp_enqueue_scripts', [$this, 'remove_wp_assets'], 15);
-      add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
       add_action('cav_head_metas', [$this, 'prints_head_tags']);
 
       add_filter('get_custom_logo_image_attributes', [$this, 'add_logo_attrs']);
@@ -21,11 +20,6 @@ class Register
       $custom_logo_attrs['title'] = 'Ir para página inicial';
 
       return $custom_logo_attrs;
-   }
-
-   public function enqueue_styles(): void
-   {
-      wp_enqueue_style('fontawesome');
    }
 
    public function prints_head_tags(): void

@@ -135,21 +135,21 @@ $social_posts['show'] = [
           class="<?php echo $social['bg']; ?> transition-all text-white flex my-2 py-1.5 px-2 font-medium text-lg <?php echo $container_class; ?>">
          <?php
 
-               if (isset($social['mini'])) {
-                  foreach ($social_links as $key => $social_link) {
-                     if (!isset($social[$key])) {
-                        continue;
-                     }
-
-                     echo '<a class="py-1.5 px-2" href="' . esc_url($social[$key]) . '" target="_blank" rel="external">';
-                  }
-
-                  if (isset($social['action'])) {
-                     echo '<button class="py-1.5 px-2 text-center" ' . $social['action'] . '>';
-                  }
-               } else {
-                  echo '<div class="py-1.5 px-2 text-center">';
+         if (isset($social['mini'])) {
+            foreach ($social_links as $key => $social_link) {
+               if (!isset($social[$key])) {
+                  continue;
                }
+
+               echo '<a class="py-1.5 px-2" href="' . esc_url($social[$key]) . '" target="_blank" rel="external" aria-hidden="true" tabindex="-1">';
+            }
+
+            if (isset($social['action'])) {
+               echo '<button class="py-1.5 px-2 text-center" ' . $social['action'] . ' aria-hidden="true" tabindex="-1">';
+            }
+         } else {
+            echo '<div class="py-1.5 px-2 text-center">';
+         }
 
          echo "<i class=\"{$social['icon']} text-xl\"></i>";
 
@@ -176,8 +176,7 @@ $social_posts['show'] = [
             <a class="py-1.5 px-2"
                href="<?php echo esc_url($social[$key]); ?>"
                target="_blank" rel="external">
-               <i
-                  class="<?php echo $social_link['icon']; ?> w-6"></i>
+               <i class="<?php echo $social_link['icon']; ?> fa-fw"></i>
                <?php echo $social_link['label']; ?>
             </a>
             <?php
@@ -186,8 +185,7 @@ $social_posts['show'] = [
 
          if (isset($social['action'])) {
             ?>
-            <button class="py-1.5 px-2 text-left"
-                    <?php echo $social['action']; ?>>
+            <button class="py-1.5 px-2 text-left" <?php echo $social['action']; ?>>
                <?php echo $social['name']; ?>
             </button>
             <?php

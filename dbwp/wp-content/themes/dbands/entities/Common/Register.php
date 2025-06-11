@@ -98,7 +98,7 @@ class Register
    {
       global $wp_query;
 
-      wp_enqueue_script('main', get_theme_file_uri('assets/script.js'), ['youtube'], false, [
+      wp_enqueue_script('main', get_theme_file_uri('assets/script.js'), [], false, [
          'strategy' => 'defer',
       ]);
 
@@ -109,15 +109,11 @@ class Register
          'apiBase'  => get_rest_url(null, 'db/v1'),
          'maxPages' => $wp_query->max_num_pages,
       ]);
-
-      wp_enqueue_script('youtube', 'https://www.youtube.com/iframe_api', [], null, [
-         'strategy' => 'defer',
-      ]);
    }
 
    public function enqueue_styles(): void
    {
-      wp_enqueue_style('main', get_theme_file_uri('assets/style.css'), ['fontawesome']);
+      wp_enqueue_style('main', get_theme_file_uri('assets/style.css'));
    }
 
    public function sets_thumbnail_placeholder()
