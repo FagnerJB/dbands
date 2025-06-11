@@ -1,5 +1,5 @@
 @import 'tailwindcss' source(none);
-@import '@ctrlaltvers/tailwind/dist/fontawesome.css';
+@import '@ctrlaltvers/tailwind/dist/fontawesome';
 @import './common';
 @import './content';
 @import './toast';
