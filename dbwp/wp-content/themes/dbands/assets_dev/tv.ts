@@ -25,6 +25,10 @@ export default class dbtv {
    }
 
    play(id: string, status = 'full') {
+      if (0 === id.length) {
+         return
+      }
+
       if (this.queue.includes(id) || this.current === id) {
          this.alpine.$do('toast', '', 'Já está na fila')
          return
