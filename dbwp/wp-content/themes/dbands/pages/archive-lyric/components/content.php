@@ -42,11 +42,11 @@ if (!empty($all_albums)) {
       }
 
       if (!empty($album->cover)) {
-         $album_cover = wp_get_attachment_image($album->cover, 'post-thumbnail', false, [
+         $album_cover = wp_get_attachment_image($album->cover, 'thumbnail', false, [
             'class' => 'size-30 sm:size-37 shrink-0',
          ]);
       } else {
-         $album_cover = '<img class="size-30 sm:size-37 shrink-0" src="https://placehold.co/150x150/png?text=' . urlencode($album->name) . '">';
+         $album_cover = '<img class="size-30 sm:size-37 shrink-0" src="https://placehold.co/150x150/png?text=' . urlencode($album->name) . '" alt="">';
       }
 
       $tracks = '';
@@ -99,7 +99,7 @@ if (!empty($all_albums)) {
       $attr = esc_attr(sanitize_title($artist));
       $summary .= "<li><a href=\"#{$attr}\">{$artist}</a></li>";
    }
-   $summary .= '<ul>';
+   $summary .= '</ul>';
 
    echo $summary . $output;
 }
