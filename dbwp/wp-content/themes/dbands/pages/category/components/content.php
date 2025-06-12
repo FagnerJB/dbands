@@ -1,7 +1,7 @@
 <?php
 
-use dbp\Category\Category;
 use cavWP\Utils;
+use dbp\Category\Category;
 
 $Category = new Category();
 $page     = Utils::get_page();
@@ -17,6 +17,9 @@ $page     = Utils::get_page();
          <i class="fas fa-hashtag"></i>
          <?php echo $Category->get('name'); ?>
       </h1>
+      <h2 class="sr-only">
+         <?php printf(esc_html__('Publicações em %s', 'dbands'), $Category->get('name')); ?>
+      </h2>
       <?php
 
       }

@@ -1,7 +1,7 @@
 <?php
 
-use dbp\Band\Band;
 use cavWP\Utils;
+use dbp\Band\Band;
 
 $page = Utils::get_page();
 $Band = new Band();
@@ -13,15 +13,14 @@ $Band = new Band();
 
       if (1 === $page || !wp_is_serving_rest_request()) {
          ?>
-         <header class="mb-7">
-            <h1>
-               <?php
-
-                  printf(esc_html__('Publicações sobre %s', 'dbands'), $Band->get('name'));
-
-         ?>
-            </h1>
-         </header>
+      <header class="mb-7">
+         <h1>
+            <?php echo $Band->get('name'); ?>
+         </h1>
+         <h2 class="sr-only">
+            <?php printf(esc_html__('Publicações sobre %s', 'dbands'), $Band->get('name')); ?>
+         </h2>
+      </header>
       <?php
 
       }

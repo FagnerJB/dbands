@@ -1,7 +1,7 @@
 <?php
 
-use dbp\Author\Author;
 use cavWP\Utils;
+use dbp\Author\Author;
 
 $Author = new Author();
 $page   = Utils::get_page();
@@ -13,9 +13,12 @@ $page   = Utils::get_page();
 
       if (1 === $page || !wp_is_serving_rest_request()) {
          ?>
-         <h1 class="mb-7">
-            <?php printf(esc_html__('Publicações de %s', 'dbands'), $Author->get('display_name')); ?>
-         </h1>
+      <h1 class="mb-7">
+         <?php echo $Author->get('display_name'); ?>
+      </h1>
+      <h2 class="sr-only">
+         <?php printf(esc_html__('Publicações de %s', 'dbands'), $Author->get('display_name')); ?>
+      </h2>
       <?php
 
       }

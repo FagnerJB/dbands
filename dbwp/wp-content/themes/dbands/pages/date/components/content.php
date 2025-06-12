@@ -2,7 +2,6 @@
 
 global $wp_locale;
 
-use cavWP\Utils as CavUtils;
 use cavWP\Utils;
 
 $page  = Utils::get_page();
@@ -16,9 +15,12 @@ $month = get_query_var('monthnum');
 
       if (1 === $page || !wp_is_serving_rest_request()) {
          ?>
-         <h1 class="mb-7">
-            <?php printf('Em %s de %d', $wp_locale->get_month($month), $year); ?>
-         </h1>
+      <h1 class="mb-7">
+         <?php printf('%s de %d', $wp_locale->get_month($month), $year); ?>
+      </h1>
+      <h2 class="sr-only">
+         <?php printf('Publicações em %s de %d', $wp_locale->get_month($month), $year); ?>
+      </h2>
       <?php
 
       }
@@ -44,7 +46,7 @@ if (1 === $page || !wp_is_serving_rest_request()) {
 <?php
 
 latte_component('pagination', [
-   'link'      => CavUtils::get_date_link(true, true),
+   'link'      => Utils::get_date_link(true, true),
    'max_pages' => $wp_query->max_num_pages,
 ]);
 
