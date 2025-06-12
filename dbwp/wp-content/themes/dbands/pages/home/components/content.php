@@ -56,7 +56,7 @@ if (!empty($videos)) {
                         <a href="<?php echo home_url('tv'); ?>">
                            <?php
 
-                        esc_html_e('Deutsche Bands TV', 'dbands');
+                        esc_html_e('dbTV Metal', 'dbands');
 
             ?>
                         </a>

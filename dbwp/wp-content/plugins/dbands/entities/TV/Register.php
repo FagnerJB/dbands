@@ -10,10 +10,10 @@ final class Register
    {
       add_action('init', [$this, 'add_rewrite']);
       add_action('template_redirect', [$this, 'do_redirect']);
-      add_action('refresh_tv_hook', [$this, 'refresh_tv']);
+      add_action('db_refresh_tv_hook', [$this, 'refresh_tv']);
 
-      if (!wp_next_scheduled('refresh_tv_hook')) {
-         wp_schedule_event(strtotime('next 03:00'), 'daily', 'refresh_tv_hook');
+      if (!wp_next_scheduled('db_refresh_tv_hook')) {
+         wp_schedule_event(strtotime('next 03:00'), 'daily', 'db_refresh_tv_hook');
       }
    }
 

@@ -108,6 +108,6 @@ if (!empty($all_albums)) {
       </div>
    </main>
    <aside>
-      <?php get_page_component('archive-lyric', 'aside'); ?>
+      <?php get_component('aside-common'); ?>
    </aside>
 </div>

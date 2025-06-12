@@ -15,14 +15,14 @@ $first  = key($videos);
       </h2>
       <div class="flex gap-2">
          <a class="flex flex-col" <?php Utils::video_attrs($first); ?>>
-            <img class="w-full aspect-video" src="<?php echo Utils::get_video_thumb($first); ?>" width="320" height="180" alt="" loading="lazy">
+            <img class="w-full aspect-video" src="<?php echo Utils::get_video_thumb($first); ?>" width="320" height="180">
             <div class="btn-alt !py-2 !px-4">
-               <i class="fas fa-play"></i> Recentes
+               <i class="fas fa-play"></i> dbTV Metal
             </div>
          </a>
 
          <a class="flex flex-col" <?php Utils::video_attrs('PLTg2AhCnKU-L4-2j5yEEEyNWDsdnzqVB1'); ?>>
-            <img class="w-full aspect-video" src="<?php echo Utils::get_video_thumb('bBqrlBFsf0s'); ?>" width="320" height="180" alt="" loading="lazy">
+            <img class="w-full aspect-video" src="<?php echo Utils::get_video_thumb('bBqrlBFsf0s'); ?>" width="320" height="180">
             <div class="btn-alt !py-2 !px-4">
                <i class="fas fa-play"></i> Recomendações
             </div>
