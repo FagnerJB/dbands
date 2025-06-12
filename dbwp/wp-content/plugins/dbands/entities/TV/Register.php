@@ -12,8 +12,9 @@ final class Register
       add_action('template_redirect', [$this, 'do_redirect']);
       add_action('db_refresh_tv_hook', [$this, 'refresh_tv']);
 
+
       if (!wp_next_scheduled('db_refresh_tv_hook')) {
-         wp_schedule_event(strtotime('next 03:00'), 'daily', 'db_refresh_tv_hook');
+         wp_schedule_event(strtotime('tomorrow 04:30'), 'daily', 'db_refresh_tv_hook', [], true);
       }
    }
 
