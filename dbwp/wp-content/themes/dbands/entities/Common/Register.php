@@ -47,7 +47,7 @@ class Register
          }
 
          if (!empty($spotify_track) && 'notrack' !== $spotify_track) {
-            $embed   = '<div class="text-center"><iframe src="https://open.spotify.com/embed/track/' . $spotify_track . '" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" title="Esta faixa no Spotify"></iframe></div>';
+            $embed   = '<div class="text-center"><iframe loading="lazy" src="https://open.spotify.com/embed/track/' . $spotify_track . '" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" title="Esta faixa no Spotify"></iframe></div>';
             $content = $embed . $content;
          }
       }

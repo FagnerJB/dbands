@@ -46,11 +46,10 @@ $ad->echo();
    }
 
 ?>
-
          </div>
       </div>
    </div>
-   <div class="container flex flex-col gap-1 mt-3 mb-6 text-center text-white text-sm md:text-base" aria-hidden="true">
+   <div class="container flex flex-col gap-1 mt-3 mb-6 text-center text-white text-sm md:text-base">
       <div class="with-links">
          <span class="whitespace-nowrap">2010-<?php echo date('Y'); ?> - <?php bloginfo('name'); ?> &mdash;</span> <wbr>
          <a class="whitespace-nowrap" href="<?php echo get_permalink(11543); ?>">Acessibilidade</a> &bull;

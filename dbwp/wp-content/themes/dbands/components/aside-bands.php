@@ -138,9 +138,8 @@ if (!empty($bands) && !is_wp_error($bands)) {
    <h3 class="font-medium text-xl mt-5">
       <?php esc_html_e('Álbum recomendado no iTunes', 'dbands'); ?>
    </h3>
-   <iframe height="450" width="100%" title="Media player"
+   <iframe height="450" width="100%" loading="lazy"
            src="https://embed.music.apple.com/br/album/album/<?php echo $Band->meta->itunes_album; ?>?itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1612051984&amp;at=10lSby&amp;theme=dark"
-           id="embedPlayer"
            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
            allow="autoplay *; encrypted-media *; clipboard-write"
            style="border: 0px; border-radius: 12px; width: 100%; height: 450px; max-width: 660px;"></iframe>
@@ -156,7 +155,7 @@ if (!empty($bands) && !is_wp_error($bands)) {
       <?php esc_html_e('Mais tocadas no Spotify', 'dbands'); ?>
    </h3>
    <iframe class="w-full"
-           src="https://open.spotify.com/embed/artist/<?php echo $Band->meta->spotify; ?>"
+           src="https://open.spotify.com/embed/artist/<?php echo $Band->meta->spotify; ?>" loading="lazy"
            width="350" height="390" frameborder="0" allowtransparency="true" allow="encrypted-media"
            title="<?php printf(esc_html__('Músicas mais tocadas de %s no Spotify', 'dbands'), $Band->get('name')); ?>"></iframe>
 </section>
