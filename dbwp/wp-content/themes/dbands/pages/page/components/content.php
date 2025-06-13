@@ -17,6 +17,6 @@ $Page = new Page();
       </article>
    </main>
    <aside>
-      <?php get_page_component('page', 'aside'); ?>
+      <?php get_component('aside-common'); ?>
    </aside>
 </div>
