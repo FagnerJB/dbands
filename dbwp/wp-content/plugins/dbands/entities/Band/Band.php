@@ -92,7 +92,13 @@ class Band extends Term
          return false;
       }
 
-      return "<img class=\"self-start\" src=\"{$logo}\" loading=\"lazy\" alt=\"{$this->data->name}\">";
+      return sprintf(
+         '<img class="self-start" src="%s" width="%s" height="%s" alt="%s" loading="lazy" />',
+         $logo['url'],
+         $logo['width'],
+         $logo['height'],
+         $this->data->name,
+      );
    }
 
    public function get_meta_link($meta, $withText = true, $start = '', $end = '', $attrs = [])
@@ -327,14 +333,28 @@ class Band extends Term
 
    private function get_file($type)
    {
-      if (isset($this->data->slug)) {
-         $extension     = 'cover' === $type ? '.jpg' : '.png';
-         $filename      = '/' . $type . 's/' . $this->data->slug . $extension;
-         $location_file = wp_upload_dir()['basedir'] . $filename;
-
-         return file_exists($location_file) ? WP_CONTENT_URL . '/uploads' . $filename : false;
+      if (!isset($this->data->slug)) {
+         return false;
       }
 
-      return false;
+      $extension     = 'cover' === $type ? '.jpg' : '.png';
+      $filename      = '/' . $type . 's/' . $this->data->slug . $extension;
+      $location_file = wp_upload_dir()['basedir'] . $filename;
+
+      if (!file_exists($location_file)) {
+         return false;
+      }
+
+      if ('cover' === $type) {
+         return WP_CONTENT_URL . '/uploads' . $filename;
+      }
+
+      list($width, $height) = getimagesize($location_file);
+
+      return [
+         'url'    => WP_CONTENT_URL . '/uploads' . $filename,
+         'width'  => $width,
+         'height' => $height,
+      ];
    }
 }
