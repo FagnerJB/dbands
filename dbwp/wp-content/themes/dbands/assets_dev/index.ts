@@ -34,7 +34,9 @@ document.addEventListener('alpine:init', () => {
          tv: new dbtv(this),
 
          init() {
-            this.$do('remClass', 'body', 'no-js')
+            if (!this.$is.bot()) {
+               this.$do('remClass', 'body', 'no-js')
+            }
 
             this.pagination.archiveUrl =
                this.$refs.archiveLink?.dataset.archiveLink ?? dbands.mainUrl
@@ -46,11 +48,12 @@ document.addEventListener('alpine:init', () => {
             this.$watch('tv.status', (status) => this.tv.onStatusChange(status))
             this.$watch('tv.state', (state) => this.tv.onStateChange(state))
 
+            // NAVIGATION
             document.addEventListener(
                'click',
                (e: Event) => {
                   const el = (e.target as Element)?.closest(
-                     `a[href^="${dbands.mainUrl}"]`
+                     `a[href^="${dbands.mainUrl}"],a[href^="https://i0.wp.com"]`
                   )
                   if (
                      el instanceof HTMLAnchorElement &&
@@ -342,9 +345,7 @@ document.addEventListener('alpine:init', () => {
             this.gallery.images = []
 
             document
-               .querySelectorAll(
-                  '#content section a[href*="wp-content/uploads"]'
-               )
+               .querySelectorAll('#content main a[href*="wp-content/uploads"]')
                .forEach((img) => {
                   this.gallery.images.push(img.getAttribute('href'))
                })
