@@ -13,7 +13,14 @@ class Register
 
    public function adds_footer(): void
    {
-      echo '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+      echo <<<SCRIPT
+      <script>
+      function refreshAds(){
+         (adsbygoogle = window.adsbygoogle || []).push({})
+      }
+      refreshAds()
+      </script>';
+SCRIPT;
    }
 
    public function adds_scripts(): void

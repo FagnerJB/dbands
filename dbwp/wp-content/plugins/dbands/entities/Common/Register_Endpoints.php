@@ -193,6 +193,11 @@ class Register_Endpoints
             'target'  => 'pagination.maxPage',
             'content' => $wp_query->max_num_pages,
          ];
+
+         $actions[]=[
+            'action'=>'cb',
+            'target'=>'refreshAds()'
+         ];
       }
 
       wp_reset_query();
@@ -264,6 +269,11 @@ class Register_Endpoints
             'target'  => 'body',
             'content' => 'data-title',
             'extra'   => $title,
+         ];
+
+         $actions[] = [
+            'action' => 'cb',
+            'target' => 'refreshAds()'
          ];
       }
 
