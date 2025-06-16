@@ -9,7 +9,7 @@ class Register
    public function __construct()
    {
       add_action('cav_head_metas', [$this, 'add_metas']);
-      add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
+      add_action('wp_footer', [$this, 'inline_style'], 20);
       // add_action('wp_enqueue_scripts', [$this, 'add_breakpoints_mark']);
       add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
       add_action('wp_resource_hints', [$this, 'add_resources'], 10, 2);
@@ -111,9 +111,11 @@ class Register
       ]);
    }
 
-   public function enqueue_styles(): void
+   public function inline_style(): void
    {
-      wp_enqueue_style('main', get_theme_file_uri('assets/style.css'));
+      echo '<style>';
+      echo file_get_contents(get_theme_file_path('assets/style.css'));
+      echo '</style>';
    }
 
    public function sets_thumbnail_placeholder()
