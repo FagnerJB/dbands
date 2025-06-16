@@ -56,7 +56,7 @@ if (!empty($cover->meta->photo_credits)) {
       }
 
 ?>
-      <ul class="flex justify-end gap-1 md:gap-3 text-lg md:text-2xl" aria-hidden="true">
+      <ul class="flex justify-end gap-1 text-lg md:text-xl" aria-hidden="true">
          <?php
 
    if (!empty($cover->meta->itunes)) {
