@@ -1,3 +1,4 @@
+:is(article, aside, nav, section) h1,
 h1 {
    @apply text-xl md:text-3xl font-semibold;
 }

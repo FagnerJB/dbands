@@ -29,11 +29,11 @@ if (!empty($bands) && !is_wp_error($bands)) {
       <?php echo $rel; ?>>
       <?php
 
-                  if ($logo = $Band->get_logo()) {
-                     echo $logo;
-                  } else {
-                     echo '<div class="text-xl font-semibold">' . $Band->get('name') . '</div>';
-                  }
+      if ($logo = $Band->get_logo()) {
+         echo $logo;
+      } else {
+         echo '<div class="text-xl font-semibold">' . $Band->get('name') . '</div>';
+      }
 
       ?>
       <div class="font-medium">
@@ -132,8 +132,9 @@ if (!empty($bands) && !is_wp_error($bands)) {
 </div>
 <?php
 
-      if (is_tag() && !empty($Band->meta->itunes_album)) {
-         ?>
+if (is_tag() && !is_bot()) {
+   if (!empty($Band->meta->itunes_album)) {
+      ?>
 <section class="flex flex-col gap-2 wjs">
    <h3 class="font-medium text-xl mt-5">
       <?php esc_html_e('Álbum recomendado no iTunes', 'dbands'); ?>
@@ -146,22 +147,24 @@ if (!empty($bands) && !is_wp_error($bands)) {
 </section>
 <?php
 
-      }
+   }
 
-      if (is_tag() && !empty($Band->meta->spotify)) {
-         ?>
+   if (!empty($Band->meta->spotify)) {
+      ?>
 <section class="flex flex-col gap-2 wjs">
    <h3 class="font-medium text-xl mt-5">
       <?php esc_html_e('Mais tocadas no Spotify', 'dbands'); ?>
    </h3>
    <iframe class="w-full"
-           src="https://open.spotify.com/embed/artist/<?php echo $Band->meta->spotify; ?>" loading="lazy"
+           src="https://open.spotify.com/embed/artist/<?php echo $Band->meta->spotify; ?>"
+           loading="lazy"
            width="350" height="390" frameborder="0" allowtransparency="true" allow="encrypted-media"
            title="<?php printf(esc_html__('Músicas mais tocadas de %s no Spotify', 'dbands'), $Band->get('name')); ?>"></iframe>
 </section>
 <?php
 
-      }
+   }
+}
 
       get_component('aside-edit-this', [
          'type' => 'term',

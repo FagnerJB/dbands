@@ -29,6 +29,14 @@ summary {
    }
 }
 
+#tv {
+   view-transition-name: tv;
+}
+
+::view-transition-group(tv) {
+   animation: none;
+}
+
 .cav-body-loading #loading-bar {
    @apply h-3.5;
    background: linear-gradient(to right, #f00, #fc0, #f00);
