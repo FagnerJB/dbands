@@ -21,7 +21,7 @@ class Register
       function refreshAds(){
          document.querySelectorAll('.adsbygoogle').forEach(function(el) {
             el.removeAttribute('data-adsbygoogle-status')
-         })
+         });
          (adsbygoogle = window.adsbygoogle || []).push({})
       }
       refreshAds()
