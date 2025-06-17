@@ -20,6 +20,7 @@ class Register
       <script>
       function refreshAds(){
          document.querySelectorAll('.adsbygoogle').forEach(function(el) {
+            el.textContent = '';
             el.removeAttribute('data-adsbygoogle-status')
          });
          (adsbygoogle = window.adsbygoogle || []).push({})
