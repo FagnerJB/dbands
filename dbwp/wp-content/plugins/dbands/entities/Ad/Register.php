@@ -7,8 +7,11 @@ class Register
    public function __construct()
    {
       add_action('admin_init', [$this, 'registers_settings']);
-      add_action('wp_body_open', [$this, 'adds_scripts'], 99);
-      add_action('cav_head_scripts', [$this, 'adds_footer'], 99);
+
+      if (!is_bot()) {
+         add_action('wp_body_open', [$this, 'adds_scripts'], 99);
+         add_action('cav_head_scripts', [$this, 'adds_footer'], 99);
+      }
    }
 
    public function adds_footer(): void
@@ -16,6 +19,9 @@ class Register
       echo <<<'SCRIPT'
       <script>
       function refreshAds(){
+         document.querySelectorAll('.adsbygoogle').forEach(function(el) {
+            el.removeAttribute('data-adsbygoogle-status')
+         })
          (adsbygoogle = window.adsbygoogle || []).push({})
       }
       refreshAds()
