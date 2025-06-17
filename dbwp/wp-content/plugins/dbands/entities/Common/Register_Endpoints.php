@@ -194,9 +194,9 @@ class Register_Endpoints
             'content' => $wp_query->max_num_pages,
          ];
 
-         $actions[]=[
-            'action'=>'cb',
-            'target'=>'refreshAds()'
+         $actions[] = [
+            'action' => 'cb',
+            'target' => 'refreshAds()',
          ];
       }
 
@@ -273,7 +273,7 @@ class Register_Endpoints
 
          $actions[] = [
             'action' => 'cb',
-            'target' => 'refreshAds()'
+            'target' => 'refreshAds()',
          ];
       }
 

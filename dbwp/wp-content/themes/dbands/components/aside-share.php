@@ -9,7 +9,7 @@ $News         = new News();
 $social_IDs   = $News->get_social_posts();
 $title_raw    = $News->get('title', apply_filter: false);
 $link_raw     = $News->get('link', apply_filter: false);
-$excerpt_raw  = $News->get('excerpt', apply_filter: false);
+$excerpt      = str_replace(["\r\n", "\n"], ', ', $News->get('excerpt', apply_filter: false));
 $title        = urlencode($title_raw);
 $link         = urlencode($link_raw);
 $tags         = $News->get('tags');
@@ -25,7 +25,7 @@ $social_posts['default'] = [
    'name'   => 'Compartilhar',
    'icon'   => 'fa-solid fa-share-nodes',
    'bg'     => 'bg-zinc-700',
-   'action' => "x-on:click=\"navigator.share({title: '{$title_raw}',text: '{$excerpt_raw}',url: '{$link_raw}'})\"",
+   'action' => "x-on:click=\"navigator.share({title: '{$title_raw}',text: '{$excerpt}',url: '{$link_raw}'})\"",
 ];
 
 $social_posts['tw'] = [
@@ -176,7 +176,8 @@ $social_posts['show'] = [
             <a class="py-1.5 px-2"
                href="<?php echo esc_url($social[$key]); ?>"
                target="_blank" rel="external">
-               <i class="<?php echo $social_link['icon']; ?> fa-fw"></i>
+               <i
+                  class="<?php echo $social_link['icon']; ?> fa-fw"></i>
                <?php echo $social_link['label']; ?>
             </a>
             <?php
@@ -185,7 +186,8 @@ $social_posts['show'] = [
 
          if (isset($social['action'])) {
             ?>
-            <button class="py-1.5 px-2 text-left" <?php echo $social['action']; ?>>
+            <button class="py-1.5 px-2 text-left"
+                    <?php echo $social['action']; ?>>
                <?php echo $social['name']; ?>
             </button>
             <?php
