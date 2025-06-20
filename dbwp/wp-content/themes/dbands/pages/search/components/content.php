@@ -18,15 +18,24 @@ if (!in_array($search_type, array_keys($search_options))) {
 if ('artista' === $search_type) {
    $LastFm = new Lastfm();
    $lastfm = $LastFm->get_artist($search_term);
-   $items  = $lastfm['items'];
+
+   if (false !== $lastfm) {
+      $items = $lastfm['items'];
+   }
 } elseif ('tag' === $search_type) {
    $LastFm = new Lastfm();
    $lastfm = $LastFm->get_tag($search_term);
-   $items  = $lastfm['items'];
+
+   if (false !== $lastfm) {
+      $items = $lastfm['items'];
+   }
 } elseif ('usuario' === $search_type) {
    $LastFm = new Lastfm();
    $lastfm = $LastFm->get_user($search_term);
-   $items  = $lastfm['items'];
+
+   if (false !== $lastfm) {
+      $items = $lastfm['items'];
+   }
 } elseif ('videos' === $search_type) {
    $youtube = new Youtube();
    $items   = $youtube->search([

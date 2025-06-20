@@ -11,6 +11,10 @@ class Utils
 
    public static function video_attrs($video_ID): void
    {
+      if (empty($video_ID)) {
+         return;
+      }
+
       $tv_link = get_permalink(8261);
 
       if (11 === strlen($video_ID)) {
