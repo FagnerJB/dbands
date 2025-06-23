@@ -36,7 +36,7 @@ if ('artista' === $search_type) {
    if (false !== $lastfm) {
       $items = $lastfm['items'];
    }
-} elseif ('videos' === $search_type) {
+} elseif ('videos' === $search_type && !is_bot()) {
    $youtube = new Youtube();
    $items   = $youtube->search([
       'q'          => $search_term,

@@ -14,7 +14,7 @@ class Register_Endpoints
       add_action('rest_api_init', [$this, 'create_endpoints']);
       add_action('pre_get_posts', [$this, 'set_search_per_page'], 99);
 
-      add_filter('rest_post_dispatch', [$this, 'parse_error']);
+      add_filter('rest_post_dispatch', [$this, 'parse_error'], 10, 3);
       add_filter('rest_url_prefix', [$this, 'change_api_prefix']);
    }
 
@@ -282,8 +282,12 @@ class Register_Endpoints
       return new WP_REST_Response($actions);
    }
 
-   public function parse_error($response)
+   public function parse_error($response, $server, $request)
    {
+      if (!str_starts_with($request->get_route(), 'db/v1')) {
+         return $response;
+      }
+
       $data = $response->get_data();
 
       if (!Utils::is_response_error($data)) {
