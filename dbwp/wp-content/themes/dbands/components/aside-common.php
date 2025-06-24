@@ -14,15 +14,30 @@ $first  = key($videos);
          Deutsche Bands TV
       </h2>
       <div class="flex gap-2">
-         <a class="flex flex-col" <?php Utils::video_attrs($first); ?>>
-            <img class="w-full aspect-video" src="<?php echo Utils::get_video_thumb($first); ?>" width="320" height="180">
+         <?php
+
+         if (!empty($first)) {
+            ?>
+         <a class="flex flex-col"
+            <?php Utils::video_attrs($first); ?>>
+            <img class="w-full aspect-video"
+                 src="<?php echo Utils::get_video_thumb($first); ?>"
+                 width="320" height="180">
             <div class="btn-alt !py-2 !px-4">
                <i class="fas fa-play"></i> dbTV Metal
             </div>
          </a>
+         <?php
 
-         <a class="flex flex-col" <?php Utils::video_attrs('PLTg2AhCnKU-L4-2j5yEEEyNWDsdnzqVB1'); ?>>
-            <img class="w-full aspect-video" src="<?php echo Utils::get_video_thumb('bBqrlBFsf0s'); ?>" width="320" height="180">
+         }
+
+?>
+
+         <a class="flex flex-col"
+            <?php Utils::video_attrs('PLTg2AhCnKU-L4-2j5yEEEyNWDsdnzqVB1'); ?>>
+            <img class="w-full aspect-video"
+                 src="<?php echo Utils::get_video_thumb('bBqrlBFsf0s'); ?>"
+                 width="320" height="180">
             <div class="btn-alt !py-2 !px-4">
                <i class="fas fa-play"></i> Recomendações
             </div>
@@ -37,10 +52,10 @@ $first  = key($videos);
       <ul class="flex flex-wrap gap-1">
          <?php
 
-         wp_list_pages([
-            'title_li'    => '',
-            'sort_column' => 'menu_order',
-         ]);
+wp_list_pages([
+   'title_li'    => '',
+   'sort_column' => 'menu_order',
+]);
 
 ?>
       </ul>

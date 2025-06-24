@@ -13,7 +13,7 @@ get_component(['footer', 'tv']);
 <footer id="footer">
    <div class="container py-3 bg-zinc-800 text-zinc-200">
       <h2 class="sr-only"><?php esc_html_e('Links do rodapé', 'dbands'); ?></h2>
-      <div class="flex justify-center items-center pt-3">
+      <div class="flex flex-col items-center justify-center pt-3">
          <?php
 
          $ad = new Ad('footer');
