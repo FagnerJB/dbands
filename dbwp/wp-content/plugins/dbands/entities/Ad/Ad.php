@@ -9,14 +9,34 @@ class Ad
    public function __construct($position)
    {
       $this->position = $position;
+
+      $this->fallback();
+
+      if (!is_bot()) {
+         $this->ad();
+      }
    }
 
-   public function echo(): void
+   public function ad(): void
    {
       $positions = [
          'footer' => '1974786989',
          'aside'  => '1017762680',
       ];
+
+      echo <<<HTML
+      <ins class="adsbygoogle slot-{$this->position}"
+         style="display:block;margin:auto;"
+         data-ad-client="ca-pub-7971845527728300"
+         data-ad-slot="{$positions[$this->position]}"
+         data-ad-format="auto"
+         data-full-width-responsive="true">
+      </ins>
+      HTML;
+   }
+
+   private function fallback(): void
+   {
       $sizes = [
          'footer' => get_option('dbands-ads-placeholder-footer', 0),
          'aside'  => get_option('dbands-ads-placeholder-aside', 0),
@@ -25,17 +45,10 @@ class Ad
 
       $image_url = wp_get_attachment_url($sizes[$this->position]);
 
-      echo <<<AD
+      echo <<<HTML
       <a href="{$link}" target="_blank" x-show="\$is.adblock" x-cloak>
          <img src="{$image_url}" alt="" />
       </a>
-      <ins class="adsbygoogle"
-         style="display:block;width:100%;margin:auto;max-width:728px;"
-         data-ad-client="ca-pub-7971845527728300"
-         data-ad-slot="{$positions[$this->position]}"
-         data-ad-format="auto"
-         data-full-width-responsive="true">
-      </ins>
-      AD;
+      HTML;
    }
 }

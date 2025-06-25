@@ -4,8 +4,7 @@
 
    use dbp\Ad\Ad;
 
-   $ad = new Ad('aside');
-   $ad->echo();
+   new Ad('aside');
 
    ?>
 </div>

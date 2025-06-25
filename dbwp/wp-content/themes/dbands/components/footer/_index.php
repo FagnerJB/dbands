@@ -16,8 +16,7 @@ get_component(['footer', 'tv']);
       <div class="flex flex-col items-center justify-center pt-3">
          <?php
 
-         $ad = new Ad('footer');
-$ad->echo();
+         new Ad('footer');
 
 ?>
       </div>

@@ -9,6 +9,7 @@ class Register
       add_action('admin_init', [$this, 'registers_settings']);
 
       if (!is_bot()) {
+         add_action('wp_enqueue_scripts', [$this, 'adds_style'], 15);
          add_action('wp_body_open', [$this, 'adds_scripts'], 99);
          add_action('cav_head_scripts', [$this, 'adds_footer'], 99);
       }
@@ -33,6 +34,19 @@ class Register
    public function adds_scripts(): void
    {
       echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7971845527728300" crossorigin="anonymous"></script>';
+   }
+
+   public function adds_style(): void
+   {
+      $ad_sizes = <<<'STYLE'
+      .slot-aside { min-width: 360px; height: 360px }
+      @media(min-width: 592px) { .slot-aside { width: 568px; } }
+      @media(min-width: 832px) { .slot-aside { width: 808px; } }
+      @media(min-width: 1024px) { .slot-aside { width: 448px; } }
+      .slot-footer { width: 100%; max-width:728px; }
+      STYLE;
+
+      wp_add_inline_style('main', $ad_sizes);
    }
 
    public function echo_field($args): void
