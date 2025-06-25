@@ -208,7 +208,7 @@ class Register_Endpoints
    public function get_next_video($request)
    {
       $video_ID = sanitize_text_field($request->get_param('v'));
-      $dbtv     = new Youtube(YT_CHANNEL_ID);
+      $dbtv     = new Youtube();
 
       return $dbtv->get_feed(1, $video_ID);
    }

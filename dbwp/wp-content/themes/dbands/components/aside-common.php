@@ -3,9 +3,8 @@
 use dbp\Services\Youtube;
 use dbp\TV\Utils;
 
-$dbtv   = new Youtube(YT_CHANNEL_ID);
+$dbtv   = new Youtube();
 $videos = $dbtv->get_feed();
-$first  = key($videos);
 
 ?>
 <div id="aside" class="sticky top-3 flex flex-col gap-5">
@@ -16,7 +15,9 @@ $first  = key($videos);
       <div class="flex gap-2">
          <?php
 
-         if (!empty($first)) {
+         if (!empty($videos)) {
+            $first = key($videos);
+
             ?>
          <a class="flex flex-col"
             <?php Utils::video_attrs($first); ?>>
@@ -32,7 +33,6 @@ $first  = key($videos);
          }
 
 ?>
-
          <a class="flex flex-col"
             <?php Utils::video_attrs('PLTg2AhCnKU-L4-2j5yEEEyNWDsdnzqVB1'); ?>>
             <img class="w-full aspect-video"

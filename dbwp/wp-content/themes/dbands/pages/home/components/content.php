@@ -13,8 +13,8 @@ $page = Utils::get_page();
 
          if (1 === $page || !wp_is_serving_rest_request()) {
             ?>
-            <h2 class="font-semibold text-sm sm:text-base lg:text-2xl">
-               <?php
+         <h2 class="font-semibold text-sm sm:text-base lg:text-2xl">
+            <?php
 
                   esc_html_e('Publicações', 'dbands');
 
@@ -24,7 +24,7 @@ $page = Utils::get_page();
             }
 
             ?>
-            </h2>
+         </h2>
          <?php
 
          }
@@ -40,30 +40,32 @@ if (have_posts()) {
       <div class="flex flex-col gap-5 content-start w-1/2">
          <?php
 
-$dbtv = new Youtube(YT_CHANNEL_ID);
-
+$dbtv   = new Youtube();
 $videos = $dbtv->get_feed($page);
 
 if (!empty($videos)) {
    ?>
-            <section class="flex flex-col gap-2">
-               <?php
+         <section class="flex flex-col gap-2">
+            <?php
 
          if (1 === $page || !wp_is_serving_rest_request()) {
             ?>
-                  <div class="flex justify-between items-center">
-                     <h2 class="font-semibold text-sm sm:text-base lg:text-2xl">
-                        <a href="<?php echo home_url('tv'); ?>">
-                           <?php
+            <div class="flex justify-between items-center">
+               <h2 class="font-semibold text-sm sm:text-base lg:text-2xl">
+                  <a
+                     href="<?php echo home_url('tv'); ?>">
+                     <?php
 
                         esc_html_e('dbTV Metal', 'dbands');
 
             ?>
-                        </a>
-                     </h2>
-                     <a class="hidden md:flex md:btn whitespace-nowrap text-sm" href="<?php echo home_url('tv'); ?>">Saiba mais</a>
-                  </div>
-               <?php
+                  </a>
+               </h2>
+               <a class="hidden md:flex md:btn whitespace-nowrap text-sm"
+                  href="<?php echo home_url('tv'); ?>">Saiba
+                  mais</a>
+            </div>
+            <?php
 
          }
 
@@ -72,7 +74,7 @@ if (!empty($videos)) {
    ]);
 
    ?>
-            </section>
+         </section>
          <?php
 }
 

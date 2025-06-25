@@ -48,7 +48,7 @@ final class Register
 
    public function refresh_tv(): void
    {
-      $dbtv = new Youtube(YT_CHANNEL_ID);
+      $dbtv = new Youtube();
       $dbtv->get_feed();
    }
 }

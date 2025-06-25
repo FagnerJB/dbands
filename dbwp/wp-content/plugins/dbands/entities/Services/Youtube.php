@@ -4,15 +4,19 @@ namespace dbp\Services;
 
 class Youtube
 {
-   private $apikey     = YOUTUBE_APIKEY;
    private $baseurl    = 'https://youtube.googleapis.com/youtube/v3';
    private $first_page = 10;
-   private $id;
-   private $per_page = 16;
+   private $per_page   = 16;
+   private $id=YT_CHANNEL_ID;
+   private $search_key = YT_SEARCH_APIKEY;
+   private $tv_key     = YT_TV_APIKEY;
 
-   public function __construct($id = '')
+   public function __construct($id =null)
    {
+      if(!empty($id)){
+         
       $this->id = $id;
+      }
    }
 
    public function get_feed($page = 1, $video_ID = '')
@@ -83,7 +87,7 @@ class Youtube
       $playlist_videos_fetched = \wp_remote_get("{$this->baseurl}/playlistItems/?" . http_build_query([
          'part'       => 'snippet',
          'maxResults' => 50,
-         'key'        => $this->apikey,
+         'key'        => $this->tv_key,
          'playlistId' => $playlist_ID,
          'pageToken'  => $page,
       ]), [
@@ -131,7 +135,7 @@ class Youtube
       $subscriptions_fetched = \wp_remote_get("{$this->baseurl}/subscriptions/?" . http_build_query([
          'part'       => 'snippet',
          'maxResults' => 50,
-         'key'        => $this->apikey,
+         'key'        => $this->tv_key,
          'channelId'  => $channel,
          'pageToken'  => $pageToken,
       ]), [
@@ -156,7 +160,7 @@ class Youtube
    public function search(array $args)
    {
       $defaults = [
-         'key'             => $this->apikey,
+         'key'             => $this->search_key,
          'maxResults'      => 50,
          'order'           => 'relevance',
          'part'            => 'snippet',
