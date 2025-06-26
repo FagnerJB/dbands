@@ -15,6 +15,8 @@ if (!in_array($search_type, array_keys($search_options))) {
    exit;
 }
 
+if(!is_bot()){
+   debug($_SERVER['HTTP_USER_AGENT'] ?? 'no ua');
 if ('artista' === $search_type) {
    $LastFm = new Lastfm();
    $lastfm = $LastFm->get_artist($search_term);
@@ -36,12 +38,13 @@ if ('artista' === $search_type) {
    if (false !== $lastfm) {
       $items = $lastfm['items'];
    }
-} elseif ('videos' === $search_type && !is_bot()) {
+} elseif ('videos' === $search_type) {
    $youtube = new Youtube();
    $items   = $youtube->search([
       'q'          => $search_term,
       'maxResults' => 48,
    ]);
+}
 }
 
 ?>
@@ -75,9 +78,9 @@ if ('artista' === $search_type) {
 
       }
 
-if (!have_posts() && empty($items)) {
+if (!have_posts() || empty($items) && 'site' !== $search_type) {
    get_component('loop-empty');
-} else {
+}else{
    if ('site' === $search_type) {
       get_component('loop-posts');
    } elseif (in_array($search_type, ['artista', 'tag', 'usuario'])) {
