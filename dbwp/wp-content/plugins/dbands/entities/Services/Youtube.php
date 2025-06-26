@@ -14,7 +14,7 @@ class Youtube
    public function __construct($id =null)
    {
       if(!empty($id)){
-         
+
       $this->id = $id;
       }
    }
@@ -23,7 +23,7 @@ class Youtube
    {
       $videos_next = get_transient('dbtv-videos');
 
-      if (!$videos_next) {
+      if (empty($videos_next)) {
          $channels = $this->get_subscriptions($this->id);
 
          if (empty($channels)) {
