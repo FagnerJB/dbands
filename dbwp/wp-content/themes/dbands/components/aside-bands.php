@@ -92,7 +92,7 @@ if (!empty($bands) && !is_wp_error($bands)) {
          <li>
             <a href="<?php echo CommonUtils::get_search_link($Band->get('name'), $key); ?>"
                title="<?php echo $option['search_page']; ?>"
-               rel="nofollow">
+               rel="nofollow noindex">
                <i
                   class="<?php echo $option['service']; ?> text-center fa-fw"></i>
                <?php echo $option['subtitle']; ?>
