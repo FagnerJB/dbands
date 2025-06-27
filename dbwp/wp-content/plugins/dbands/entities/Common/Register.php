@@ -8,6 +8,7 @@ class Register
    {
       add_post_type_support('page', 'excerpt');
 
+      add_filter('wp_preload_resources', [$this, 'preloads_logo']);
       add_action('wp_enqueue_scripts', [$this, 'remove_wp_assets'], 15);
       add_action('cav_head_metas', [$this, 'prints_head_tags']);
 
@@ -20,6 +21,23 @@ class Register
       $custom_logo_attrs['title'] = 'Ir para página inicial';
 
       return $custom_logo_attrs;
+   }
+
+   public function preloads_logo($preloads)
+   {
+      if (has_custom_logo()) {
+         $attachment_ID = get_theme_mod('custom_logo');
+
+         $preloads[] = [
+            'href'        => wp_get_attachment_url($attachment_ID),
+            'type'        => get_post_mime_type($attachment_ID),
+            'imagesrcset' => wp_get_attachment_image_srcset($attachment_ID),
+            'imagesizes'  => wp_get_attachment_image_sizes($attachment_ID),
+            'as'          => 'image',
+         ];
+      }
+
+      return $preloads;
    }
 
    public function prints_head_tags(): void

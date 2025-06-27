@@ -2,6 +2,7 @@
 
 namespace dbp\Band;
 
+use Automattic\Jetpack\Image_CDN\Image_CDN_Core;
 use cavWP\Models\Term;
 use cavWP\Utils as CavUtils;
 use dbp\Author\Author;
@@ -345,14 +346,20 @@ class Band extends Term
          return false;
       }
 
+      $url = WP_CONTENT_URL . '/uploads' . $filename;
+
+      if (class_exists('\Automattic\Jetpack\Image_CDN\Image_CDN_Core')) {
+         $url = Image_CDN_Core::cdn_url($url);
+      }
+
       if ('cover' === $type) {
-         return WP_CONTENT_URL . '/uploads' . $filename;
+         return $url;
       }
 
       list($width, $height) = getimagesize($location_file);
 
       return [
-         'url'    => WP_CONTENT_URL . '/uploads' . $filename,
+         'url'    => $url,
          'width'  => $width,
          'height' => $height,
       ];
