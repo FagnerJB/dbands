@@ -2,6 +2,7 @@
 
 namespace dbp\TV;
 
+use cavWP\Utils as UtilsCav;
 use dbp\Services\Youtube;
 
 final class Register
@@ -50,5 +51,6 @@ final class Register
    {
       $dbtv = new Youtube();
       $dbtv->get_feed();
+      UtilsCav::purge_page_cache('/');
    }
 }

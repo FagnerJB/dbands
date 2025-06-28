@@ -16,7 +16,6 @@ if (!in_array($search_type, array_keys($search_options))) {
 }
 
 if(!is_bot()){
-   debug($_SERVER['HTTP_USER_AGENT'] ?? 'no ua');
 if ('artista' === $search_type) {
    $LastFm = new Lastfm();
    $lastfm = $LastFm->get_artist($search_term);

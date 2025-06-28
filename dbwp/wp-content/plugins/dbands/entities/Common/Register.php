@@ -29,11 +29,23 @@ class Register
          $attachment_ID = get_theme_mod('custom_logo');
 
          $preloads[] = [
-            'href'        => wp_get_attachment_url($attachment_ID),
-            'type'        => get_post_mime_type($attachment_ID),
-            'imagesrcset' => wp_get_attachment_image_srcset($attachment_ID),
-            'imagesizes'  => wp_get_attachment_image_sizes($attachment_ID),
-            'as'          => 'image',
+            'href'          => wp_get_attachment_url($attachment_ID),
+            'type'          => get_post_mime_type($attachment_ID),
+            'imagesrcset'   => wp_get_attachment_image_srcset($attachment_ID),
+            'imagesizes'    => wp_get_attachment_image_sizes($attachment_ID),
+            'fetchpriority' => 'high',
+            'as'            => 'image',
+         ];
+      }
+
+      global $db_cover;
+
+      if (!empty($db_cover)) {
+         $preloads[] = [
+            'href'          => $db_cover,
+            'type'          => 'image/jpeg',
+            'fetchpriority' => 'high',
+            'as'            => 'image',
          ];
       }
 

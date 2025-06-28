@@ -6,7 +6,10 @@ $suggests = Utils::get_suggests();
 
 ?>
 <section class="flex flex-col gap-2">
-   <h2 class="font-semibold text-sm sm:text-base lg:text-2xl"><?php esc_html_e('Nossas recomendações', 'dbands'); ?></h2>
+   <div class="flex justify-between items-center">
+      <h2 class="font-semibold text-sm sm:text-base lg:text-2xl"><?php esc_html_e('Nossas recomendações', 'dbands'); ?></h2>
+      <a class="hidden md:flex md:btn whitespace-nowrap text-sm" href="<?php echo home_url('indice-bandas-alemas'); ?>">Veja todas</a>
+   </div>
    <ul class="grid auto-rows-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 lg:gap-2">
       <?php
 
