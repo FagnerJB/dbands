@@ -22,6 +22,7 @@ class Register
       function refreshAds(){
          document.querySelectorAll('.adsbygoogle').forEach(function(el) {
             el.textContent = '';
+            el.style.height = 0;
             el.removeAttribute('data-adsbygoogle-status')
          });
          (adsbygoogle = window.adsbygoogle || []).push({})
@@ -39,11 +40,11 @@ class Register
    public function adds_style(): void
    {
       $ad_sizes = <<<'STYLE'
-      .slot-aside { min-width: 360px; height: 360px }
+      .slot-aside { min-width: 360px; max-height: 360px }
       @media(min-width: 592px) { .slot-aside { width: 568px; } }
       @media(min-width: 832px) { .slot-aside { width: 808px; } }
       @media(min-width: 1024px) { .slot-aside { width: 448px; } }
-      .slot-footer { width: 100%; max-width:728px; }
+      .slot-footer { width: 100%; max-width:728px; max-height: 360px }
       STYLE;
 
       wp_add_inline_style('main', $ad_sizes);

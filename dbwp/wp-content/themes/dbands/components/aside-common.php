@@ -23,7 +23,7 @@ $videos = $dbtv->get_feed();
             <?php Utils::video_attrs($first); ?>>
             <img class="w-full aspect-video"
                  src="<?php echo Utils::get_video_thumb($first); ?>"
-                 width="320" height="180">
+                 width="320" height="180" alt="">
             <div class="btn-alt !py-2 !px-4">
                <i class="fas fa-play"></i> dbTV Metal
             </div>
@@ -37,7 +37,7 @@ $videos = $dbtv->get_feed();
             <?php Utils::video_attrs('PLTg2AhCnKU-L4-2j5yEEEyNWDsdnzqVB1'); ?>>
             <img class="w-full aspect-video"
                  src="<?php echo Utils::get_video_thumb('bBqrlBFsf0s'); ?>"
-                 width="320" height="180">
+                 width="320" height="180" alt="">
             <div class="btn-alt !py-2 !px-4">
                <i class="fas fa-play"></i> Recomendações
             </div>

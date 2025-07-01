@@ -13,7 +13,7 @@ do_action('get_header');
 <body id="top" x-data="dbands" data-title="<?php echo wp_get_document_title(); ?>" <?php body_class('no-js'); ?> x-bind:class="{'overflow-hidden': tv.status === 'full'||gallery.open}">
    <?php wp_body_open(); ?>
    <noscript>
-      <div class="p-4 mb-3 bg-red-800 text-zinc-200 text-center text-xs sm:text-base">
+      <div class="flex gap-2 items-center justify-center p-4 mb-3 bg-red-800 text-zinc-200 text-center text-xs sm:text-base">
          <?php
 
       printf(
