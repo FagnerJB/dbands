@@ -6,7 +6,7 @@ use dbp\Common\Utils;
 
 class Lastfm
 {
-   private $apikey  = LASTFM_APIKEY;
+   private $apikey  = LASTFM_APIKEY ?? '';
    private $args    = [];
    private $baseurl = 'https://ws.audioscrobbler.com/2.0/';
    private $lang;

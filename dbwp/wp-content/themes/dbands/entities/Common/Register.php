@@ -13,6 +13,7 @@ class Register
       // add_action('wp_enqueue_scripts', [$this, 'add_breakpoints_mark']);
       add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
       add_action('wp_resource_hints', [$this, 'add_resources'], 10, 2);
+      add_action('wp_body_open', [$this, 'no_script_alert']);
 
       add_filter('cav_post_thumbnail_placeholder_img', [$this, 'sets_thumbnail_placeholder']);
       add_filter('the_content', [$this, 'add_embed_content']);
@@ -21,11 +22,11 @@ class Register
 
    public function add_breakpoints_mark(): void
    {
-      $data = <<<'STYLE'
+      $data = <<<'CSS'
       html::before {
          @apply fixed bottom-0 right-0 z-9999 py-1 px-2 bg-red-600/90 text-white text-xxs font-bold font-mono sm:content-['sm:'] md:content-['md:'] lg:content-['lg:'] xl:content-['xl:'];
       }
-      STYLE;
+      CSS;
 
       wp_add_inline_style('main', $data);
    }
@@ -114,6 +115,11 @@ class Register
    public function enqueue_styles(): void
    {
       wp_enqueue_style('main', get_theme_file_uri('assets/style.css'));
+   }
+
+   public function no_script_alert(): void
+   {
+      get_component('noscript');
    }
 
    public function sets_thumbnail_placeholder()

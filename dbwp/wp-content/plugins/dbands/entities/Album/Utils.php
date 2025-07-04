@@ -9,7 +9,7 @@ class Utils
       global $wpdb;
 
       return $wpdb->get_results(
-         <<<EOD
+         <<<SQL
          SELECT
             t.term_id,
             t.name,
@@ -35,7 +35,7 @@ class Utils
             ON x.term_id = t.term_id
          WHERE x.taxonomy = 'albuns'
          ORDER BY ma.meta_value ASC, my.meta_value DESC;
-         EOD
+         SQL
       );
    }
 }

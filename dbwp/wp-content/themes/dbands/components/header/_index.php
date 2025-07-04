@@ -10,21 +10,10 @@ do_action('get_header');
    <?php wp_head(); ?>
 </head>
 
-<body id="top" x-data="dbands" data-title="<?php echo wp_get_document_title(); ?>" <?php body_class('no-js'); ?> x-bind:class="{'overflow-hidden': tv.status === 'full'||gallery.open}">
+<body id="top" x-data="dbands"
+      data-title="<?php echo wp_get_document_title(); ?>" <?php body_class('no-js'); ?>
+   x-bind:class="{'overflow-hidden': tv.status === 'full'||gallery.open}">
    <?php wp_body_open(); ?>
-   <noscript>
-      <div class="flex gap-2 items-center justify-center p-4 mb-3 bg-red-800 text-zinc-200 text-center text-xs sm:text-base">
-         <?php
-
-      printf(
-         esc_html__('%s ou %s para que este site funcione corretamente.', 'dbands'),
-         '<a class="btn-alt" href="https://browser-update.org/pt/update-browser.html" target="_blank" rel="external">' . esc_html__('Atualize seu navegador', 'dbands') . '</a>',
-         '<a class="btn-alt" href="https://www.enable-javascript.com/pt/" target="_blank" rel="external">' . esc_html__('ative o JavaScript', 'dbands') . '</a>',
-      );
-
-?>
-      </div>
-   </noscript>
 
    <nav class="absolute top-3 left-3 z-20">
       <ul>
@@ -33,9 +22,12 @@ do_action('get_header');
       </ul>
    </nav>
 
-   <div id="loading-bar" class="fixed z-90 top-0 inset-x-0 h-0 flex items-center justify-center bg-red-800 text-xxs text-zinc-200 uppercase truncate overflow-hidden transition-all"></div>
+   <div id="loading-bar"
+        class="fixed z-90 top-0 inset-x-0 h-0 flex items-center justify-center bg-red-800 text-xxs text-zinc-200 uppercase truncate overflow-hidden transition-all">
+   </div>
 
-   <div class="py-4 mb-3 bg-zinc-200 text-xs sm:text-base min-w-90" x-show="showCookies" x-transition x-cloak data-nosnippet>
+   <div class="py-4 mb-3 bg-zinc-200 text-xs sm:text-base min-w-90" x-show="showCookies" x-transition x-cloak
+        data-nosnippet>
       <div class="container flex justify-between gap-1 sm:gap-3 items-center">
          <span class="grow uppercase">
             <?php
@@ -45,7 +37,8 @@ do_action('get_header');
 ?>
          </span>
          <div class="flex flex-col sm:flex-row gap-1 sm:gap-3">
-            <a class="btn-alt uppercase" href="https://dbands.com.br/politica-de-privacidade" rel="privacy-policy">Detalhes</a>
+            <a class="btn-alt uppercase" href="https://dbands.com.br/politica-de-privacidade"
+               rel="privacy-policy">Detalhes</a>
             <button class="btn-alt uppercase" x-on:click="showCookies = false" type="button">Fechar</button>
          </div>
       </div>
@@ -63,6 +56,6 @@ do_action('get_header');
    </header>
    <?php
 
-   get_component(['header', 'search']);
+      get_component(['header', 'search']);
 
 ?>

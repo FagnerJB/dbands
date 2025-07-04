@@ -14,17 +14,17 @@ class contribua
       $categories = '';
 
       foreach (get_categories() as $category) {
-         $categories .= <<<CATEGORY
+         $categories .= <<<HTML
          <option value="{$category->term_id}">{$category->name} - {$category->description}</option>
-         CATEGORY;
+         HTML;
       }
 
       $bands = '';
 
       foreach (get_tags() as $band) {
-         $bands .= <<<BAND
+         $bands .= <<<HTML
          <option value="{$band->term_id}">{$band->name}</option>
-         BAND;
+         HTML;
       }
 
       $user_name  = '';
@@ -40,7 +40,7 @@ class contribua
 
       $ajax_nonce = wp_create_nonce('form_new_post_draft');
 
-      $output = <<<FORM
+      $output = <<<HTML
       <form class="form-new-draft">
       <div class="form-group mb-3">
          <label for="post-author">Autor</label>
@@ -80,7 +80,7 @@ class contribua
          <button type="button" class="button" data-media-uploader-target="#post-thumb" data-media-thumbnail-target="">Selecionar imagem</button>
       </div>
       <input type="hidden" name="_ajax_nonce" value="{$ajax_nonce}">
-      FORM;
+      HTML;
 
       ob_start();
       wp_editor('', 'post_content', [
@@ -91,13 +91,13 @@ class contribua
       ]);
       $output .= ob_get_clean();
 
-      $output .= <<<'FORM'
+      $output .= <<<'HTML'
       <div class="mt-3">
       <button class="btn btn-primary submit-new-draft" type="submit">Enviar publicação</button>
       <span class="form-msg-error text-danger"></span>
       </div>
       </form>
-      FORM;
+      HTML;
 
       return $output;
    }

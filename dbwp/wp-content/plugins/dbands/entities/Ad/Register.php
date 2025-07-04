@@ -17,7 +17,7 @@ class Register
 
    public function adds_footer(): void
    {
-      echo <<<'SCRIPT'
+      echo <<<'HTML'
       <script>
       function refreshAds(){
          document.querySelectorAll('.adsbygoogle').forEach(function(el) {
@@ -29,7 +29,7 @@ class Register
       }
       refreshAds()
       </script>
-      SCRIPT;
+      HTML;
    }
 
    public function adds_scripts(): void
@@ -39,13 +39,13 @@ class Register
 
    public function adds_style(): void
    {
-      $ad_sizes = <<<'STYLE'
-      .slot-aside { min-width: 360px; max-height: 360px }
+      $ad_sizes = <<<'CSS'
+      .slot-aside { min-width: 336px; max-height: 360px; width: 100%; }
       @media(min-width: 592px) { .slot-aside { width: 568px; } }
       @media(min-width: 832px) { .slot-aside { width: 808px; } }
       @media(min-width: 1024px) { .slot-aside { width: 448px; } }
       .slot-footer { width: 100%; max-width:728px; max-height: 360px }
-      STYLE;
+      CSS;
 
       wp_add_inline_style('main', $ad_sizes);
    }

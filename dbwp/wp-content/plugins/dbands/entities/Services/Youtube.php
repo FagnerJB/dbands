@@ -6,16 +6,15 @@ class Youtube
 {
    private $baseurl    = 'https://youtube.googleapis.com/youtube/v3';
    private $first_page = 10;
+   private $id         = YT_CHANNEL_ID ?? '';
    private $per_page   = 16;
-   private $id=YT_CHANNEL_ID;
-   private $search_key = YT_SEARCH_APIKEY;
-   private $tv_key     = YT_TV_APIKEY;
+   private $search_key = YT_SEARCH_APIKEY ?? '';
+   private $tv_key     = YT_TV_APIKEY     ?? '';
 
-   public function __construct($id =null)
+   public function __construct($id = null)
    {
-      if(!empty($id)){
-
-      $this->id = $id;
+      if (!empty($id)) {
+         $this->id = $id;
       }
    }
 

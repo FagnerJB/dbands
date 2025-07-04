@@ -4,19 +4,41 @@ namespace dbp\Services\Spotify;
 
 class Spotify
 {
-   private $client           = SPOTIFY_CLIENT;
-   private $secret           = SPOTIFY_SECRET;
-   private $base_url         = 'https://api.spotify.com/v1';
    private $auth_url         = 'https://accounts.spotify.com';
-   private $redirect         = '';
-   private $token            = '';
+   private $base_url         = 'https://api.spotify.com/v1';
+   private $client           = SPOTIFY_CLIENT ?? '';
    private $cookie_prefix    = '';
+   private $redirect         = '';
+   private $secret           = SPOTIFY_SECRET ?? '';
+   private $token            = '';
    private $transient_prefix = 'dbands_spotify_token_user_';
 
    public function __construct()
    {
       $this->redirect      = get_home_url(null, '/spotify', 'https');
       $this->cookie_prefix = md5('[x)4#dR{Oa)t1');
+   }
+
+   public function fetch_tracks($id)
+   {
+      $tracks_fetched = wp_remote_get("{$this->base_url}/artists/{$id}/top-tracks?country=BR&track_number=9", [
+         'cache_duration' => '2 weeks',
+      ]);
+
+      $tracks_fetched = wp_remote_retrieve_body($tracks_fetched);
+
+      $tracks_return = [];
+
+      if (is_array($tracks_fetched) && count($tracks_fetched['tracks']) > 0) {
+         foreach ($tracks_fetched['tracks'] as $track) {
+            $tracks_return[] = [
+               'name' => (string) $track['name'],
+               'id'   => (string) $track['id'],
+            ];
+         }
+      }
+
+      return $tracks_return;
    }
 
    public function get_auth_link()
@@ -101,28 +123,6 @@ class Spotify
             return $search_body["{$type}s"]['items'][0]['id'];
          }
       }
-   }
-
-   public function fetch_tracks($id)
-   {
-      $tracks_fetched = wp_remote_get("{$this->base_url}/artists/{$id}/top-tracks?country=BR&track_number=9", [
-         'cache_duration' => '2 weeks',
-      ]);
-
-      $tracks_fetched = wp_remote_retrieve_body($tracks_fetched);
-
-      $tracks_return = [];
-
-      if (is_array($tracks_fetched) && count($tracks_fetched['tracks']) > 0) {
-         foreach ($tracks_fetched['tracks'] as $track) {
-            $tracks_return[] = [
-               'name' => (string) $track['name'],
-               'id'   => (string) $track['id'],
-            ];
-         }
-      }
-
-      return $tracks_return;
    }
 
    private function get_user($user_hash): void

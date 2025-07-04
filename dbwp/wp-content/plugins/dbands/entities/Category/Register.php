@@ -14,12 +14,12 @@ class Register
 
    public function add_fields(): void
    {
-      echo <<<'FIELD'
+      echo <<<'HTML'
       <div class="form-field">
          <label for="singular">Nome singular</label>
          <input id="singular" name="singular" type="text" value size="40">
       </div>
-      FIELD;
+      HTML;
    }
 
    public function edit_fields($term): void

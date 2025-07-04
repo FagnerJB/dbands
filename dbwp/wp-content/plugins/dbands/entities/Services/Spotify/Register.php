@@ -30,9 +30,9 @@ class Register
       } else {
          $spotify = new Spotify();
          $link    = $spotify->get_auth_link();
-         $output .= <<<LINK
-                  <a class="btn btn-secondary spotify-auth-btn" href="{$link}"><i class="fab fa-spotify"></i> Entrar com Spotify</a>
-         LINK;
+         $output .= <<<HTML
+            <a class="btn btn-secondary spotify-auth-btn" href="{$link}"><i class="fab fa-spotify"></i> Entrar com Spotify</a>
+         HTML;
       }
 
       return $output;

@@ -8,7 +8,10 @@ $News = new News();
 <div class="container-content">
    <main>
       <article id="single-<?php echo $News->ID; ?>" <?php post_class('content'); ?>>
-         <h1 class="mb-7"><?php echo $News->get('title'); ?></h1>
+         <h1 class="mb-4"><?php echo $News->get('title'); ?></h1>
+         <div class="mb-7 text-xl font-normal">
+            <?php echo $News->get('excerpt'); ?>
+         </div>
          <div class="text-justify">
             <?php echo $News->get('content'); ?>
          </div>

@@ -17,7 +17,7 @@ class Register
    {
       wp_nonce_field('album_edit', '_wpnonce_album');
 
-      echo <<<'META_BOX'
+      echo <<<'HTML'
             <div class="form-field">
                <label for="album_artist">Artista</label>
                <input id="album_artist" name="album_artist" type="text" value size="40" />
@@ -36,7 +36,7 @@ class Register
                <div class="cover-preview"></div>
                <button type="button" class="button" data-media-uploader-target="#album_cover" data-media-thumbnail-target=".cover-preview">Selecionar imagem</button>
             </div>
-      META_BOX;
+      HTML;
    }
 
    public function edit_fields($album): void
@@ -49,7 +49,7 @@ class Register
 
       wp_nonce_field('album_edit', '_wpnonce_album');
 
-      echo <<<META_BOX
+      echo <<<HTML
       <tr class="form-field">
          <th scope="row"><label for="album_artist">Artista</label></th>
          <td>
@@ -76,7 +76,7 @@ class Register
             <button type="button" class="button" data-media-uploader-target="#album_cover" data-media-thumbnail-target=".cover-preview">Selecionar imagem</button>
          </td>
       </tr>
-      META_BOX;
+      HTML;
    }
 
    public function handle_assets($suffix): void

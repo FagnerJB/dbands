@@ -60,13 +60,13 @@ class Register
          $type          = $details['type'] ?? 'text';
          $required_attr = isset($details['required']) ? 'required="true"' : '';
 
-         echo <<<FIELD
+         echo <<<HTML
          <div class="form-field {$required}">
             <label for="{$key}">{$details['name']}</label>
             <input id="{$key}" name="{$key}" type="{$type}" value size="40" aria-required="true" {$required_attr}>
             <p>{$details['description']}.</p>
          </div>
-         FIELD;
+         HTML;
       }
    }
 
@@ -78,7 +78,7 @@ class Register
       <tr class="form-field">
          <th scope="row">Prévia</th>
          <td>
-            <a class="button" href="<?php $Band->link(); ?>" target="_blank">Visualizar página deste artista</a>
+            <a class="button" href="<?php $Band->get('link'); ?>" target="_blank">Visualizar página deste artista</a>
          </td>
       </tr>
       <tr class="form-field">

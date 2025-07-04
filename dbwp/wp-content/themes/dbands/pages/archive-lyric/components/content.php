@@ -36,9 +36,9 @@ if (!empty($all_albums)) {
          $artists[] = $album->artist;
          $attr      = esc_attr(sanitize_title($album->artist));
 
-         $output .= <<<TITLE
+         $output .= <<<HTML
          <h2 id="{$attr}">{$album->artist}</h2>
-         TITLE;
+         HTML;
       }
 
       if (!empty($album->cover)) {
@@ -54,9 +54,9 @@ if (!empty($all_albums)) {
       foreach ($album_tracks as $track) {
          $link = get_permalink($track);
 
-         $tracks .= <<<TRACK
+         $tracks .= <<<HTML
          <li>{$track->menu_order}. <a href="{$link}">{$track->post_title}</a></li>
-         TRACK;
+         HTML;
       }
 
       $album_year = '';
@@ -73,7 +73,7 @@ if (!empty($all_albums)) {
 
       $count = sprintf(_n('%s tradução', '%s traduções', $album->count, 'dbands'), $album->count);
 
-      $output .= <<<ALBUM
+      $output .= <<<HTML
       <div class="flex gap-3 mb-5">
       {$album_cover}
       <details class="w-full">
@@ -89,7 +89,7 @@ if (!empty($all_albums)) {
          </ul>
       </details>
       </div>
-      ALBUM;
+      HTML;
    }
 
    $summary = '<h2>Índice dos artistas</h2>';

@@ -68,7 +68,7 @@ class Register
 
       wp_nonce_field('lyric_edit', '_wpnonce_lyric');
 
-      echo <<<META_BOX
+      echo <<<HTML
       <table width="100%">
          <tr><td>
             <p><label for="tradutor"><strong>Tradução</strong></label><br>
@@ -91,7 +91,7 @@ class Register
             <small>ID da faixa no Spotify.</small></p>
          </td></tr>
       </table>
-      META_BOX;
+      HTML;
    }
 
    public function register(): void
