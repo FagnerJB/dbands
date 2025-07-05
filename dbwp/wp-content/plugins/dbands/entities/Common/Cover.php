@@ -7,7 +7,7 @@ class Cover
    public function get($key)
    {
       return match ($key) {
-        'link'  => '#',
+         'link' => home_url('streaming'),
          'name' => 'Séries e Filmes',
       };
    }
@@ -16,7 +16,7 @@ class Cover
    {
       $cover = get_posts([
          'post_type' => 'attachment',
-         'title' => 'streaming'
+         'title'     => 'streaming',
       ]);
 
       return wp_get_attachment_url($cover[0]->ID);

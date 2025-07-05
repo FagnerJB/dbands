@@ -15,7 +15,7 @@ document.addEventListener('alpine:init', () => {
          pagination: {
             archiveUrl: dbands.mainUrl,
             currentPage: 1,
-            maxPage: dbands.maxPages,
+            maxPage: 0,
             infinite: false,
             currentEl: null as Element,
          },
@@ -97,6 +97,8 @@ document.addEventListener('alpine:init', () => {
                return
             }
 
+            this.pagination.maxPage = 0
+
             const urlPatterns = {
                gallery: '\\.(jpg|jpeg|gif|png|webp|apng)$',
                author: `^author/([\\w-]+)(?:/page\\/)?(\\d+)?`,
@@ -130,11 +132,9 @@ document.addEventListener('alpine:init', () => {
                }
 
                const path = url.pathname.slice(1)
-               console.log(new RegExp(pattern))
                const matches = path.match(new RegExp(pattern))
 
                if (matches) {
-                  console.log(key, matches)
                   found = key
                   if ('subcategory' === found) {
                      found = 'category'
@@ -178,13 +178,7 @@ document.addEventListener('alpine:init', () => {
                      q: slug,
                   })
                   .then((response) => {
-                     this.postAjax(
-                        page,
-                        fullUrl,
-                        response.data,
-                        fromHistory,
-                        response.success
-                     )
+                     this.postAjax(page, fullUrl, fromHistory, response.success)
                   })
                return
             }
@@ -196,13 +190,7 @@ document.addEventListener('alpine:init', () => {
                   page,
                })
                .then((response) => {
-                  this.postAjax(
-                     page,
-                     fullUrl,
-                     response.data,
-                     fromHistory,
-                     response.success
-                  )
+                  this.postAjax(page, fullUrl, fromHistory, response.success)
 
                   if (!url?.hash.length) {
                      return
@@ -217,7 +205,6 @@ document.addEventListener('alpine:init', () => {
          postAjax(
             page: string,
             fullUrl: string,
-            actions: any[],
             fromHistory: boolean,
             success: boolean
          ) {
@@ -235,12 +222,6 @@ document.addEventListener('alpine:init', () => {
             this.$nextTick(() => {
                this.pagination.archiveUrl =
                   this.$refs.archiveLink?.dataset.archiveLink ?? dbands.mainUrl
-            })
-
-            actions.forEach((act: any) => {
-               if ('ignore' === act.action) {
-                  this.pagination.maxPage = act.content
-               }
             })
          },
 

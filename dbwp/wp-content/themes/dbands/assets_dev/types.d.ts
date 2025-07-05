@@ -9,7 +9,6 @@ interface iDbands {
    catBase: string
    tagBase: string
    apiBase: string
-   maxPages: number
 }
 
 declare

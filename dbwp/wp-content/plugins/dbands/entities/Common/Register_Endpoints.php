@@ -221,12 +221,6 @@ class Register_Endpoints
          ];
 
          $actions[] = [
-            'action'  => 'ignore',
-            'target'  => 'pagination.maxPage',
-            'content' => $wp_query->max_num_pages,
-         ];
-
-         $actions[] = [
             'action' => 'cb',
             'target' => 'refreshAds()',
          ];

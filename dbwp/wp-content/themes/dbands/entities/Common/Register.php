@@ -97,18 +97,15 @@ class Register
 
    public function enqueue_scripts(): void
    {
-      global $wp_query;
-
       wp_enqueue_script('main', get_theme_file_uri('assets/script.js'), [], false, [
          'strategy' => 'defer',
       ]);
 
       wp_localize_script('main', 'dbands', [
-         'mainUrl'  => get_bloginfo('url'),
-         'catBase'  => get_option('category_base'),
-         'tagBase'  => get_option('tag_base'),
-         'apiBase'  => get_rest_url(null, 'db/v1'),
-         'maxPages' => $wp_query->max_num_pages,
+         'mainUrl' => get_bloginfo('url'),
+         'catBase' => get_option('category_base'),
+         'tagBase' => get_option('tag_base'),
+         'apiBase' => get_rest_url(null, 'db/v1'),
       ]);
    }
 
