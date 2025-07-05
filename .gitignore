@@ -3,4 +3,5 @@ vendor/
 **/cache/
 uploads/
 env-*
-**/themes/**/assets/
+**/themes/**/assets/*.js
+**/themes/**/assets/*.css

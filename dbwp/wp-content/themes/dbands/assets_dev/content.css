@@ -20,11 +20,12 @@ body.search #search {
    @apply sticky top-0 z-10;
 }
 
-.content {
-   > div > * {
-      @apply my-3;
-   }
+.content > *,
+.content .wp-block-column > * {
+   @apply my-3;
+}
 
+.content {
    @apply font-light;
 
    h2 {
@@ -49,6 +50,10 @@ body.search #search {
 
    p a {
       @apply font-normal text-red-800;
+   }
+
+   .wp-block-columns {
+      @apply flex items-start gap-4;
    }
 
    .aligncenter {
@@ -88,7 +93,7 @@ body.search #search {
    }
 
    .wp-block-pullquote {
-      @apply my-4 mx-6 text-lg;
+      @apply m-3 text-lg;
 
       cite {
          @apply block text-sm text-right before:content-['—'] before:mr-1 before:inline;
