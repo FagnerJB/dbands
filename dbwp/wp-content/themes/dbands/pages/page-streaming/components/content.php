@@ -23,7 +23,7 @@ the_post();
          <?php the_content(); ?>
       </div>
       <?php } ?>
-      <ul class="grid grid-cols-6 gap-1">
+      <ul class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1">
          <?php foreach ($items as $item) {
             $type_label = 'movie' === $item['type'] ? esc_html__('Filme', 'dbands') : esc_html__('Série', 'dbands');
             echo <<<HTML
