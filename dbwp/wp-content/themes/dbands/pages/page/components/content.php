@@ -4,6 +4,8 @@ use dbp\Page\Page;
 
 $Page = new Page();
 
+the_post();
+
 ?>
 <div class="container-content">
    <main>

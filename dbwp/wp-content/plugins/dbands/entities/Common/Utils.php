@@ -4,49 +4,35 @@ namespace dbp\Common;
 
 class Utils
 {
-
-
-
-   public static function remove_tags($text)
+   public static function get_provider_link($provider, $title, $fallback_link)
    {
-      $text = preg_replace('@<(a)[^>]*?>.*?</\1>\.?@si', '', $text);
+      $amazon_link = 'https://www.amazon.com.br/prime?&linkCode=ll2&tag=dbands-20&linkId=99876f5801cb2b1783576e08bacf90bd&ref_=as_li_ss_tl';
+      $apple_link  = 'https://tv.apple.com/channel/tvs.sbd.4000?itscg=30200&itsct=tv_box_link&at=10lSby';
 
-      return wp_strip_all_tags($text);
+      $link = match ($provider['provider_name']) {
+         'Amazon Video'                 => $amazon_link,
+         'Apple TV Plus Amazon Channel' => $amazon_link,
+         'Telecine Amazon Channel'      => $amazon_link,
+         'Sony One Amazon Channel'      => $amazon_link,
+         'Looke Amazon Channel'         => $amazon_link,
+         'Apple TV'                     => $apple_link,
+         'Apple TV+'                    => $apple_link,
+         default                        => $fallback_link,
+      };
+
+      return str_replace('%TITLE%', urlencode($title), $link);
    }
 
-   public static function is_response_error($thing)
+   public static function get_provider_type_name($key)
    {
-      return is_array($thing) && isset($thing['code'], $thing['message'], $thing['data']) && $thing['data']['status'] >= 400;
-   }
-
-   public static function get_social_links($name, $username = '')
-   {
-      return [
-         'share' => [
-            'icon'  => 'fa-solid fa-share',
-            'label' => "Compartilhar no {$name}",
-         ],
-         'repost' => [
-            'icon'  => 'fa-solid fa-retweet',
-            'label' => 'Republicar',
-         ],
-         'like' => [
-            'icon'  => 'fa-solid fa-heart',
-            'label' => 'Curtir',
-         ],
-         'reply' => [
-            'icon'  => 'fa-solid fa-comment',
-            'label' => 'Responder',
-         ],
-         'link' => [
-            'icon'  => 'fa-solid fa-link',
-            'label' => "Esta publicação no {$name}",
-         ],
-         'profile' => [
-            'icon'  => 'fa-solid fa-user-plus',
-            'label' => "Seguir @{$username}",
-         ],
-      ];
+      return match ($key) {
+         'flatrate' => esc_html__('Assinatura', 'dbands'),
+         'free'     => esc_html__('Grátis', 'dbands'),
+         'ads'      => esc_html__('Com anúncios', 'dbands'),
+         'buy'      => esc_html__('Comprar', 'dbands'),
+         'rent'     => esc_html__('Alugar', 'dbands'),
+         default    => $key,
+      };
    }
 
    public static function get_search_link($search_query, $search_type = 'site', $paged = 0)
@@ -125,5 +111,47 @@ class Utils
 
       return null;
       // spotify = search => ID => related-artists
+   }
+
+   public static function get_social_links($name, $username = '')
+   {
+      return [
+         'share' => [
+            'icon'  => 'fa-solid fa-share',
+            'label' => "Compartilhar no {$name}",
+         ],
+         'repost' => [
+            'icon'  => 'fa-solid fa-retweet',
+            'label' => 'Republicar',
+         ],
+         'like' => [
+            'icon'  => 'fa-solid fa-heart',
+            'label' => 'Curtir',
+         ],
+         'reply' => [
+            'icon'  => 'fa-solid fa-comment',
+            'label' => 'Responder',
+         ],
+         'link' => [
+            'icon'  => 'fa-solid fa-link',
+            'label' => "Esta publicação no {$name}",
+         ],
+         'profile' => [
+            'icon'  => 'fa-solid fa-user-plus',
+            'label' => "Seguir @{$username}",
+         ],
+      ];
+   }
+
+   public static function is_response_error($thing)
+   {
+      return is_array($thing) && isset($thing['code'], $thing['message'], $thing['data']) && $thing['data']['status'] >= 400;
+   }
+
+   public static function remove_tags($text)
+   {
+      $text = preg_replace('@<(a)[^>]*?>.*?</\1>\.?@si', '', $text);
+
+      return wp_strip_all_tags($text);
    }
 }

@@ -2,6 +2,8 @@
 
 namespace dbp\Common;
 
+use cavWP\Parse_HTML;
+use dbp\Services\TMDB;
 use dbp\Services\Youtube;
 use WP_Query;
 use WP_REST_Response;
@@ -42,6 +44,27 @@ class Register_Endpoints
             'page' => [
                'type'    => 'integer',
                'default' => 0,
+            ],
+         ],
+      ]);
+
+      register_rest_route('db/v1', '/providers', [
+         'methods'             => WP_REST_Server::READABLE,
+         'callback'            => [$this, 'get_providers_content'],
+         'permission_callback' => '__return_true',
+         'args'                => [
+            'id' => [
+               'type'     => 'numeric',
+               'required' => true,
+            ],
+            'type' => [
+               'type'     => 'string',
+               'enum'     => ['movie', 'tv'],
+               'required' => true,
+            ],
+            'title' => [
+               'type'     => 'string',
+               'required' => true,
             ],
          ],
       ]);
@@ -96,7 +119,10 @@ class Register_Endpoints
          'lyric'    => 'name',
       ];
 
-      if ('traducoes' === $value) {
+      if ('streaming' === $value) {
+         $key               = 'page-streaming';
+         $query['pagename'] = $value;
+      } elseif ('traducoes' === $value) {
          $key = 'archive-lyric';
 
          $query['post_type'] = 'lyric';
@@ -117,7 +143,7 @@ class Register_Endpoints
       }
 
       // ARCHIVES
-      if (in_array($key, ['author', 'category', 'date', 'home', 'tag'])) {
+      if (in_array($key, ['author', 'category', 'date', 'home', 'tag', 'page-streaming'])) {
          $query['paged'] = $page;
       }
 
@@ -128,6 +154,9 @@ class Register_Endpoints
       ob_start();
       get_page_component($key, 'content');
       $content = ob_get_clean();
+
+      $minify  = new Parse_HTML($content);
+      $content = $minify->get_html();
 
       if ($page > 1) {
          $actions[] = [
@@ -147,6 +176,9 @@ class Register_Endpoints
             ob_start();
             get_component(['header', 'cover']);
             $cover = ob_get_clean();
+
+            $minify = new Parse_HTML($cover);
+            $cover  = $minify->get_html();
 
             $actions[] = [
                'action'  => 'html',
@@ -207,10 +239,60 @@ class Register_Endpoints
 
    public function get_next_video($request)
    {
-      $video_ID = sanitize_text_field($request->get_param('v'));
+      $video_ID = $request->get_param('v');
       $dbtv     = new Youtube();
 
       return $dbtv->get_feed(1, $video_ID);
+   }
+
+   public function get_providers_content($request)
+   {
+      $item_ID   = $request->get_param('id');
+      $item_type = $request->get_param('type');
+      $title     = $request->get_param('title');
+
+      $tmdb      = new TMDB();
+      $providers = $tmdb->get_providers($item_ID, $item_type);
+
+      $link    = '';
+      $content = 'Não está disponível no Brasil no momento.';
+
+      if (!empty($providers['BR'])) {
+         $content = '<ul class="flex flex-wrap gap-3">';
+
+         foreach ($providers['BR'] as $type => $providers) {
+            if ('link' === $type) {
+               $link = $providers;
+               continue;
+            }
+
+            $content .= '<li>';
+            $content .= '<span class="font-medium text-sm">' . Utils::get_provider_type_name($type) . '</span>';
+            $content .= '<ul class="flex gap-1 pt-1">';
+
+            foreach ($providers as $provider) {
+               $content .= '<li>';
+               $content .= '<a href="' . Utils::get_provider_link($provider, $title, $link) . '" target="_blank" rel="external nofollow">';
+               $content .= '<img class="rounded-md" src="' . $tmdb->image_url . 'w45' . $provider['logo_path'] . '" alt="' . $provider['provider_name'] . '" title="' . $provider['provider_name'] . '" />';
+               $content .= '</a>';
+               $content .= '</li>';
+            }
+            $content .= '</ul>';
+            $content .= '</li>';
+         }
+         $content .= '</ul>';
+      }
+
+      $minify  = new Parse_HTML($content);
+      $content = $minify->get_html();
+
+      $actions = [
+         'action'  => 'html',
+         'target'  => '#tmdbModal .providers',
+         'content' => $content,
+      ];
+
+      return new WP_REST_Response($actions);
    }
 
    public function get_search_content($request)
@@ -228,8 +310,13 @@ class Register_Endpoints
       $wp_query->set('search_type', $type);
 
       ob_start();
+
       get_page_component('search', 'content');
+
       $content = ob_get_clean();
+
+      $minify  = new Parse_HTML($content);
+      $content = $minify->get_html();
 
       if ($page > 1) {
          $actions[] = [
@@ -282,7 +369,7 @@ class Register_Endpoints
       return new WP_REST_Response($actions);
    }
 
-   public function parse_error($response, $server, $request)
+   public function parse_error($response, $_server, $request)
    {
       if (!str_starts_with($request->get_route(), 'db/v1')) {
          return $response;

@@ -11,6 +11,7 @@ document.addEventListener('alpine:init', () => {
    Alpine.data('dbands', function () {
       return {
          showCookies: Alpine.$persist(true),
+         tmdbItem: null,
          pagination: {
             archiveUrl: dbands.mainUrl,
             currentPage: 1,
@@ -98,21 +99,22 @@ document.addEventListener('alpine:init', () => {
 
             const urlPatterns = {
                gallery: '\\.(jpg|jpeg|gif|png|webp|apng)$',
-               author: `^author/([\\w-]+)(?:/page/)?(\\d+)?`,
+               author: `^author/([\\w-]+)(?:/page\\/)?(\\d+)?`,
                lyric: `^traducoes/([\\w-]+)`,
                tv: `^tv/([^"&?\/\\s]{11,34})`,
-               search: `^busca/([^"&?\/\\s]+)(?:/page/)?(\\d+)?$`,
+               search: `^busca/([^"&?\/\\s]+)(?:/page\\/)?(\\d+)?$`,
                search_type: `^busca/([\\w-]+)/(.+)$`,
-               tag: '^' + dbands.tagBase + `/([\\w-]+)(?:/page/)?(\\d+)?`,
-               category: '^' + dbands.catBase + `/([\\w-]+)(?:/page/)?(\\d+)?$`,
+               tag: '^' + dbands.tagBase + `/([\\w-]+)(?:/page\\/)?(\\d+)?`,
+               category:
+                  '^' + dbands.catBase + `/([\\w-]+)(?:/page\\/)?(\\d+)?$`,
                subcategory:
                   '^' +
                   dbands.catBase +
-                  `/(?:[\\w-]+)/([\\w-]+)(?:/page/)?(\\d+)?`,
+                  `/(?:[\\w-]+)/([\\w-]+)(?:/page\\/)?(\\d+)?`,
                single: `^\\d{4}/\\d{2}/([\\w-]+)`,
-               date: `^(\\d{4}/\\d{2})(?:/page/)?(\\d+)?`,
-               page: `^([\\w-]+)$`,
-               home: `^(?:page/)?(\\d+)?`,
+               date: `^(\\d{4}/\\d{2})(?:/page\\/)?(\\d+)?`,
+               page: `^\\b(?!page)\\b([\\w-]+)\/?(?:page\\/)?(\\d+)?`,
+               home: `^(?:page\\/)?(\\d+)?`,
             }
 
             const url = new URL(fullUrl)
@@ -128,9 +130,11 @@ document.addEventListener('alpine:init', () => {
                }
 
                const path = url.pathname.slice(1)
+               console.log(new RegExp(pattern))
                const matches = path.match(new RegExp(pattern))
 
                if (matches) {
+                  console.log(key, matches)
                   found = key
                   if ('subcategory' === found) {
                      found = 'category'

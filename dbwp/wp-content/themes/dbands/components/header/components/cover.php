@@ -1,8 +1,11 @@
 <?php
 
 use dbp\Band\Band;
+use dbp\Common\Cover;
 
-if (isset($_GET['slug_band'])) {
+if (is_page('streaming')) {
+   $cover = new Cover('streaming');
+} elseif (isset($_GET['slug_band'])) {
    $cover = new Band([
       'field' => 'slug',
       'value' => $_GET['slug_band'],

@@ -94,7 +94,7 @@ if (!empty($bands) && !is_wp_error($bands)) {
                title="<?php echo $option['search_page']; ?>"
                rel="nofollow noindex">
                <i
-                  class="<?php echo $option['service']; ?> text-center fa-fw"></i>
+                  class="<?php echo $option['service']; ?> text-center fa-fw mr-1"></i>
                <?php echo $option['subtitle']; ?>
             </a>
          </li>

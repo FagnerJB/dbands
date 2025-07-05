@@ -17,18 +17,6 @@ class Lyric extends Post
       return implode(', ', array_map(fn($band) => $band->name, $bands));
    }
 
-   public function get_content()
-   {
-      $priority = has_filter('the_content', 'wpautop');
-      remove_filter('the_content', 'wpautop', $priority);
-
-      $content = parent::get('content');
-
-      add_filter('the_content', 'wpautop', $priority);
-
-      return $content;
-   }
-
    public function get_fullname()
    {
       $bands = $this->get_artists();
