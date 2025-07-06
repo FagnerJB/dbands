@@ -100,6 +100,18 @@ body.search #search {
       }
    }
 
+   .wp-block-media-text {
+      @apply flex gap-4 items-center text-lg;
+
+      .wp-block-media-text__content > * {
+         @apply my-3;
+      }
+   }
+
+   .wp-block-media-text.is-stacked-on-mobile {
+      @apply flex-col md:flex-row;
+   }
+
    strong,
    b {
       @apply font-medium;

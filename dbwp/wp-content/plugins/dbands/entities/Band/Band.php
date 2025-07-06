@@ -313,7 +313,7 @@ class Band extends Term
       }
 
       if (!empty($icon)) {
-         $html .= '<i class="' . $icon . ' text-center fa-fw mr-1"></i> ';
+         $html .= '<i class="' . $icon . ' text-center fa-fw mr-0.5"></i> ';
       }
 
       if ($withText && !empty($text)) {

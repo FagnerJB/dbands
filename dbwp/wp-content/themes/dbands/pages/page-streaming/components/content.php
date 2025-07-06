@@ -3,13 +3,14 @@
 use cavWP\Utils as CavUtils;
 use dbp\Services\TMDB;
 
-$page  = CavUtils::get_page();
-$tmdb  = new TMDB();
-$items = $tmdb->get_items($page);
+if (have_posts()) {
+   $page  = CavUtils::get_page();
+   $tmdb  = new TMDB();
+   $items = $tmdb->get_items($page);
 
-the_post();
+   the_post();
 
-?>
+   ?>
 <div id="page-<?php echo $page; ?>" class="container-content">
    <article class="w-full">
       <?php if (1 === $page || !wp_is_serving_rest_request()) { ?>
@@ -82,3 +83,4 @@ the_post();
    'link'      => get_permalink($post),
    'max_pages' => $tmdb->max_pages,
 ]); ?>
+<?php } ?>

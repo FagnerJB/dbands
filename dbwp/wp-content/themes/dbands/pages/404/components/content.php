@@ -1,3 +1,4 @@
+<?php if (have_posts()) {?>
 <?php the_post(); ?>
 <div class="container-content">
    <main>
@@ -13,3 +14,4 @@
       </section>
    </main>
 </div>
+<?php } ?>

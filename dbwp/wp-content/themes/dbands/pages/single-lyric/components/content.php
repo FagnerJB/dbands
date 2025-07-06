@@ -2,11 +2,12 @@
 
 use dbp\Lyric\Lyric;
 
-$Lyric = new Lyric();
+if (have_posts()) {
+   $Lyric = new Lyric();
 
-the_post();
+   the_post();
 
-?>
+   ?>
 <div class="container-content">
    <main>
       <article id="lyric-<?php echo $Lyric->ID; ?>" <?php post_class(); ?>>
@@ -68,3 +69,4 @@ the_post();
       <?php get_page_component('single-lyric', 'aside'); ?>
    </aside>
 </div>
+<?php } ?>

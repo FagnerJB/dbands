@@ -177,7 +177,7 @@ $social_posts['show'] = [
                href="<?php echo esc_url($social[$key]); ?>"
                target="_blank" rel="external">
                <i
-                  class="<?php echo $social_link['icon']; ?> fa-fw mr-1"></i>
+                  class="<?php echo $social_link['icon']; ?> fa-fw mr-0.5"></i>
                <?php echo $social_link['label']; ?>
             </a>
             <?php

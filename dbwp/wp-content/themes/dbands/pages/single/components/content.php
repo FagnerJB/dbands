@@ -3,22 +3,23 @@
 use dbp\Author\Author;
 use dbp\News\News;
 
-$News = new News();
+if (have_posts()) {
+   $News = new News();
 
-$Author = new Author($News->get('author'));
-$title  = sprintf(esc_html__('Publicações de %s', 'dbands'), $Author->get('name'));
+   $Author = new Author($News->get('author'));
+   $title  = sprintf(esc_html__('Publicações de %s', 'dbands'), $Author->get('name'));
 
-the_post();
+   the_post();
 
-?>
+   ?>
 <div class="container-content">
    <main>
       <article id="single-<?php echo $News->ID; ?>" <?php post_class(); ?>>
          <header>
             <?php get_component('tags', [
-               'post'       => $News,
-               'with_links' => true,
-            ]); ?>
+                  'post'       => $News,
+                  'with_links' => true,
+               ]); ?>
             <h1 class="mt-3">
                <?php echo $News->get('title'); ?>
             </h1>
@@ -55,3 +56,4 @@ the_post();
       <?php get_page_component('single', 'aside'); ?>
    </aside>
 </div>
+<?php } ?>

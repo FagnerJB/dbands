@@ -2,11 +2,12 @@
 
 use dbp\Page\Page;
 
-$Page = new Page();
+if (have_posts()) {
+   $Page = new Page();
 
-the_post();
+   the_post();
 
-?>
+   ?>
 <div class="container-content">
    <main>
       <article id="page-<?php echo $Page->ID; ?>" <?php post_class('content'); ?>>
@@ -22,3 +23,4 @@ the_post();
       <?php get_component('aside-common'); ?>
    </aside>
 </div>
+<?php } ?>
