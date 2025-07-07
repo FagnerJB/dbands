@@ -9,7 +9,7 @@ $video_ID = get_query_var('video');
    'right-0 sm:right-1 bottom-0 sm:bottom-1 w-full sm:max-w-lg aspect-video': tv.status === 'small'
 }" x-cloak>
    <div id="player-container" class="size-full"
-      x-init="tv.play('<?php echo $video_ID; ?>')"></div>
+      x-init="tv.play('<?php echo $video_ID; ?>')" x-on:keyup.window.media-track-next="tv.next()"></div>
    <div class="flex text-xl select-none z-80" x-show="tv.showButtons" x-bind:class="{
    'absolute left-5 bottom-32 flex-col': tv.status === 'full',
    'fixed right-1 bottom-[calc(100vw/16*9)] sm:bottom-73': tv.status === 'small'

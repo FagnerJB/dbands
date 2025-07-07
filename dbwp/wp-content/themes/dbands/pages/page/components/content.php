@@ -10,11 +10,13 @@ if (have_posts()) {
    ?>
 <div class="container-content">
    <main>
-      <article id="page-<?php echo $Page->ID; ?>" <?php post_class('content'); ?>>
-         <h1 class="mb-7">
+      <article id="page-<?php echo $Page->ID; ?>" <?php post_class(); ?>>
+         <header class="mb-7">
+         <h1>
             <?php echo $Page->get('title'); ?>
          </h1>
-         <div class="text-justify">
+         </header>
+         <div class="text-justify content">
             <?php echo $Page->get('content'); ?>
          </div>
       </article>

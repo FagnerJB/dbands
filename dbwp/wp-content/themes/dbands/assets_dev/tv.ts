@@ -60,6 +60,10 @@ export default class dbtv {
    }
 
    next() {
+      if (!this.ready) {
+         return
+      }
+
       if (this.isPlaylist(this.current)) {
          this.player.nextVideo()
          return

@@ -17,13 +17,13 @@ if (have_posts()) {
       <article id="single-<?php echo $News->ID; ?>" <?php post_class(); ?>>
          <header>
             <?php get_component('tags', [
-                  'post'       => $News,
-                  'with_links' => true,
-               ]); ?>
+               'post'       => $News,
+               'with_links' => true,
+            ]); ?>
             <h1 class="mt-3">
                <?php echo $News->get('title'); ?>
             </h1>
-            <div class="mb-4 text-xl font-normal">
+            <div class="mb-4 text-lg md:text-xl font-normal">
                <?php echo $News->get('excerpt'); ?>
             </div>
             <div class="mb-12 flex flex-col md:flex-row gap-2">

@@ -40,6 +40,7 @@ class Register
    public function adds_style(): void
    {
       $ad_sizes = <<<'CSS'
+      .slot-aside,.slot-footer{padding: 2px; background: rgba(128,128,128,.4) }
       .slot-aside { min-width: 336px; max-height: 360px; width: 100%; }
       @media(min-width: 592px) { .slot-aside { width: 568px; } }
       @media(min-width: 832px) { .slot-aside { width: 808px; } }

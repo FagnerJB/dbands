@@ -16,14 +16,14 @@ $options = Utils::get_search_options();
          action="<?php bloginfo('url'); ?>"
          x-on:submit.prevent="handleSearch($el)">
       <div class="flex flex-col md:flex-row gap-2 md:items-center">
-         <div class="grow flex gap-3 items-center">
+         <div class="grow flex gap-1 items-center">
             <?php wp_nav_menu([
                'theme_location' => 'social_links',
                'container'      => '',
                'menu_id'        => '',
-               'menu_class'     => 'flex text-lg sm:text-xl menu-only-icons',
+               'menu_class'     => 'flex gap-0.5 text-lg sm:text-xl menu-only-icons',
             ]); ?>
-            <label for="search-input" class="text-xl">
+            <label for="search-input" class="text-lg sm:text-xl">
                <i class="fas fa-search"></i>
             </label>
             <input id="search-input" class="grow py-1 px-2 w-full" name="s" type="search" minlength="3" maxlength="42"

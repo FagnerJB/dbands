@@ -27,69 +27,55 @@ if (is_tag() || is_category() && !$with_links) {
    }
 }
 
-if (!empty($tags)) {
-   ?>
-   <ul class="flex flex-wrap font-semibold <?php echo $with_links ? 'gap-2' : 'gap-1 lg:gap-2'; ?>">
-      <?php
+?>
+<?php if (!empty($tags)) { ?>
+<ul
+    class="flex flex-wrap font-semibold <?php echo $with_links ? 'gap-2' : 'gap-1 lg:gap-2'; ?>">
+   <?php foreach ($tags as $tag) {
+      if ('category' === $tag->taxonomy) {
+         $li_classes = 'bg-red-800 text-zinc-200';
 
-         foreach ($tags as $tag) {
-            if ('category' === $tag->taxonomy) {
-               $li_classes = 'bg-red-800 text-zinc-200';
-
-               if ($with_links) {
-                  $li_classes .= ' hover:bg-red-600 focus-visible:bg-red-600';
-               }
-            } else {
-               $li_classes = 'bg-amber-400 text-zinc-800';
-
-               if ($with_links) {
-                  $li_classes .= ' hover:bg-yellow-300 focus-visible:bg-yellow-300';
-               }
-            }
-
-            $li_classes .= $with_links ? ' text-base' : ' text-xxs md:text-base';
-
-            $name = $tag->name;
-
-            if ('category' === $tag->taxonomy) {
-               $singular = get_term_meta($tag->term_id, 'singular_name', true);
-
-               if (!empty($singular) && !$with_links) {
-                  $name = $singular;
-               }
-            }
-
-            ?>
-         <li class="<?php echo $li_classes; ?>" href="<?php echo get_term_link($tag); ?>">
-            <?php
-
-                  $item_classes = 'block truncate max-w-50';
-
-            if ($with_links) {
-               $rel = is_singular() ? 'rel="tag"' : '';
-
-               echo '<a class="' . $item_classes . ' py-1.5 px-3" href="' . get_term_link($tag) . '" ' . $rel . '>';
-            } else {
-               echo '<div class="' . $item_classes . ' py-0.75 px-2">';
-            }
-
-            $prefix = 'category' === $tag->taxonomy ? '<i class="fas fa-hashtag"></i>' : '';
-            echo $prefix . $name;
-
-            if ($with_links) {
-               echo '</a>';
-            } else {
-               echo '</div>';
-            }
-
-            ?>
-         </li>
-      <?php
-
+         if ($with_links) {
+            $li_classes .= ' hover:bg-red-600 focus-visible:bg-red-600';
          }
+      } else {
+         $li_classes = 'bg-amber-400 text-zinc-800';
 
-   ?>
-   </ul>
-<?php
+         if ($with_links) {
+            $li_classes .= ' hover:bg-yellow-300 focus-visible:bg-yellow-300';
+         }
+      }
 
-}
+      $li_classes .= $with_links ? ' text-base' : ' text-xxs md:text-base';
+
+      $name = $tag->name;
+
+      if ('category' === $tag->taxonomy) {
+         $singular = get_term_meta($tag->term_id, 'singular_name', true);
+
+         if (!empty($singular) && !$with_links) {
+            $name = $singular;
+         }
+      }             ?>
+   <li class="<?php echo $li_classes; ?>"
+       href="<?php echo get_term_link($tag); ?>">
+      <?php $item_classes = 'block truncate max-w-50 text-sm md:text-base'; ?>
+
+      <?php if ($with_links) {
+         $rel = is_singular() ? 'rel="tag"' : '';
+
+         echo '<a class="' . $item_classes . ' py-1.5 px-3" href="' . get_term_link($tag) . '" ' . $rel . '>';
+      } else {
+         echo '<div class="' . $item_classes . ' py-0.75 px-2">';
+      } ?>
+      <?php $prefix = 'category' === $tag->taxonomy ? '<i class="fas fa-hashtag"></i>' : ''; ?>
+      <?php echo $prefix . $name; ?>
+      <?php if ($with_links) {
+         echo '</a>';
+      } else {
+         echo '</div>';
+      } ?>
+   </li>
+   <?php } ?>
+</ul>
+<?php }?>
