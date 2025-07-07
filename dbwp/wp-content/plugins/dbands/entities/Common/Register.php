@@ -8,12 +8,20 @@ class Register
    {
       add_post_type_support('page', 'excerpt');
 
-      add_filter('wp_preload_resources', [$this, 'preloads_logo']);
       add_action('wp_enqueue_scripts', [$this, 'remove_wp_assets'], 15);
       add_action('cav_head_metas', [$this, 'prints_head_tags']);
 
+      add_filter('wp_preload_resources', [$this, 'preloads_logo']);
       add_filter('get_custom_logo_image_attributes', [$this, 'add_logo_attrs']);
       add_filter('upload_mimes', [$this, 'remove_upload_types'], 10, 2);
+      add_filter('cav_activity_log_events', [$this, 'add_events']);
+   }
+
+   public function add_events($events)
+   {
+      $events['search_api'] = [];
+
+      return $events;
    }
 
    public function add_logo_attrs($custom_logo_attrs)
