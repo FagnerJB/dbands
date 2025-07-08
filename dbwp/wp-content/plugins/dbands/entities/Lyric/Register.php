@@ -20,7 +20,7 @@ class Register
       $columns_new = [
          'album'      => esc_html__('Álbum', 'dbands'),
          'translator' => esc_html__('Tradutor', 'dbands'),
-         'excerpt'    => esc_html__('Excerpt'),
+         'short'      => esc_html__('Excerpt'),
       ];
       $columns_start = array_splice($columns, 0, 3);
 
@@ -55,7 +55,7 @@ class Register
 
             break;
 
-         case 'excerpt':
+         case 'short':
             $post = get_post($post_ID);
             echo nl2br($post->post_excerpt);
             break;
