@@ -101,7 +101,11 @@ body.search #search {
    }
 
    .wp-block-media-text {
-      @apply flex gap-4 items-center text-lg;
+      @apply flex gap-4 items-start;
+
+      .wp-block-media-text__media {
+         @apply shrink-0;
+      }
 
       .wp-block-media-text__content > * {
          @apply my-3;

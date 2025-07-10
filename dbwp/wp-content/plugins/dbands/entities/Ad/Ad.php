@@ -10,11 +10,10 @@ class Ad
    {
       $this->position = $position;
 
+      echo '<div x-data="{hasAdBlock: $is.adblock}">';
       $this->fallback();
-
-      if (!is_bot()) {
-         $this->ad();
-      }
+      $this->ad();
+      echo '</div>';
    }
 
    public function ad(): void
@@ -25,7 +24,7 @@ class Ad
       ];
 
       echo <<<HTML
-      <ins class="adsbygoogle slot-{$this->position}"
+      <ins class="adsbygoogle slot-{$this->position}" x-show="!hasAdBlock"
          style="display:block;margin:auto;"
          data-ad-client="ca-pub-7971845527728300"
          data-ad-slot="{$positions[$this->position]}"
@@ -46,7 +45,7 @@ class Ad
       $image_url = wp_get_attachment_url($sizes[$this->position]);
 
       echo <<<HTML
-      <a href="{$link}" target="_blank" x-show="\$is.adblock" x-cloak>
+      <a href="{$link}" target="_blank" x-show="hasAdBlock" x-cloak>
          <img src="{$image_url}" alt="" />
       </a>
       HTML;

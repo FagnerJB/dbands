@@ -47,7 +47,7 @@ if (!is_bot() && in_array($search_type, ['artista', 'tag', 'usuario', 'videos'])
 ?>
 <div id="page-<?php echo $page; ?>" class="container-content">
    <section>
-      <?php if (1 === $page || !wp_is_serving_rest_request()) {          ?>
+      <?php if (1 === $page || !wp_is_serving_rest_request()) { ?>
       <header class="mb-7">
          <h1>
             <?php if (empty($search_term)) {
