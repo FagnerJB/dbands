@@ -101,11 +101,8 @@ body.search #search {
    }
 
    .wp-block-media-text {
-      @apply grid gap-4 grid-cols-2;
-
-      .wp-block-media-text__media {
-         @apply shrink-0;
-      }
+      @apply grid gap-4;
+      grid-template-columns: 350px auto;
 
       .wp-block-media-text__content > * {
          @apply my-3;
