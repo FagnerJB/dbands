@@ -101,7 +101,7 @@ body.search #search {
    }
 
    .wp-block-media-text {
-      @apply flex gap-4 items-start;
+      @apply grid gap-4 grid-cols-2;
 
       .wp-block-media-text__media {
          @apply shrink-0;
