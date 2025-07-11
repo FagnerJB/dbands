@@ -48,8 +48,9 @@ body.search #search {
       @apply font-normal;
    }
 
-   p a {
-      @apply font-normal text-red-800;
+   p a,
+   li a {
+      @apply text-red-800;
    }
 
    .wp-block-columns {
@@ -98,6 +99,10 @@ body.search #search {
       cite {
          @apply block text-sm text-right before:content-['—'] before:mr-1 before:inline;
       }
+   }
+
+   .wp-block-list li {
+      @apply my-1.5;
    }
 
    .wp-block-media-text {
