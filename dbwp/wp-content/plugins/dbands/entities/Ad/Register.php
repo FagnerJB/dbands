@@ -20,12 +20,16 @@ class Register
       echo <<<'HTML'
       <script>
       function refreshAds(){
-         document.querySelectorAll('.adsbygoogle').forEach(function(el) {
-            el.textContent = '';
-            el.style.height = 0;
-            el.removeAttribute('data-adsbygoogle-status')
-         });
-         (adsbygoogle = window.adsbygoogle || []).push({})
+         try {
+            document.querySelectorAll('.adsbygoogle').forEach(function(el) {
+               el.textContent = '';
+               el.style.height = 0;
+               el.removeAttribute('data-adsbygoogle-status')
+            });
+            (adsbygoogle = window.adsbygoogle || []).push({})
+         } catch (error) {
+            console.warn(error);
+         }
       }
       refreshAds()
       </script>

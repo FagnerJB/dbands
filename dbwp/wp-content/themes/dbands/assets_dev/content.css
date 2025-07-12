@@ -54,7 +54,7 @@ body.search #search {
    }
 
    .wp-block-columns {
-      @apply flex-col md:flex-row items-start;
+      @apply flex-col md:flex-row flex-nowrap items-start;
    }
 
    .aligncenter {
@@ -106,16 +106,11 @@ body.search #search {
    }
 
    .wp-block-media-text {
-      @apply grid gap-4;
-      grid-template-columns: 350px auto;
+      @apply grid gap-4 grid-cols-none md:grid-cols-[350px_auto] lg:grid-cols-none xl:grid-cols-[350px_auto];
 
       .wp-block-media-text__content > * {
          @apply my-3;
       }
-   }
-
-   .wp-block-media-text.is-stacked-on-mobile {
-      @apply flex-col md:flex-row;
    }
 
    strong,
