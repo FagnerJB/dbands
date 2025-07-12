@@ -14,14 +14,6 @@ class Register
       add_filter('wp_preload_resources', [$this, 'preloads_logo']);
       add_filter('get_custom_logo_image_attributes', [$this, 'add_logo_attrs']);
       add_filter('upload_mimes', [$this, 'remove_upload_types'], 10, 2);
-      add_filter('cav_activity_log_events', [$this, 'add_events']);
-   }
-
-   public function add_events($events)
-   {
-      $events['search_api'] = [];
-
-      return $events;
    }
 
    public function add_logo_attrs($custom_logo_attrs)

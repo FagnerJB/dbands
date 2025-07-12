@@ -133,7 +133,7 @@ class Register
    <th scope="row">Prévia</th>
    <td>
       <a class="button"
-         href="<?php $Band->get('link'); ?>"
+         href="<?php echo $Band->get('link'); ?>"
          target="_blank">Visualizar página deste artista</a>
    </td>
 </tr>

@@ -16,11 +16,6 @@ if (!in_array($search_type, array_keys($search_options))) {
 }
 
 if (!is_bot() && in_array($search_type, ['artista', 'tag', 'usuario', 'videos'])) {
-   do_action('log_activity', 'search_api', details: [
-      'search_type' => $search_type,
-      'search_term' => $search_term,
-   ]);
-
    if ('videos' === $search_type) {
       $youtube = new Youtube();
       $items   = $youtube->search([
