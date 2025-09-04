@@ -369,11 +369,11 @@ class Register_Endpoints
          return $response;
       }
 
-      $data = $response->get_data();
-
-      if (!Utils::is_response_error($data)) {
+      if (!$response->is_error()) {
          return $response;
       }
+
+      $data = $response->get_data();
 
       return new WP_REST_Response([
          [

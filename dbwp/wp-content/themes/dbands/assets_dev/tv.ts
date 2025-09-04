@@ -7,8 +7,6 @@ export default class dbtv {
    private title = ''
    private ready = false
    public showButtons = true
-   private checkMouse: NodeJS.Timeout
-   private lastMove = Date.now()
    private state = -2
    public showNext = false
    public parent = {
@@ -77,44 +75,35 @@ export default class dbtv {
       this.showNext = !!this.queue.length
    }
 
-   initPlayer(id: string) {
-      this.alpine
-         .$do('script', 'youtube', 'https://www.youtube.com/iframe_api')
-         .then((status: boolean) => {
-            if (status === false) {
-               console.error("YouTube SDK didn't load.")
-               return
-            }
+   initPlayer(id: string, targetWindow = window) {
+      let options = {} as YT.PlayerOptions
+      let playerVars = {} as YT.PlayerVars
 
-            let options = {} as YT.PlayerOptions
-            let playerVars = {} as YT.PlayerVars
+      if (this.isPlaylist(id)) {
+         playerVars.list = id
+         playerVars.listType = 'playlist'
+         this.showNext = true
+      } else {
+         options.videoId = id
+      }
 
-            if (this.isPlaylist(id)) {
-               playerVars.list = id
-               playerVars.listType = 'playlist'
-               this.showNext = true
-            } else {
-               options.videoId = id
-            }
-
-            this.player = new YT.Player('player-container', {
-               ...options,
-               width: '640',
-               height: '390',
-               events: {
-                  onReady: () => this.onPlayerReady(),
-                  onStateChange: (e) => (this.state = e.data),
-               },
-               playerVars: {
-                  ...playerVars,
-                  modestbranding: 1,
-                  enablejsapi: 1,
-                  cc_load_policy: 0,
-                  rel: 0,
-                  fs: 0,
-               },
-            })
-         })
+      this.player = new targetWindow.YT.Player('player-container', {
+         ...options,
+         width: 640,
+         height: 390,
+         events: {
+            onReady: () => this.onPlayerReady(),
+            onStateChange: (e) => (this.state = e.data),
+         },
+         playerVars: {
+            ...playerVars,
+            modestbranding: 1,
+            enablejsapi: 1,
+            cc_load_policy: 0,
+            rel: 0,
+            fs: 0,
+         },
+      })
    }
 
    onStatusChange(newStatus: string) {
@@ -154,7 +143,15 @@ export default class dbtv {
          }
       }
 
-      this.initPlayer(current)
+      this.alpine
+         .$do('script', 'youtube', 'https://www.youtube.com/iframe_api')
+         .then((status: boolean) => {
+            if (status === false) {
+               console.error("YouTube SDK didn't load.")
+               return
+            }
+            this.initPlayer(current)
+         })
    }
 
    onStateChange(state: number) {
@@ -192,25 +189,6 @@ export default class dbtv {
    onPlayerReady() {
       this.ready = true
       this.player.playVideo()
-   }
-
-   onMouseLeave() {
-      this.showButtons = false
-   }
-
-   onMouseMove() {
-      this.showButtons = true
-      this.lastMove = Date.now()
-
-      if (this.checkMouse) {
-         clearTimeout(this.checkMouse)
-      }
-
-      this.checkMouse = setTimeout(() => {
-         if (Date.now() - this.lastMove >= 3000) {
-            this.showButtons = false
-         }
-      }, 3000)
    }
 
    private isPlaylist(id: string) {

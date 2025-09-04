@@ -1,5 +1,5 @@
 body {
-   @apply bg-zinc-800 font-sans antialiased text-base;
+   @apply bg-zinc-800 font-sans antialiased text-md;
    font-optical-sizing: auto;
 }
 

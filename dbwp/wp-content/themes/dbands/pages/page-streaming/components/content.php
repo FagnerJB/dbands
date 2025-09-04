@@ -41,7 +41,7 @@ if (have_posts()) {
          } ?>
       </ul>
       <?php if (1 === $page || !wp_is_serving_rest_request()) { ?>
-      <dialog id="tmdbModal" class="m-[auto] overflow-y-auto backdrop:bg-black/60"
+      <dialog id="tmdbModal" class="m-auto overflow-y-auto backdrop:bg-black/60"
               x-on:click.self="tmdbModal.close()">
          <div class="relative max-w-2xl bg-zinc-200">
             <button class="absolute top-3 right-3 text-white drop-shadow drop-shadow-black"
@@ -53,7 +53,7 @@ if (have_posts()) {
                <h2 class="font-medium text-xl" x-text="tmdbItem?.title"></h2>
                <div class="italic" x-show="tmdbItem?.title !== tmdbItem?.original"
                     x-text="'Título original: '+tmdbItem?.original"></div>
-               <div class="flex gap-3 mt-1 text-base">
+               <div class="flex gap-3 mt-1 text-md">
                   <span class="font-medium" x-text="tmdbItem?.type === 'movie' ? 'Filme' : 'Série'"></span>
                   <span x-text="tmdbItem?.release"></span>
                   <span x-text="tmdbItem?.genres"></span>

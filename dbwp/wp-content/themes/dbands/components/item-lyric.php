@@ -13,7 +13,7 @@ $title = sprintf(esc_attr__('Tradução de %s de %s', 'dbands'), $Lyric->get('ti
       <a class="flex flex-col justify-end md:justify-between py-2 px-3 size-full bg-amber-400 hover:bg-yellow-300 focus-visible:bg-yellow-300"
          href="<?php echo $Lyric->get('link'); ?>"
          title="<?php echo $title; ?>" rel="bookmark">
-         <div class="grow italic line-clamp-2 sm:line-clamp-2 md:line-clamp-4 text-xxs md:text-base">
+         <div class="grow italic line-clamp-2 sm:line-clamp-2 md:line-clamp-4 text-xxs md:text-md">
             <?php echo $Lyric->get('excerpt'); ?>
          </div>
          <div>
@@ -22,7 +22,7 @@ $title = sprintf(esc_attr__('Tradução de %s de %s', 'dbands'), $Lyric->get('ti
                   <?php echo $Lyric->get('title'); ?>
                </div>
                <span class="sr-only">de</span>
-               <div class="font-semibold text-xxs md:text-base">
+               <div class="font-semibold text-xxs md:text-md">
                   <?php echo $Lyric->get_artists(); ?></div>
             </h3>
             <?php if (is_search()) { ?>

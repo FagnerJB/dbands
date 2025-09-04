@@ -46,7 +46,7 @@ if (is_tag() || is_category() && !$with_links) {
          }
       }
 
-      $li_classes .= $with_links ? ' text-base' : ' text-xxs md:text-base';
+      $li_classes .= $with_links ? ' text-md' : ' text-xxs md:text-md';
 
       $name = $tag->name;
 
@@ -59,7 +59,7 @@ if (is_tag() || is_category() && !$with_links) {
       }             ?>
    <li class="<?php echo $li_classes; ?>"
        href="<?php echo get_term_link($tag); ?>">
-      <?php $item_classes = 'block truncate max-w-50 text-sm md:text-base'; ?>
+      <?php $item_classes = 'block truncate max-w-50 text-sm md:text-md'; ?>
 
       <?php if ($with_links) {
          $rel = is_singular() ? 'rel="tag"' : '';

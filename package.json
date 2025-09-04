@@ -10,7 +10,7 @@
       "js": "webpack",
       "test": ""
    },
-   "author": "CtrlAltVerso",
+   "author": "CtrlAltVersœ",
    "license": "MIT",
    "devDependencies": {
       "@alpinejs/mask": "^3.14.9",

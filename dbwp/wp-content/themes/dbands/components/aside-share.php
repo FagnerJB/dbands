@@ -34,7 +34,7 @@ $social_posts['tw'] = [
    'icon'     => 'fa-brands fa-x-twitter',
    'bg'       => 'bg-black',
    'username' => 'dbands_com_br',
-   'profile'  => 'https://twitter.com/intent/follow?screen_name=dbands_com_br',
+   'profile'  => 'https://x.com/intent/follow?screen_name=dbands_com_br',
    'share'    => "https://x.com/intent/tweet?text={$title}&url={$link}&via=dbands_com_br&hashtags={$tag}",
 ];
 
@@ -164,7 +164,7 @@ $social_posts['show'] = [
          }
 
          ?>
-         <div class="grow flex flex-col text-base">
+         <div class="grow flex flex-col text-md">
             <?php
 
             foreach ($social_links as $key => $social_link) {

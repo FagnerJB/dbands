@@ -34,7 +34,7 @@ if (have_posts()) {
                      <?php echo $Author->get('avatar', size: 48); ?>
                   </a>
                   <div class="flex flex-col gap-1">
-                     <a class="text-base font-medium"
+                     <a class="text-md font-medium"
                         href="<?php echo $Author->get('link'); ?>"
                         title="<?php echo $title; ?>" rel="author">
                         <?php printf(esc_html__('Por %s', 'dbands'), $Author->get('name')); ?>

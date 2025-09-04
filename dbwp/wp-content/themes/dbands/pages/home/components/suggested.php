@@ -7,7 +7,7 @@ $suggests = Utils::get_suggests();
 ?>
 <section class="flex flex-col gap-2">
    <div class="flex justify-between items-center">
-      <h2 class="font-semibold text-sm sm:text-base lg:text-2xl">
+      <h2 class="font-semibold text-sm sm:text-md lg:text-2xl">
          <?php esc_html_e('Nossas recomendações', 'dbands'); ?>
       </h2>
       <a class="btn whitespace-nowrap text-sm" href="<?php echo home_url('indice-bandas-alemas'); ?>">Veja todas</a>
@@ -23,7 +23,7 @@ $suggests = Utils::get_suggests();
             <div
                  class="absolute inset-0 z-0 flex flex-col justify-between py-2 px-3 bg-zinc-950/50 group-hover:bg-zinc-950/80 group-focus-visible:bg-zinc-950/80 text-shadow-sm transition-all">
                <div class="grow">
-                  <div class="font-semibold text-xs md:text-base lg:text-xl">
+                  <div class="font-semibold text-xs md:text-md lg:text-xl">
                      <?php echo $suggested->term->get('name'); ?>
                   </div>
                   <div class="text-xxs md:text-sm">

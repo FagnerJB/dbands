@@ -8,6 +8,10 @@ add_filter('cav_cdn_file_extensions', fn() => 'jpg|png|jpeg|gif|mp4');
 add_action('wp_loaded', 'dbt\load_theme');
 function load_theme(): void
 {
+   if (!function_exists('cav_autoloader')) {
+      return;
+   }
+
    $AutoLoader = \cav_autoloader();
    $AutoLoader->add_namespace('dbt', implode(DIRECTORY_SEPARATOR, [__DIR__, 'entities']));
 

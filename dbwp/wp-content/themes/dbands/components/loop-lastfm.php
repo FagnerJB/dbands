@@ -8,10 +8,10 @@ use dbp\Common\Utils;
 <section class="flex flex-col gap-2">
    <ul class="grid auto-rows-auto grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-3 flex-wrap">
       <li class="aspect-square xl:aspect-video overflow-hidden col-span-2 row-span-2 flex flex-col gap-3 py-3 px-3 bg-zinc-800 text-zinc-200">
-         <h2 class="flex justify-between items-end text-base sm:text-xl font-semibold">
+         <h2 class="flex justify-between items-end text-md sm:text-xl font-semibold">
             <?php echo $lastfm['name']; ?>
          </h2>
-         <p class="grow line-clamp-7 leading-6.5 whitespace-break-spaces text-sm sm:text-base"><?php echo $lastfm['wiki']; ?></p>
+         <p class="grow line-clamp-7 leading-6.5 whitespace-break-spaces text-sm sm:text-md"><?php echo $lastfm['wiki']; ?></p>
          <ul class="flex flex-wrap gap-1 sm:gap-2 text-xs sm:text-sm">
             <?php
 

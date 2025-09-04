@@ -48,14 +48,14 @@ get_component(['footer', 'tv']);
          </div>
       </div>
    </div>
-   <div class="container flex flex-col gap-1 mt-3 mb-6 text-center text-white text-sm md:text-base">
+   <div class="container flex flex-col gap-1 mt-3 mb-6 text-center text-white text-sm md:text-md">
       <div class="with-links">
          <span class="whitespace-nowrap">2010-<?php echo date('Y'); ?> - <?php bloginfo('name'); ?> &mdash;</span> <wbr>
          <a class="whitespace-nowrap" href="<?php echo get_permalink(11543); ?>">Acessibilidade</a> &bull;
          <a class="whitespace-nowrap" href="<?php echo get_permalink(11542); ?>" rel="terms-of-service">Termos de Uso</a> &bull;
          <a class="whitespace-nowrap" href="<?php echo get_permalink(11537); ?>" rel="privacy-policy">Política de Privacidade</a>
       </div>
-      <a href="https://ctrl.altvers.net" target="_blank" title="Este projeto faz parte de CtrlAltVerso" rel="external">🌌</a>
+      <a href="https://ctrl.altvers.net" target="_blank" title="Este projeto faz parte de CtrlAltVersœ" rel="external">🌌</a>
    </div>
 </footer>
 <?php

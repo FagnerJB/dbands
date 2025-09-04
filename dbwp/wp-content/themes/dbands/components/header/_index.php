@@ -26,7 +26,7 @@ do_action('get_header');
         class="fixed z-90 top-0 inset-x-0 h-0 flex items-center justify-center bg-red-800 text-xxs text-zinc-200 uppercase truncate overflow-hidden transition-all">
    </div>
 
-   <div class="py-4 mb-3 bg-zinc-200 text-xs sm:text-base min-w-90" x-show="showCookies" x-transition x-cloak
+   <div class="py-4 mb-3 bg-zinc-200 text-xs sm:text-md min-w-90" x-show="showCookies" x-transition x-cloak
         data-nosnippet>
       <div class="container flex justify-between gap-1 sm:gap-3 items-center">
          <span class="grow uppercase">
@@ -54,8 +54,4 @@ do_action('get_header');
          </div>
       </div>
    </header>
-   <?php
-
-      get_component(['header', 'search']);
-
-?>
+   <?php get_component(['header', 'search']); ?>

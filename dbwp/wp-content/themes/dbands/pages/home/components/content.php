@@ -10,7 +10,7 @@ $page = Utils::get_page();
    <div class="container flex flex-col sm:flex-row gap-3 py-5 bg-zinc-800 text-zinc-200">
       <section class="flex flex-col gap-2 sm:w-1/2">
          <?php if (1 === $page || !wp_is_serving_rest_request()) { ?>
-         <h2 class="font-semibold text-sm sm:text-base lg:text-2xl">
+         <h2 class="font-semibold text-sm sm:text-md lg:text-2xl">
             <?php esc_html_e('Publicações', 'dbands'); ?>
             <?php if (1 === $page) {
                echo ' ';
@@ -31,7 +31,7 @@ $page = Utils::get_page();
          <section class="flex flex-col gap-2">
             <?php if (1 === $page || !wp_is_serving_rest_request()) { ?>
             <div class="flex justify-between items-center">
-               <h2 class="font-semibold text-sm sm:text-base lg:text-2xl">
+               <h2 class="font-semibold text-sm sm:text-md lg:text-2xl">
                   <a
                      href="<?php echo home_url('tv'); ?>">
                      <?php esc_html_e('dbTV Metal', 'dbands'); ?>

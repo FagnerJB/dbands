@@ -1,6 +1,6 @@
    <noscript>
       <div
-           class="flex gap-2 items-center justify-center p-4 mb-3 bg-red-800 text-zinc-200 text-center text-xs sm:text-base">
+           class="flex gap-2 items-center justify-center p-4 mb-3 bg-red-800 text-zinc-200 text-center text-xs sm:text-md">
          <?php
 
       printf(

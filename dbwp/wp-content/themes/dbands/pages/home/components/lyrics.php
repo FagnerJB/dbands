@@ -11,7 +11,7 @@ $lyrics = Utils::get_lyrics($page);
 <section class="flex flex-col gap-2">
    <?php if (1 === $page || !wp_is_serving_rest_request()) { ?>
    <div class="flex justify-between items-center">
-      <h2 class="font-semibold text-sm sm:text-base lg:text-2xl">
+      <h2 class="font-semibold text-sm sm:text-md lg:text-2xl">
          <a
             href="<?php echo home_url('traducoes'); ?>">
             <?php esc_html_e('Traduções', 'dbands'); ?>
