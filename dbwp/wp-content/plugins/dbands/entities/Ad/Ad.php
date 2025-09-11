@@ -45,7 +45,7 @@ class Ad
       $image_url = wp_get_attachment_url($sizes[$this->position]);
 
       echo <<<HTML
-      <a href="{$link}" target="_blank" x-cloak>
+      <a class="block mx-auto" href="{$link}" target="_blank" x-cloak>
          <img src="{$image_url}" alt="" />
       </a>
       HTML;

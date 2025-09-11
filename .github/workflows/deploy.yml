@@ -35,18 +35,17 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.private_key
           chmod 600 ~/.private_key
-          rclone config create remote sftp host=${{ secrets.FTP_HOST }} user=${{ vars.SERVER_USER }} key_file=~/.private_key -vv
-          rclone copyto dbwp/ remote:${{ vars.SERVER_FOLDER }} -vv
+          rclone config create remote sftp host=${{ secrets.FTP_HOST }} user=${{ vars.SERVER_USER }} key_file=~/.private_key -v
+          rclone copyto dbwp/ remote:${{ vars.SERVER_FOLDER }} -v
 
-      - name: Send Email
-        uses: hilarion5/send-mail@v1
-        with:
-          smtp-server: ${{vars.SMTP_HOST}}
-          from-email: ${{vars.SMTP_USER}}
-          to-email: fagnerjb@gmail.com
-          username: ${{vars.SMTP_USER}}
-          password: ${{secrets.SMTP_PASS}}
-          subject: Deploy done
-          html: |
-            <p>Deploy done of ${{github.ref_name}} in ${{github.repository}}</p>
-            <p><a href="https://dbands.com.br/">dbands.com.br</a></p>
+      # - name: Send Email
+      #   uses: hilarion5/send-mail@v1
+      #   with:
+      #     smtp-server: ${{vars.SMTP_HOST}}
+      #     from-email: ${{vars.SMTP_USER}}
+      #     to-email: ${{vars.SMTP_TO}}
+      #     username: ${{vars.SMTP_USER}}
+      #     password: ${{secrets.SMTP_PASS}}
+      #     subject: Deploy done
+      #     html: |
+      #       <p>Deploy done of ${{github.ref_name}} in ${{github.repository}}</p>
