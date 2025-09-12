@@ -2,6 +2,10 @@
 
 namespace dbp\Services;
 
+if (!defined('TMDB_TOKEN')) {
+   return;
+}
+
 class TMDB
 {
    public $image_url = ' https://image.tmdb.org/t/p/';
@@ -97,13 +101,13 @@ class TMDB
             if (empty($item['poster_path'])) {
                $image = 'https://placehold.co/185x278/png?text=' . urlencode($title);
             } else {
-               $image = $this->image_url.'w185'.$item['poster_path'];
+               $image = $this->image_url . 'w185' . $item['poster_path'];
             }
 
-            if(empty($item['backdrop_path'])){
-               $backdrop = 'https://placehold.co/780x278/png?text=' . urlencode($title);;
-            }else{
-               $backdrop = $this->image_url .'w780'. $item['backdrop_path'];
+            if (empty($item['backdrop_path'])) {
+               $backdrop = 'https://placehold.co/780x278/png?text=' . urlencode($title);
+            } else {
+               $backdrop = $this->image_url . 'w780' . $item['backdrop_path'];
             }
 
             return [
@@ -115,7 +119,7 @@ class TMDB
                'original'   => $original,
                'title'      => $title,
                'overview'   => $item['overview'] ?? '',
-               'backdrop' => $backdrop,
+               'backdrop'   => $backdrop,
                'image'      => $image,
             ];
          },
@@ -173,7 +177,7 @@ class TMDB
          $this->providers_id = [];
       }
 
-      $providers = array_filter( $body['results'],fn($provider) => $provider['provider_name'] !== 'Pluto TV');
+      $providers = array_filter($body['results'], fn($provider) => 'Pluto TV' !== $provider['provider_name']);
 
       $this->providers_id = array_map(fn($provider) => $provider['provider_id'], $providers);
    }

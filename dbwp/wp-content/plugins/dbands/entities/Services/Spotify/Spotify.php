@@ -2,6 +2,10 @@
 
 namespace dbp\Services\Spotify;
 
+if (!defined('SPOTIFY_CLIENT')) {
+   return;
+}
+
 class Spotify
 {
    private $auth_url         = 'https://accounts.spotify.com';

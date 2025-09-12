@@ -2,6 +2,10 @@
 
 namespace dbp\Services;
 
+if (!defined('YT_CHANNEL_ID')) {
+   return;
+}
+
 class Youtube
 {
    private $baseurl    = 'https://youtube.googleapis.com/youtube/v3';

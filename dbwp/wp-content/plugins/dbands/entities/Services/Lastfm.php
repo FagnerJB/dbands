@@ -2,6 +2,10 @@
 
 namespace dbp\Services;
 
+if (!defined('LASTFM_APIKEY')) {
+   return;
+}
+
 use dbp\Common\Utils;
 
 class Lastfm
