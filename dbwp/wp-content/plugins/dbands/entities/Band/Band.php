@@ -346,7 +346,7 @@ class Band extends Term
          return false;
       }
 
-      $url = wp_upload_dir()['baseurl'] . '/uploads' . $filename;
+      $url = wp_upload_dir()['baseurl'] . $filename;
 
       if (class_exists('\Automattic\Jetpack\Image_CDN\Image_CDN_Core')) {
          $url = Image_CDN_Core::cdn_url($url);
