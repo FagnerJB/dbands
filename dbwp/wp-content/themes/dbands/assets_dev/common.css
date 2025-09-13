@@ -53,7 +53,11 @@ summary {
 }
 
 .menu-only-icons .menu-item-text {
-   @apply hidden;
+   @apply sr-only;
+
+   i {
+      @apply not-sr-only;
+   }
 }
 
 summary.custom-marker {

@@ -10,7 +10,7 @@ class Ad
    {
       $this->position = $position;
 
-      echo '<div>';
+      echo '<div class="flex flex-col gap-1">';
       $this->ad();
       $this->fallback();
       echo '</div>';
@@ -45,7 +45,7 @@ class Ad
       $image_url = wp_get_attachment_url($sizes[$this->position]);
 
       echo <<<HTML
-      <a class="block mx-auto" href="{$link}" target="_blank" x-cloak>
+      <a class="flex justify-center" href="{$link}" target="_blank" x-cloak>
          <img src="{$image_url}" alt="" />
       </a>
       HTML;
