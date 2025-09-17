@@ -52,12 +52,8 @@ summary {
    @apply bg-neutral-800 hover:bg-neutral-700;
 }
 
-.menu-only-icons .menu-item-text {
-   @apply sr-only;
-
-   i {
-      @apply not-sr-only;
-   }
+.menu-only-icons .menu-item-title {
+   @apply hidden;
 }
 
 summary.custom-marker {
