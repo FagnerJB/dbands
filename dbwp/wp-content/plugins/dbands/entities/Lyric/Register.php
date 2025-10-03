@@ -113,7 +113,7 @@ class Register
          'has_archive'   => true,
          'menu_position' => 5,
          'menu_icon'     => 'dashicons-playlist-audio',
-         'supports'      => ['title', 'editor', 'page-attributes', 'custom-fields', 'post-formats', 'author', 'excerpt'],
+         'supports'      => ['title', 'editor', 'page-attributes', 'custom-fields', 'author', 'excerpt'],
          'rewrite'       => [
             'slug'  => 'traducoes',
             'pages' => false,

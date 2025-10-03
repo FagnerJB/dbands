@@ -38,8 +38,8 @@ $Author = new Author();
       ]); ?>
    </section>
    <?php } ?>
-   <?php $socials = $Author->get_socials(); ?>
-   <?php if (!empty($socials)) {    ?>
+   <?php $socials = $Author->get_socials(['spotify', 'lastfm', 'instagram', 'youtube', 'twitter', 'facebook']); ?>
+   <?php if (!empty($socials)) { ?>
    <section class="flex flex-col gap-2">
       <h3 class="text-xl font-medium">
          <?php esc_html_e('Suas redes sociais', 'dbands'); ?>
@@ -48,12 +48,12 @@ $Author = new Author();
          <?php foreach ($socials as $key => $meta) { ?>
          <li>
             <a class="btn-alt"
-               href="<?php printf($meta['link'], $meta['username']); ?>"
-               title="<?php echo $meta['title']; ?>"
-               target="_blank">
-               <i
-                  class="<?php echo $meta['icon']; ?>"></i>
-               <?php printf($meta['text'], $meta['username']); ?>
+               href="<?php echo $meta['profile']; ?>"
+               title="<?php echo $meta['name']; ?>"
+               target="_blank"
+               rel="external">
+               <i class="<?php echo $meta['icon']; ?>"></i>
+               <?php echo $meta['raw']; ?>
             </a>
          </li>
          <?php } ?>
