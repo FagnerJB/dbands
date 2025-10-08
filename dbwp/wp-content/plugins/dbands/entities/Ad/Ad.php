@@ -41,11 +41,12 @@ class Ad
          'aside'  => get_option('dbands-ads-placeholder-aside', 0),
       ];
       $link = get_option('dbands-ads-placeholder-link', '');
+      $text = get_option('dbands-ads-placeholder-text', '');
 
       $image_url = wp_get_attachment_url($sizes[$this->position]);
 
       echo <<<HTML
-      <a class="flex justify-center" href="{$link}" target="_blank" x-cloak>
+      <a class="flex justify-center" href="{$link}" target="_blank" title="{$text}" x-cloak>
          <img src="{$image_url}" alt="" />
       </a>
       HTML;

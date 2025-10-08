@@ -68,12 +68,26 @@ class Register
       register_setting('reading', 'dbands-ads-placeholder-footer');
       register_setting('reading', 'dbands-ads-placeholder-aside');
       register_setting('reading', 'dbands-ads-placeholder-link');
+      register_setting('reading', 'dbands-ads-placeholder-text');
 
       add_settings_section(
          'dbands-ads',
          esc_html__('Placeholder para Ads', 'dbands'),
          '__return_empty_string',
          'reading',
+      );
+
+      add_settings_field(
+         'dbands-ads-placeholder-text',
+         esc_html__('Texto para Placeholder', 'dbands'),
+         [$this, 'echo_field'],
+         'reading',
+         'dbands-ads',
+         [
+            'label_for' => 'dbands-ads-placeholder-text',
+            'type'      => 'text',
+            'class'     => 'regular-text',
+         ],
       );
 
       add_settings_field(
