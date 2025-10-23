@@ -8,6 +8,10 @@ class Ad
 
    public function __construct($position)
    {
+      if (is_user_logged_in()) {
+         return;
+      }
+
       $this->position = $position;
 
       echo '<div class="flex flex-col gap-1">';
