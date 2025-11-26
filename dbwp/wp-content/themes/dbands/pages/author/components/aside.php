@@ -38,7 +38,7 @@ $Author = new Author();
       ]); ?>
    </section>
    <?php } ?>
-   <?php $socials = $Author->get_socials(['spotify', 'lastfm', 'instagram', 'youtube', 'twitter', 'facebook']); ?>
+   <?php $socials = $Author->get_socials(); ?>
    <?php if (!empty($socials)) { ?>
    <section class="flex flex-col gap-2">
       <h3 class="text-xl font-medium">
