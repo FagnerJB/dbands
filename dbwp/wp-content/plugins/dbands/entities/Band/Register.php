@@ -134,7 +134,7 @@ class Register
    <td>
       <a class="button"
          href="<?php echo $Band->get('link'); ?>"
-         target="_blank">Visualizar página deste artista</a>
+         target="_blank" rel="nofollow external">Visualizar página deste artista</a>
    </td>
 </tr>
 <tr class="form-field">
@@ -150,7 +150,7 @@ class Register
              accept="image/png,image/x-png,image/x-citrix-png,image/bmp,image/jpeg,image/x-citrix-jpeg,image/tiff">
       <p class="description">Atualizar ou adicionar imagem de cabeçalho. <a class="button edit-attachment"
             href="https://www.photopea.com/"
-            target="_blank"><?php esc_html_e('Preparar imagem', 'dbands'); ?></a>.
+            target="_blank" rel="nofollow external"><?php esc_html_e('Preparar imagem', 'dbands'); ?></a>.
          Se a imagem não for exatamente <strong>960 x 300</strong>, será redimensionada e cortada para tal e convertida
          para JPEG.</p>
    </td>
@@ -173,7 +173,7 @@ class Register
       <input id="logo" name="logo" type="file"
              accept="image/png,image/x-png,image/x-citrix-png,image/bmp,image/jpeg,image/x-citrix-jpeg,image/tiff">
       <p class="description">Atualizar ou adicionar logotipo. <a class="button" href="https://www.photopea.com/"
-            target="_blank"><?php esc_html_e('Preparar a imagem', 'dbands'); ?></a>
+            target="_blank" rel="nofollow external"><?php esc_html_e('Preparar a imagem', 'dbands'); ?></a>
          salvando em PNG 8, escala de cinza, com 64 cores. Se a <strong>largura</strong> do logotipo não for
          <strong>160</strong> com altura variável, será redimensionada para tal e convertida para PNG.
       </p>

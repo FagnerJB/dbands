@@ -309,7 +309,7 @@ class Band extends Term
       }
 
       if (!empty($link)) {
-         $html .= ' rel="external">';
+         $html .= ' rel="nofollow external">';
       }
 
       if (!empty($icon)) {

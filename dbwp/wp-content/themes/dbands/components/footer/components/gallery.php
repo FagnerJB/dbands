@@ -2,7 +2,7 @@
    <div class="grow flex items-center justify-center">
       <img class="max-h-[calc(100dvh-9rem)] w-auto" x-bind:src="gallery.images[gallery.current]" alt="" />
    </div>
-   <div class="absolute bottom-32 right-3 flex gap-3">
+   <div class="absolute bottom-32 left-3 flex gap-3">
       <button class="btn-alt aspect-square" x-on:click="navGallery(false)" x-on:keyup.left.window="navGallery(false)"
          x-show="gallery.images.length>1">
          <i class="fa-solid fa-chevron-left"></i>

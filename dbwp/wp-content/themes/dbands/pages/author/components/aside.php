@@ -51,7 +51,7 @@ $Author = new Author();
                href="<?php echo $meta['profile']; ?>"
                title="<?php echo $meta['name']; ?>"
                target="_blank"
-               rel="external">
+               rel="external nofollow">
                <i class="<?php echo $meta['icon']; ?>"></i>
                <?php echo $meta['raw']; ?>
             </a>

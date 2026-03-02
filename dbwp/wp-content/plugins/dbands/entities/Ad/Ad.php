@@ -50,7 +50,7 @@ class Ad
       $image_url = wp_get_attachment_url($sizes[$this->position]);
 
       echo <<<HTML
-      <a class="flex justify-center" href="{$link}" target="_blank" title="{$text}" x-cloak>
+      <a class="flex justify-center" href="{$link}" target="_blank" title="{$text}" rel="external" x-cloak>
          <img src="{$image_url}" alt="" />
       </a>
       HTML;

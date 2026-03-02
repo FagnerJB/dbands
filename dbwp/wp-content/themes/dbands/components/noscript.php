@@ -5,8 +5,8 @@
 
       printf(
          esc_html__('%s ou %s para que este site funcione corretamente.', 'dbands'),
-         '<a class="btn-alt" href="https://browser-update.org/pt/update-browser.html" target="_blank" rel="external">' . esc_html__('Atualize seu navegador', 'dbands') . '</a>',
-         '<a class="btn-alt" href="https://www.enable-javascript.com/pt/" target="_blank" rel="external">' . esc_html__('ative o JavaScript', 'dbands') . '</a>',
+         '<a class="btn-alt" href="https://browser-update.org/pt/update-browser.html" target="_blank" rel="nofollow external">' . esc_html__('Atualize seu navegador', 'dbands') . '</a>',
+         '<a class="btn-alt" href="https://www.enable-javascript.com/pt/" target="_blank" rel="nofollow external">' . esc_html__('ative o JavaScript', 'dbands') . '</a>',
       );
 
          ?>

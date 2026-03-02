@@ -141,7 +141,7 @@ $social_posts['show'] = [
                   continue;
                }
 
-               echo '<a class="py-1.5 px-2" href="' . esc_url($social[$key]) . '" target="_blank" rel="external" aria-hidden="true" tabindex="-1">';
+               echo '<a class="py-1.5 px-2" href="' . esc_url($social[$key]) . '" target="_blank" rel="nofollow external" aria-hidden="true" tabindex="-1">';
             }
 
             if (isset($social['action'])) {
@@ -175,7 +175,7 @@ $social_posts['show'] = [
                ?>
             <a class="py-1.5 px-2"
                href="<?php echo esc_url($social[$key]); ?>"
-               target="_blank" rel="external">
+               target="_blank" rel="nofollow external">
                <i
                   class="<?php echo $social_link['icon']; ?> fa-fw mr-0.5"></i>
                <?php echo $social_link['label']; ?>
