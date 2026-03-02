@@ -2,6 +2,8 @@
 
 namespace dbp\Common;
 
+use cavWP\Utils;
+
 class Register
 {
    public function __construct()
@@ -14,6 +16,7 @@ class Register
       add_filter('wp_preload_resources', [$this, 'preloads_logo']);
       add_filter('get_custom_logo_image_attributes', [$this, 'add_logo_attrs']);
       add_filter('upload_mimes', [$this, 'remove_upload_types'], 10, 2);
+      add_filter('get_custom_logo', [$this, 'set_logo'], 10, 2);
    }
 
    public function add_logo_attrs($custom_logo_attrs)
@@ -89,5 +92,25 @@ class Register
       wp_deregister_script('wpcom-notes-common');
       wp_deregister_script('wpcom-notes-admin-bar');
       wp_deregister_script('jetpack-scan-show-notice');
+   }
+
+   public function set_logo($logo, $blog_id)
+   {
+      if (!empty($logo) && empty($blog_id)) {
+         return $logo;
+      }
+
+      if (is_multisite() && get_current_blog_id() !== (int) $blog_id) {
+         switch_to_blog($blog_id);
+         $switched_blog = true;
+      }
+
+      $logo = Utils::render_svg(get_template_directory() . '/assets/CtrlAltVerso.svg');
+
+      if ($switched_blog ?? false) {
+         restore_current_blog();
+      }
+
+      return $logo;
    }
 }

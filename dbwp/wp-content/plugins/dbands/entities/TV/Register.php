@@ -13,6 +13,8 @@ final class Register
       add_action('template_redirect', [$this, 'do_redirect']);
       add_action('db_refresh_tv_hook', [$this, 'refresh_tv']);
 
+      add_filter('cav_head_metatags', [$this, 'set_metatags']);
+
       if (!wp_next_scheduled('db_refresh_tv_hook')) {
          wp_schedule_event(strtotime('tomorrow 04:30'), 'daily', 'db_refresh_tv_hook', [], true);
       }
@@ -52,5 +54,19 @@ final class Register
       $dbtv = new Youtube();
       $dbtv->get_feed();
       UtilsCav::purge_page_cache('/');
+   }
+
+   public function set_metatags($metatags)
+   {
+      $video_ID = get_query_var('video');
+
+      if (!is_page('tv') || empty($video_ID)) {
+         return $metatags;
+      }
+
+      $metatags['og:url']   = home_url('tv/' . $video_ID);
+      $metatags['og:image'] = 'https://i.ytimg.com/vi/' . $video_ID . '/maxresdefault.jpg';
+
+      return $metatags;
    }
 }
