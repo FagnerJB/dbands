@@ -4,7 +4,19 @@ namespace dbp\Ad;
 
 class Ad
 {
-   private $position = '';
+   private $position  = '';
+   private $positions = [
+      'footer' => [
+         'slot'   => '1974786989',
+         'width'  => 728,
+         'height' => 90,
+      ],
+      'aside' => [
+         'slot'   => '1017762680',
+         'width'  => 300,
+         'height' => 250,
+      ],
+   ];
 
    public function __construct($position)
    {
@@ -22,16 +34,11 @@ class Ad
 
    public function ad(): void
    {
-      $positions = [
-         'footer' => '1974786989',
-         'aside'  => '1017762680',
-      ];
-
       echo <<<HTML
       <ins class="adsbygoogle slot-{$this->position}"
          style="display:block;margin:auto;"
          data-ad-client="ca-pub-7971845527728300"
-         data-ad-slot="{$positions[$this->position]}"
+         data-ad-slot="{$this->positions[$this->position]['slot']}"
          data-ad-format="auto"
          data-full-width-responsive="true">
       </ins>
@@ -40,18 +47,15 @@ class Ad
 
    private function fallback(): void
    {
-      $sizes = [
-         'footer' => get_option('dbands-ads-placeholder-footer', 0),
-         'aside'  => get_option('dbands-ads-placeholder-aside', 0),
-      ];
-      $link = get_option('dbands-ads-placeholder-link', '');
-      $text = get_option('dbands-ads-placeholder-text', '');
+      $image_ID = get_option('dbands-ads-placeholder-' . $this->position, 0);
+      $link     = get_option('dbands-ads-placeholder-link', '');
+      $text     = get_option('dbands-ads-placeholder-text', '');
 
-      $image_url = wp_get_attachment_url($sizes[$this->position]);
+      $image_url = wp_get_attachment_url($image_ID);
 
       echo <<<HTML
       <a class="flex justify-center" href="{$link}" target="_blank" title="{$text}" rel="external" x-cloak>
-         <img src="{$image_url}" alt="" />
+         <img src="{$image_url}" alt="" width="{$this->positions[$this->position]['width']}" height="{$this->positions[$this->position]['height']}" />
       </a>
       HTML;
    }

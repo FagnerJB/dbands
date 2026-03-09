@@ -64,6 +64,7 @@ final class Register
          return $metatags;
       }
 
+      $metatags['og:title'] = 'Assista no ' . $metatags['og:title'];
       $metatags['og:url']   = home_url('tv/' . $video_ID);
       $metatags['og:image'] = 'https://i.ytimg.com/vi/' . $video_ID . '/maxresdefault.jpg';
 

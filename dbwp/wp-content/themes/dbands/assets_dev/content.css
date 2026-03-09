@@ -68,7 +68,8 @@ body.search #search {
    }
 
    .wp-element-caption,
-   .wp-caption-text {
+   .wp-caption-text,
+   .wp-block-image figcaption {
       @apply bg-zinc-300 py-1 px-2.5 font-normal;
    }
 
